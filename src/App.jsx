@@ -1,11 +1,20 @@
-import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom'; // Import BrowserRouter
-import Navbar from './components/nav/Navbar'; // Assuming Navbar is in this path
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Use Routes instead of Switch
+import Navbar from "./components/nav/Navbar";
+import Marquee from "./components/marquee/Marquee";
+import Ranking from "./components/ranking/Ranking";
+import ProgessRanking from './components/ranking/progess-ranking/ProgessRanking';
 
 const App = () => {
   return (
     <Router>
-      <Navbar /> {/* Now Navbar can use react-router links for navigation */}
+      <Navbar />
+      <Marquee />
+
+      {/* Routing for different pages */}
+      <Routes>
+        {/* Route for the Ranking page */}
+        <Route path="/" element={<Ranking />} />
+      </Routes>
     </Router>
   );
 }
