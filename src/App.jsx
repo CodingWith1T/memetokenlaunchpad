@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Us
 import Navbar from "./components/nav/Navbar";
 import Marquee from "./components/marquee/Marquee";
 import Ranking from "./components/ranking/Ranking";
-import ProgessRanking from './components/ranking/progess-ranking/ProgessRanking';
 
 const App = () => {
   return (

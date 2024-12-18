@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import logo from "../../../assets/logo/logo.png";
 
 const ProgessRanking = () => {
   // State to store the token data
@@ -7,25 +7,51 @@ const ProgessRanking = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Fetch token data from CoinGecko API
+  // Dummy data representing the token data from CoinGecko API
+  const dummyTokens = [
+    {
+      id: 'bitcoin',
+      name: 'Bitcoin',
+      image: 'https://cryptocurrencies-images.s3.amazonaws.com/bitcoin.png',
+      market_cap: 850000000000,
+    },
+    {
+      id: 'ethereum',
+      name: 'Ethereum',
+      image: 'https://cryptocurrencies-images.s3.amazonaws.com/ethereum.png',
+      market_cap: 400000000000,
+    },
+    {
+      id: 'binancecoin',
+      name: 'Binance Coin',
+      image: 'https://cryptocurrencies-images.s3.amazonaws.com/binancecoin.png',
+      market_cap: 95000000000,
+    },
+    {
+      id: 'cardano',
+      name: 'Cardano',
+      image: 'https://cryptocurrencies-images.s3.amazonaws.com/cardano.png',
+      market_cap: 43000000000,
+    },
+    {
+      id: 'polkadot',
+      name: 'Polkadot',
+      image: 'https://cryptocurrencies-images.s3.amazonaws.com/polkadot.png',
+      market_cap: 22000000000,
+    },
+  ];
+
+  // Simulate fetching token data (replace with dummy data for now)
   useEffect(() => {
     const fetchTokenData = async () => {
       try {
-        // Fetch data from CoinGecko API
-        const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets', {
-          params: {
-            vs_currency: 'usd',
-            order: 'market_cap_desc',
-            per_page: 5, // Number of tokens to fetch (change this number as needed)
-            page: 1,
-          },
-        });
-
-        // Set the fetched token data in state
-        setTokens(response.data);
+        // Simulating a delay to mimic API call
+        setTimeout(() => {
+          setTokens(dummyTokens); // Set the dummy token data
+          setLoading(false);
+        }, 1000);
       } catch (error) {
         setError('Failed to fetch token data');
-      } finally {
         setLoading(false);
       }
     };
@@ -35,7 +61,19 @@ const ProgessRanking = () => {
 
   // If data is still loading, show loading indicator
   if (loading) {
-    return <div></div>;
+    return <div className="flex justify-center items-center h-screen bg-gray-100">
+          {/* Loading Container */}
+          <div className="flex flex-col items-center space-y-4">
+            {/* Logo with animation */}
+            <img
+              src={logo}
+              alt="Loading Logo"
+              className="w-24 h-24 animate-spin-slow"
+            />
+            {/* Text: Loading... */}
+            <span className="text-lg text-gray-700 font-semibold">Loading...</span>
+          </div>
+        </div>;;
   }
 
   // If there's an error fetching data, show error message
@@ -56,8 +94,8 @@ const ProgessRanking = () => {
   };
 
   return (
-    <div className=" overflow-x-auto shadow-md rounded-lg bg-white">
-      <table className="min-w-full table-auto">
+    <div className="overflow-x-auto shadow-md rounded-lg bg-white">
+      <table className="min-w-full table-auto text-sm sm:text-base">
         {/* Table Header */}
         <thead className="bg-purple-600 text-white">
           <tr>
@@ -78,8 +116,8 @@ const ProgessRanking = () => {
                 key={token.id}
                 className={`border-t ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-purple-50`}
               >
-                <td className="px-6 py-4 text-purple-700">{index + 1}</td>
-                <td className="px-6 py-4 flex items-center space-x-2 text-purple-700">
+                <td className="px-3 py-5 text-purple-700">{index + 1}</td>
+                <td className="px-3 py-5 flex items-center space-x-2 text-purple-700">
                   {/* Display the token logo and name */}
                   <img
                     src={token.image}
@@ -88,11 +126,11 @@ const ProgessRanking = () => {
                   />
                   <span>{token.name}</span>
                 </td>
-                <td className="px-6 py-4 text-purple-500">${formatNumber(token.market_cap)}</td>
-                <td className="px-6 py-4 text-purple-700">
+                <td className="px-3 py-2 text-purple-500">${formatNumber(token.market_cap)}</td>
+                <td className="px-3 py-2 text-purple-700">
                   <div className="relative pt-1">
                     <div className="flex mb-2 items-center justify-between">
-                      <span className="text-sm font-semibold">{Math.round(progress)}%</span>
+                      <span className="text-xs font-semibold">{Math.round(progress)}%</span>
                     </div>
                     <div className="flex mb-2">
                       <div className="w-full bg-gray-200 rounded-full h-2.5">
