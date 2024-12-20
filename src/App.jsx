@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Us
 import Navbar from "./components/nav/Navbar";
 import Marquee from "./components/marquee/Marquee";
 import Ranking from "./components/ranking/Ranking";
+import CreateToken from './pages/createToken/CreateToken';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <Routes>
         {/* Route for the Ranking page */}
         <Route path="/" element={<Ranking />} />
+        <Route path="/create-token" element={<CreateToken />} />
       </Routes>
     </Router>
   );

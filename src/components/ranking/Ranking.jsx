@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import ProgressRanking from './progess-ranking/ProgessRanking'; // Import the ProgressRanking component
 import GainersRanking from './gainers-ranking/GainersRanking';
 import NonListed from '../card/NonListed/NonListed';
+import { useTranslation } from 'react-i18next';
 
 const Ranking = () => {
   // State to track which table is active
   const [activeTable, setActiveTable] = useState('progress'); // 'progress' is the default
-
+  const { t, i18n } = useTranslation();
   // Function to handle the button clicks
   const handleButtonClick = (table) => {
     setActiveTable(table);
@@ -33,7 +34,7 @@ const Ranking = () => {
                 className="flex-1 flex items-center justify-center h-10 px-4 text-center font-medium text-[#7A6EAA] dark:text-purple-500 rounded-full hover:bg-purple-300 overflow-hidden whitespace-nowrap text-ellipsis text-xs sm:text-sm lg:text-base"
                 onClick={() => handleButtonClick('progress')}
               >
-                Progress Ranking
+                {t('progressRanking')}
               </button>
 
               {/* Button 2: 24 Hours Gainers Ranking */}
@@ -42,7 +43,7 @@ const Ranking = () => {
                 className="flex-1 flex items-center justify-center h-10 px-4 text-center font-medium text-[#7A6EAA] dark:text-purple-500 rounded-full hover:bg-purple-300 overflow-hidden whitespace-nowrap text-ellipsis text-xs sm:text-sm lg:text-base"
                 onClick={() => handleButtonClick('gainers')}
               >
-                24 Hours Gainers Ranking
+                {t('gainersRanking')}
               </button>
 
               {/* Button 3: MarketCap Ranking */}
@@ -51,7 +52,7 @@ const Ranking = () => {
                 className="flex-1 flex items-center justify-center h-10 px-4 text-center font-medium text-[#7A6EAA] dark:text-purple-500 rounded-full hover:bg-purple-300 overflow-hidden whitespace-nowrap text-ellipsis text-xs sm:text-sm lg:text-base"
                 onClick={() => handleButtonClick('marketcap')}
               >
-                MarketCap Ranking
+                {t('marketCapRanking')}
               </button>
 
               {/* Button 4: 24 Hours Trading Volume */}
@@ -60,17 +61,17 @@ const Ranking = () => {
                 className="flex-1 flex items-center justify-center h-10 px-4 text-center font-medium text-[#7A6EAA] dark:text-purple-500 rounded-full hover:bg-purple-300 overflow-hidden whitespace-nowrap text-ellipsis text-xs sm:text-sm lg:text-base"
                 onClick={() => handleButtonClick('volume')}
               >
-                24 Hours Trading Volume
+                {t('tradingVolume')}
               </button>
             </div>
 
             {/* ConnectButton for wallet connection */}
             <div className="mt-4 lg:mt-0">
               <Link
-                to="/"
+                to="/create-token"
                 className="inline-block px-6 py-3 text-white bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 rounded-full text-center shadow-lg transition-all duration-200 ease-in-out text-xs sm:text-sm lg:text-base"
               >
-                Create Token
+                {t('createToken')} 
               </Link>
             </div>
           </div>
