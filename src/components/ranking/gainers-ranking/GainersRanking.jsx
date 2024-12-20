@@ -117,7 +117,7 @@ const GainersRanking = () => {
             return (
               <tr
                 key={token.id}
-                className={`border-t ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-purple-50`}
+                className={`border-t ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-blue-100`}
               >
                 <td className="px-5 py-5 text-purple-700">{index + 1}</td>
                 <td className="px-5 py-5 flex items-center space-x-2 text-purple-700">

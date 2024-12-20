@@ -114,7 +114,7 @@ const ProgessRanking = () => {
             return (
               <tr
                 key={token.id}
-                className={`border-t ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-purple-50`}
+                className={`border-t ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-blue-100`}
               >
                 <td className="px-3 py-5 text-purple-700">{index + 1}</td>
                 <td className="px-3 py-5 flex items-center space-x-2 text-purple-700">
@@ -135,7 +135,7 @@ const ProgessRanking = () => {
                     <div className="flex mb-2">
                       <div className="w-full bg-gray-200 rounded-full h-2.5">
                         <div
-                          className="bg-purple-500 h-2.5 rounded-full"
+                          className="bg-blue-500 h-2.5 rounded-full"
                           style={{ width: `${progress}%` }}
                         ></div>
                       </div>

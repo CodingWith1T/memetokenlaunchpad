@@ -112,7 +112,7 @@ const NonListed = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 p-6">
+      <div className="cardbox grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
         {data.map((item) => (
           <div key={item.id} className="max-w-xs bg-white rounded-lg shadow-md overflow-hidden">
             {/* Image Section */}
@@ -137,18 +137,18 @@ const NonListed = () => {
                 <span className="font-medium">Created by: </span>
                 <span className="text-purple-600">{item.walletAddress}</span>
               </div>
-
-              <div className="font-medium text-lg text-purple-700">{item.tokenName}</div>
-              <div className="text-sm text-gray-500 mb-2">{item.tokenSymbol}</div>
-
-              <p className="text-gray-600 text-xs line-clamp-3">{item.description}</p>
+              <div className='tokenbox'>
+              <div className="tname font-medium text-lg text-purple-700">{item.tokenName}</div>
+              <div className="tshort text-sm text-gray-500 mb-2">{item.tokenSymbol}</div>
+              </div>
+              <p className="lastcontent text-gray-600 text-xs line-clamp-3">{item.description}</p>
             </div>
           </div>
         ))}
       </div>
 
       {/* Pagination Section */}
-      <div className="flex justify-center items-center py-4">
+      <div className="pagination flex justify-center items-center py-4">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}

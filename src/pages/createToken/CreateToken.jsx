@@ -37,12 +37,12 @@ const CreateToken = () => {
   };
 
   return (
-    <main className="relative top-0 min-h-[calc(100vh_-_182px)]">
+    <main className="formmain mainbox relative top-0 min-h-[calc(100vh_-_182px)]">
       <div className="w-full relative">
-<div class="absolute bg-purple-300 w-full h-[193px] top-0 left-0 gradient-default dark:gradient-default-dark  border-bottom border-[#E7E3EB] dark:border-[#383241] z-0"></div>
-        <form className="ant-form ant-form-horizontal css-en40gs" onSubmit={handleSubmit}>
-          <div className="lg:mx-auto px-[4.8%] lg:px-0 py-8 lg:py-[74px] w-full lg:w-[741px] min-w-0">
-            <div className="flex flex-col items-center gap-6 lg:gap-12 w-full">
+<div class="formbox absolute w-full h-[193px] top-0 left-0 gradient-default dark:gradient-default-dark  border-bottom border-[#E7E3EB] dark:border-[#383241] z-0"></div>
+        <form className="tokenform ant-form ant-form-horizontal css-en40gs" onSubmit={handleSubmit}>
+          <div className="forminbox lg:mx-auto px-[4.8%] lg:px-0 py-8 lg:py-[20px] w-full lg:w-[800px] min-w-0">
+            <div className="flex flex-col items-center gap-6 lg:gap-6 w-full">
               {/* Token Name Input Section */}
               <div className="w-full flex flex-col gap-4">
                 <label htmlFor="tokenName" className="text-lg font-bold text-purple-900">
@@ -162,7 +162,7 @@ const CreateToken = () => {
               </div>
 
               {/* Tags Selection - Button Grid */}
-              <div className="w-full grid grid-cols-4 gap-4 mt-2">
+              <div className="tags-selection w-full grid grid-cols-4 gap-4 mt-2">
                 {tags.map((tag) => (
                   <button
                     type="button"
@@ -180,7 +180,7 @@ const CreateToken = () => {
               </div>
 
               {/* Connect Wallet Button */}
-              <div className="mt-4 w-full flex justify-center">
+              <div className="connectbutton mt-4 w-full flex justify-center">
                 <ConnectButton label={t('connectWallet')}/>
               </div>
             </div>

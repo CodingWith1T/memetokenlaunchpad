@@ -1,3 +1,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+header{ box-shadow:none !important; border-bottom: 1px solid #c8cbe1;}
+header button{background: #3e69cc !important; border-radius: 7px !important; padding: 5px 15px 8px !important;}
+header .text-sm{ font-size:18px;}
+header .active{ color:#3e69cc;}
+.bg-purple-600{background-color: #3e69cc;}
+.text-purple-200{color: rgb(255 255 255);}
+main{    background: #e3e7f5; padding:0px 70px !important;}
+.buttonbox{box-shadow: 1px 2px 5px rgb(150 178 223 / 50%); background: #fff; border: none;}
+.lastbtn{padding: 10px 30px;}
+.hover\:bg-purple-300:hover {background-color:#3e69cc !important; color: #fff !important;}
+.text-\[\#7A6EAA\] {color: #4f6597;}
+.text-purple-700 {color: #1a3a83; font-weight: 600;}
+.text-purple-500{color: #1a3a83; font-weight: 600;}
+.bg-purple-500{background-color:#8f63e5;}
+.cardbox img { width: 100px; height: 100px; margin: 30px auto; border-radius: 50px;  background: #fff;
+    padding: 3px; box-shadow: 3px 6px 7px #869ccf;}
+.cardbox  .bg-gray-300 {    background: radial-gradient(circle, #d1d8ff 0%, rgb(142 174 247) 71%);}
+.cardbox .text-gray-600{color: #1a3a83;}
+.lastcontent{}
+.cardbox .text-purple-600{color: #8f63e5;}
+.tname{ float:left;font-weight:700;}
+.tshort{ float:right;margin-top: 5px; margin-bottom: 0px;    color: #1a3a83;}
+.tokenbox{ width:100%; display: inline-block;}
+.cardbox .shadow-md{box-shadow: 2px 3px 4px #cdd7ed !important;}
+.pagination{ margin-top:20px;}
+.pagination .bg-gray-300{background-color: #bacdf7 !important;}
+.cardbox .p-4{padding: 15px 10px;}
+header button{ color:#fff !important;}
+header button div{ color:#fff !important;}
+header button svg{ color:#fff !important;}
+
+.forminbox{ background:#fff;     padding: 30px !important;    box-shadow: 1px 3px 8px #c4cfe9; border-radius:20px;}
+.tokenform{padding-top:70px !important;padding-bottom: 70px !important;}
+.forminbox input{border-color: #859cd3;background-color: #f0f4ff;    padding: 10px;}
+.forminbox textarea{border-color: #859cd3;background-color: #f0f4ff;}
+.forminbox select{border-color: #859cd3;background-color: #f0f4ff;    padding: 10px;}
+.forminbox .text-purple-900{    color: #1a3a83;}
+.tags-selection button{border-color: #859cd3;background-color: #f0f4ff;}
+.forminbox  .border-2 {border-width: 1px;}
+.tags-selection .text-white{background: #3e69cc;    border-color: #859cd3;}
+.formmain{background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgb(229 234 245) 100%);}
+.connectbutton button{background: #3e69cc !important;  border-radius: 7px !important; padding: 5px 15px 8px !important;}
+.createrightbtn a{background: #3e69cc !important;  border-radius: 7px !important; padding:8px 34px 10px !important;}
