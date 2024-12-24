@@ -5,7 +5,14 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        gold: '#C1A444',  // Custom gold color
+      },
+      textColor: {
+        gold: '#C1A444',  // Custom gold color
+      },
+    },
   },
   plugins: [],
 }

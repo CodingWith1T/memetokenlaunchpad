@@ -4,15 +4,15 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
 
 i18n
-  .use(LanguageDetector)  // Detect language from the browser settings
-  .use(Backend)  // Load translations from the server (optional in your case)
-  .use(initReactI18next)  // Initialize React i18next
+  .use(LanguageDetector)  // Detect language from browser settings
+  .use(Backend)  // Optional: Load translations from a backend server
+  .use(initReactI18next)  // Initialize react-i18next for React
   .init({
     resources: {
       en: {
         translation: {
-          board: 'Board', // Added for Board page
-          createToken: 'Create Token', // Added for CreateToken page
+          board: 'Board',
+          createToken: 'Create Token',
           tokenName: 'Token Name',
           tickerSymbol: 'Ticker Symbol',
           description: 'Description',
@@ -34,16 +34,25 @@ i18n
           depin: 'Depin',
           charity: 'Charity',
           others: 'Others',
-          progressRanking: 'Progress Ranking', // Added for Progress Ranking
-          gainersRanking: '24 Hours Gainers Ranking', // Added for Gainers Ranking
-          marketCapRanking: 'MarketCap Ranking', // Added for MarketCap Ranking
-          tradingVolume: '24 Hours Trading Volume', // Added for Trading Volume
+          progressRanking: 'Progress Ranking',
+          gainersRanking: '24 Hours Gainers Ranking',
+          marketCapRanking: 'MarketCap Ranking',
+          tradingVolume: '24 Hours Trading Volume',
+          extraOptions: 'Extra Options',
+          totalSupply: 'Total Supply',
+          raisedAmount: 'Raised Amount',
+          salesRatio: 'Sales Ratio',
+          reservedRatio: 'Reserved Ratio',
+          liquidityPoolRatio: 'Liquidity Pool Ratio',
+          startTime: 'Start Time',
+          maximumPerUser: 'Maximum Per User',
+          createToken: 'Create Token',
         },
       },
       zh: {
         translation: {
-          board: '板块', // Translation for Board page
-          createToken: '创建代币', // Translation for CreateToken page
+          board: '板块',
+          createToken: '创建代币',
           tokenName: '代币名称',
           tickerSymbol: '代币符号',
           description: '描述',
@@ -65,15 +74,27 @@ i18n
           depin: '去中心化基础设施',
           charity: '慈善',
           others: '其他',
-          progressRanking: '进度排名', // Translation for Progress Ranking
-          gainersRanking: '24小时涨幅排名', // Translation for Gainers Ranking
-          marketCapRanking: '市值排名', // Translation for MarketCap Ranking
-          tradingVolume: '24小时交易量', // Translation for Trading Volume
+          progressRanking: '进度排名',
+          gainersRanking: '24小时涨幅排名',
+          marketCapRanking: '市值排名',
+          tradingVolume: '24小时交易量',
+          extraOptions: '额外选项',
+          totalSupply: '总供应量',
+          raisedAmount: '募资金额',
+          salesRatio: '销售比例',
+          reservedRatio: '预留比例',
+          liquidityPoolRatio: '流动池比例',
+          startTime: '开始时间',
+          maximumPerUser: '每个用户最大金额',
+          createToken: '创建代币',
         },
       },
     },
-    fallbackLng: 'en',  // Fallback language
-    debug: true,  // Enable debug logs
+    fallbackLng: 'en',  // Use English as the fallback language
+    debug: true,  // Enable debug logs for development
+    interpolation: {
+      escapeValue: false, // React already escapes values
+    },
   });
 
 export default i18n;

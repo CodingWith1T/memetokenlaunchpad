@@ -2,46 +2,122 @@
 @tailwind components;
 @tailwind utilities;
 
-header{ box-shadow:none !important; border-bottom: 1px solid #c8cbe1;}
-header button{background: #3e69cc !important; border-radius: 7px !important; padding: 5px 15px 8px !important;}
+header{ box-shadow:none !important; border-bottom: 1px solid #c5c5c5;}
+header button{background:#c1a444!important; border-radius: 7px !important; padding: 5px 15px 8px !important;}
 header .text-sm{ font-size:18px;}
 header .active{ color:#3e69cc;}
-.bg-purple-600{background-color: #3e69cc;}
+.bg-purple-600{background-color:#3a3a3a;}
 .text-purple-200{color: rgb(255 255 255);}
-main{    background: #e3e7f5; padding:0px 70px !important;}
-.buttonbox{box-shadow: 1px 2px 5px rgb(150 178 223 / 50%); background: #fff; border: none;}
+main{background:#e8e8e8; padding:0px 70px !important;}
+.buttonbox{box-shadow:1px 2px 5px rgb(191 191 191 / 50%); background: #fff; border: none;}
 .lastbtn{padding: 10px 30px;}
-.hover\:bg-purple-300:hover {background-color:#3e69cc !important; color: #fff !important;}
-.text-\[\#7A6EAA\] {color: #4f6597;}
-.text-purple-700 {color: #1a3a83; font-weight: 600;}
-.text-purple-500{color: #1a3a83; font-weight: 600;}
-.bg-purple-500{background-color:#8f63e5;}
+.hover\:bg-purple-300:hover {background-color:#4c4c4c !important; color: #fff !important;}
+.text-\[\#7A6EAA\] {color:#2a2a2a;}
+.text-purple-700 {color:#2a2a2a; font-weight: 600;}
+.text-purple-500{color:#2a2a2a; font-weight: 600;}
+.bg-purple-500{background-color:#c1a444;    box-shadow: 1px 2px 1px #8f782e;}
+.hover\:text-purple-500:hover{color:#c1a444 !important;}
 .cardbox img { width: 100px; height: 100px; margin: 30px auto; border-radius: 50px;  background: #fff;
-    padding: 3px; box-shadow: 3px 6px 7px #869ccf;}
-.cardbox  .bg-gray-300 {    background: radial-gradient(circle, #d1d8ff 0%, rgb(142 174 247) 71%);}
-.cardbox .text-gray-600{color: #1a3a83;}
+    padding: 3px; box-shadow:3px 6px 7px #747474;}
+.cardbox .bg-gray-300 {background: radial-gradient(circle, #c3c3c3 0%, rgb(131 131 131) 71%);}
+.cardbox .text-gray-600{color:#2a2a2a;}
 .lastcontent{}
-.cardbox .text-purple-600{color: #8f63e5;}
+.cardbox .text-purple-600{color:#c1a444!important;}
 .tname{ float:left;font-weight:700;}
-.tshort{ float:right;margin-top: 5px; margin-bottom: 0px;    color: #1a3a83;}
+.tshort{ float:right;margin-top: 5px; margin-bottom: 0px;    color:#2a2a2a;}
 .tokenbox{ width:100%; display: inline-block;}
-.cardbox .shadow-md{box-shadow: 2px 3px 4px #cdd7ed !important;}
+.cardbox .shadow-md{box-shadow: 2px 3px 4px #dddddd !important;}
 .pagination{ margin-top:20px;}
-.pagination .bg-gray-300{background-color: #bacdf7 !important;}
+.pagination .bg-gray-300{background-color:#cbcbcb !important;}
 .cardbox .p-4{padding: 15px 10px;}
 header button{ color:#fff !important;}
 header button div{ color:#fff !important;}
 header button svg{ color:#fff !important;}
 
-.forminbox{ background:#fff;     padding: 30px !important;    box-shadow: 1px 3px 8px #c4cfe9; border-radius:20px;}
+.forminbox{ background:#fff;     padding: 30px !important;    box-shadow:1px 3px 8px #dddddd; border-radius:20px;}
 .tokenform{padding-top:70px !important;padding-bottom: 70px !important;}
-.forminbox input{border-color: #859cd3;background-color: #f0f4ff;    padding: 10px;}
-.forminbox textarea{border-color: #859cd3;background-color: #f0f4ff;}
-.forminbox select{border-color: #859cd3;background-color: #f0f4ff;    padding: 10px;}
-.forminbox .text-purple-900{    color: #1a3a83;}
-.tags-selection button{border-color: #859cd3;background-color: #f0f4ff;}
+.forminbox input{border-color:#c5c5c5;background-color: #fff;    padding: 10px;}
+.forminbox textarea{border-color: #c5c5c5;background-color: #fff;}
+.forminbox select{border-color: #c5c5c5;background-color: #fff;    padding: 10px;}
+.forminbox .text-purple-900{color:#333;}
+.tags-selection button{border-color:#b7b7b7;background-color:#efefef;}
 .forminbox  .border-2 {border-width: 1px;}
-.tags-selection .text-white{background: #3e69cc;    border-color: #859cd3;}
-.formmain{background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgb(229 234 245) 100%);}
-.connectbutton button{background: #3e69cc !important;  border-radius: 7px !important; padding: 5px 15px 8px !important;}
-.createrightbtn a{background: #3e69cc !important;  border-radius: 7px !important; padding:8px 34px 10px !important;}
+.tags-selection .text-white{background:#c1a444!important; border-color: #c1a444;}
+.formmain{background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgb(225 225 225) 100%);}
+.connectbutton button{background:#c1a444!important;  border-radius: 7px !important; padding: 7px 35px 11px !important; box-shadow: 1px 4px 3px #dfdfdf !important;}
+.createrightbtn a{background:#c1a444 !important;  border-radius: 7px !important; padding:8px 34px 10px !important;}
+.marquee-link{color:#2a2a2a !important;}
+header .text-gray-900{color:rgb(76 76 76) !important;}
+header{padding: 0px 64px !important;}
+/* Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: goldenrod;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+
+.extraoptions .col-md-6{display: inline-grid; width:48%; float:left; margin-right:14px; margin-bottom:20px;}
+.extraoptions .col-md-6 label{ padding-bottom:6px;}
+.extraoptions .col-md-4{display: inline-grid; width:31%; float:left; margin-right:18px; margin-bottom:20px;}
+.extraoptions .col-md-4 label{ padding-bottom:6px;}
+.liquiditydiv{margin-right: 0px !important; width: 33% !important;}
+.lastdiv{width:50% !important;margin-right:0px !important;}
+
+
+
+@media only screen and (max-width: 768px) {
+  main {padding: 0px 15px !important;}
+  .max-w-xs {max-width: 100%;}
+  .pt-\[75px\] {padding-top: 35px;}
+  header{padding: 0px 10px !important;}
+  .extraoptions .col-md-6{ width:100%;}
+  .extraoptions .col-md-4{ width:100%;}
+  .liquiditydiv{width:100% !important;}
+  .lastdiv{width:100% !important;}
+}
+@media only screen and (max-width: 540px) {
+	header .text-sm {font-size: 12px;}
+	header button{font-size: 13px !important;}
+	.extraoptions .col-md-4{ width:100%;}
+}
+

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Dummy fallback data in case the API fails
 const dummyData = [
@@ -35,87 +36,83 @@ const dummyData = [
 ];
 
 const NonListed = () => {
-  const [data, setData] = useState([]);  // Data state
-  const [loading, setLoading] = useState(true);  // Loading state
-  const [error, setError] = useState(null);  // Error state
-  const [currentPage, setCurrentPage] = useState(1);  // Current page state
-  const [totalPages, setTotalPages] = useState(1);  // Total pages state
+  const [data, setData] = useState([]); // Data state
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState(null); // Error state
+  const [currentPage, setCurrentPage] = useState(1); // Current page state
+  const [totalPages, setTotalPages] = useState(1); // Total pages state
 
-  const itemsPerPage = 10;  // Number of items per page
+  const itemsPerPage = 10; // Number of items per page
+  const navigate = useNavigate(); // React Router hook for navigation
 
+  // Fetch data when the component is mounted or when currentPage changes
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch the data from CoinGecko API
         const response = await fetch(
           `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${itemsPerPage}&page=${currentPage}`
         );
-        
-        // Check if the response is OK
+
         if (!response.ok) {
           throw new Error(`API call failed with status: ${response.status}`);
         }
 
-        // Parse the JSON response
         const realData = await response.json();
-
-        // Calculate the total pages (assuming the API returns a pagination field)
-        const totalItems = 100;  // Assume total items for now, you can adjust this if the API returns the actual total
+        const totalItems = 100; // Assume total items for now
         const totalPagesCalculated = Math.ceil(totalItems / itemsPerPage);
         setTotalPages(totalPagesCalculated);
 
-        // Transform data for your needs (including rise and chain info)
         const transformedData = realData.map((coin) => ({
           id: coin.id,
           image: coin.image,
-          chainName: coin.platform ? coin.platform.name : 'Ethereum', // Some coins might not have platform info
-          rise: coin.price_change_percentage_24h, // 24h price change
+          chainName: coin.platform ? coin.platform.name : 'Ethereum', // Fallback to Ethereum if platform is not available
+          rise: coin.price_change_percentage_24h,
           walletAddress: '0x' + Math.random().toString(16).slice(2, 18), // Random wallet address for demo
           tokenName: coin.name,
           tokenSymbol: coin.symbol.toUpperCase(),
-          description: `${coin.name} is a popular cryptocurrency with a focus on decentralized finance and blockchain innovation.`,
+          description: `${coin.name} is a popular cryptocurrency.`,
         }));
 
-        setData(transformedData);  // Set the data state
+        setData(transformedData);
       } catch (error) {
         console.error('Error fetching token data:', error);
         setError(error.message);
-        setData(dummyData);  // Fallback to dummy data in case of failure
+        setData(dummyData); // Fallback to dummy data in case of failure
       } finally {
-        setLoading(false);  // Hide loading spinner after the data fetch
+        setLoading(false);
       }
     };
 
     fetchData();
-  }, [currentPage]);  // Fetch data when the current page changes
+  }, [currentPage]);
 
-  // Handle page change
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
+  // Navigate to the CardPage with item data passed through state
+  const handleCardClick = (item) => {
+    navigate('/card-page', { state: { item } });
+  };
+
   if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen rounded-full bg-gray-100" role="alert">
-        Loading...
-      </div>
-    );
+    return <div className="flex justify-center items-center h-screen">Loading...</div>;
   }
 
   if (error) {
-    return (
-      <div className="flex justify-center items-center h-14 rounded-full bg-gray-100" role="alert">
-        Error: {error}
-      </div>
-    );
+    return <div className="flex justify-center items-center h-14">Error: {error}</div>;
   }
 
   return (
     <div>
       <div className="cardbox grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
         {data.map((item) => (
-          <div key={item.id} className="max-w-xs bg-white rounded-lg shadow-md overflow-hidden">
-            {/* Image Section */}
+          <div
+            key={item.id}
+            className="max-w-xs bg-white rounded-lg shadow-md overflow-hidden cursor-pointer"
+            onClick={() => handleCardClick(item)} // On card click, navigate to /card-page
+          >
+            {/* Card Image Section */}
             <div className="h-40 bg-gray-300 overflow-hidden">
               <img
                 src={item.image || 'https://via.placeholder.com/400'}
@@ -124,7 +121,7 @@ const NonListed = () => {
               />
             </div>
 
-            {/* Content Section */}
+            {/* Card Content Section */}
             <div className="p-4">
               <div className="flex justify-between items-center mb-2">
                 <span className="text-sm font-semibold text-purple-700">{item.chainName}</span>
@@ -137,11 +134,10 @@ const NonListed = () => {
                 <span className="font-medium">Created by: </span>
                 <span className="text-purple-600">{item.walletAddress}</span>
               </div>
-              <div className='tokenbox'>
-              <div className="tname font-medium text-lg text-purple-700">{item.tokenName}</div>
-              <div className="tshort text-sm text-gray-500 mb-2">{item.tokenSymbol}</div>
-              </div>
-              <p className="lastcontent text-gray-600 text-xs line-clamp-3">{item.description}</p>
+
+              <div className="font-medium text-lg text-purple-700">{item.tokenName}</div>
+              <div className="text-sm text-gray-500 mb-2">{item.tokenSymbol}</div>
+              <p className="text-gray-600 text-xs line-clamp-3">{item.description}</p>
             </div>
           </div>
         ))}

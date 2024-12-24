@@ -4,6 +4,8 @@ import ProgressRanking from './progess-ranking/ProgessRanking'; // Import the Pr
 import GainersRanking from './gainers-ranking/GainersRanking';
 import NonListed from '../card/NonListed/NonListed';
 import { useTranslation } from 'react-i18next';
+import MarketCap from './marketCap-ranking/MarketCap';
+import TradingVolume from './trading-volume/TradingVolume';
 
 const Ranking = () => {
   // State to track which table is active
@@ -69,9 +71,9 @@ const Ranking = () => {
             <div className="createrightbtn mt-4 lg:mt-0">
               <Link
                 to="/create-token"
-                className="inline-block px-6 py-3 text-white bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 rounded-full text-center shadow-lg transition-all duration-200 ease-in-out text-xs sm:text-sm lg:text-base"
+                className="inline-block font-bold px-6 py-3 text-white bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 rounded-full text-center shadow-lg transition-all duration-200 ease-in-out text-xs sm:text-sm lg:text-base"
               >
-                {t('createToken')} 
+                {t('createToken')}
               </Link>
             </div>
           </div>
@@ -80,8 +82,8 @@ const Ranking = () => {
           <div className="mt-0">
             {activeTable === 'progress' && <ProgressRanking />}
             {activeTable === 'gainers' && <GainersRanking />}
-            {activeTable === 'marketcap' && <div>MarketCap Ranking Table</div>}
-            {activeTable === 'volume' && <div>24 Hours Trading Volume Table</div>}
+            {activeTable === 'marketcap' && <MarketCap/>}
+            {activeTable === 'volume' && <TradingVolume/>}
           </div>
         </div>
       </div>
