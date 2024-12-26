@@ -82,8 +82,8 @@ const Ranking = () => {
           <div className="mt-0">
             {activeTable === 'progress' && <ProgressRanking />}
             {activeTable === 'gainers' && <GainersRanking />}
-            {activeTable === 'marketcap' && <MarketCap/>}
-            {activeTable === 'volume' && <TradingVolume/>}
+            {activeTable === 'marketcap' && <MarketCap />}
+            {activeTable === 'volume' && <TradingVolume />}
           </div>
         </div>
       </div>
