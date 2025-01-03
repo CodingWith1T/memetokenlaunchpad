@@ -46,7 +46,8 @@ i18n
           liquidityPoolRatio: 'Liquidity Pool Ratio',
           startTime: 'Start Time',
           maximumPerUser: 'Maximum Per User',
-          createToken: 'Create Token',
+          buyTax: 'Buy Tax',
+          sellTax: 'Sell Tax',
         },
       },
       zh: {
@@ -86,12 +87,13 @@ i18n
           liquidityPoolRatio: '流动池比例',
           startTime: '开始时间',
           maximumPerUser: '每个用户最大金额',
-          createToken: '创建代币',
+          buyTax: '买入税',
+          sellTax: '卖出税',
         },
       },
     },
     fallbackLng: 'en',  // Use English as the fallback language
-    debug: true,  // Enable debug logs for development
+    debug: process.env.NODE_ENV === 'development',  // Only enable debug in development
     interpolation: {
       escapeValue: false, // React already escapes values
     },

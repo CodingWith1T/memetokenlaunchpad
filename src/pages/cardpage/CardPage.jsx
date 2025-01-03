@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
@@ -64,6 +64,29 @@ const CardPage = () => {
     },
   };
 
+  // State for amount input
+  const [amount, setAmount] = useState(0);
+  
+  // Handle Buy Button Logic (for now, just logs to console)
+  const handleBuy = (tokenAddress) => {
+    if (amount <= 0) {
+      alert('Please enter a valid amount to buy.');
+      return; // Prevent the function from executing if the amount is 0 or less
+    }
+    alert(`Buying ${amount} tokens from ${tokenAddress}`);
+    // Implement the buying logic here (e.g., Web3.js or Ethers.js)
+  };
+
+  // Handle Sell Button Logic (for now, just logs to console)
+  const handleSell = (tokenAddress) => {
+    if (amount <= 0) {
+      alert('Please enter a valid amount to sell.');
+      return; // Prevent the function from executing if the amount is 0 or less
+    }
+    alert(`Selling ${amount} tokens to ${tokenAddress}`);
+    // Implement the selling logic here (e.g., Web3.js or Ethers.js)
+  };
+
   return (
     <div className="container px-4 px-lg-5 mx-auto">
       {/* Header Section */}
@@ -104,21 +127,6 @@ const CardPage = () => {
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-xl font-semibold text-gray-800">Social Links</h2>
-          <div className="mt-4 flex space-x-4">
-            <Link to={`https://twitter.com/${item.twitter}`} className="text-blue-500 hover:underline">
-              Twitter
-            </Link>
-            <Link to={`https://discord.com/${item.discord}`} className="text-blue-500 hover:underline">
-              Discord
-            </Link>
-            <Link to={`https://telegram.me/${item.telegram}`} className="text-blue-500 hover:underline">
-              Telegram
-            </Link>
-          </div>
-        </div>
-
-        <div className="bg-white p-6 rounded-lg shadow-lg">
           <h2 className="text-xl font-semibold text-gray-800">Contract Info</h2>
           <ul className="mt-4 space-y-3 text-gray-600">
             <li>
@@ -126,7 +134,7 @@ const CardPage = () => {
                 to={`https://etherscan.io/address/${item.walletAddress}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
+                className="text-gray-500 hover:underline"
               >
                 View on Etherscan
               </Link>
@@ -135,6 +143,53 @@ const CardPage = () => {
               <strong>Contract Address:</strong> {item.walletAddress}
             </li>
           </ul>
+        </div>
+
+        {/* Buy/Sell Section */}
+        <div className="bg-white p-6 rounded-lg shadow-lg">
+          <h2 className="text-xl font-semibold text-gray-800">Buy / Sell Token</h2>
+          <div className="mt-4">
+            {/* Token Input for Buy/Sell */}
+            <div className="mb-4">
+              <label className="block text-gray-600">Amount of {item.tokenSymbol} to {item.rise > 0 ? "Buy" : "Sell"}</label>
+              <input
+                type="number"
+                className="mt-2 w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder={`Enter amount in ${item.tokenSymbol}`}
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                min="0"
+              />
+            </div>
+
+            {/* Buy and Sell Buttons */}
+            <div className="flex justify-between space-x-4">
+              <button
+                className="w-full bg-gold text-white py-3 rounded-lg hover:bg-gold transition duration-300"
+                onClick={() => handleBuy(item.tokenAddress)}
+              >
+                Buy Token
+              </button>
+              <button
+                className="w-full bg-gray-600 text-white py-3 rounded-lg hover:bg-red-700 transition duration-300"
+                onClick={() => handleSell(item.tokenAddress)}
+              >
+                Sell Token
+              </button>
+            </div>
+            
+            {/* Alternatively, you can link to a token purchase page */}
+            <div className="mt-4 text-center">
+              <Link
+                to={`https://springboard.pancakeswap.finance/bsc/token/${item.tokenAddress}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:underline"
+              >
+                Or trade directly on PancakeSwap
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
 

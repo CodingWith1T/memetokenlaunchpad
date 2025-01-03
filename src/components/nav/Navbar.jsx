@@ -24,14 +24,14 @@ const Navbar = () => {
             <NavLink
               to="/"
               className="text-sm text-gray-900 hover:text-gold font-semibold"
-              activeClassName="font-bold text-gold"
+              active ClassName="font-bold text-gold"
             >
               {t('board')} {/* Use translation key */}
             </NavLink>
             <NavLink
               to="/create-token"
               className="text-sm text-gray-900 hover:text-gold font-semibold"
-              activeClassName="font-bold text-gold"
+              active ClassName="font-bold text-gold"
             >
               {t('createToken')} {/* Use translation key */}
             </NavLink>

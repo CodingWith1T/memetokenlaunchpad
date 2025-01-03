@@ -26,7 +26,7 @@ const Marquee = () => {
         });
 
         // Log the response to check its structure
-        console.log(response.data);
+        // console.log(response.data);
 
         // Check if the response contains the expected data
         if (response.data) {
