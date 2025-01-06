@@ -23,15 +23,14 @@ const Navbar = () => {
           <div className="flex space-x-6">
             <NavLink
               to="/"
-              className="text-sm text-gray-900 hover:text-gold font-semibold"
-              active ClassName="font-bold text-gold"
+              className="text-sm text-gray-900 hover:text-gold font-semibold font-bold text-gold"
             >
               {t('board')} {/* Use translation key */}
             </NavLink>
             <NavLink
               to="/create-token"
-              className="text-sm text-gray-900 hover:text-gold font-semibold"
-              active ClassName="font-bold text-gold"
+              className="text-sm text-gray-900 hover:text-gold font-semibold font-bold text-gold"
+              
             >
               {t('createToken')} {/* Use translation key */}
             </NavLink>

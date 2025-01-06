@@ -1,22 +1,23 @@
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAccount, useConnect, useWriteContract } from 'wagmi';
-import { daimond } from '../../helper/Helper';
+import { useAccount, useWriteContract } from 'wagmi';
+import { daimond, routers } from '../../helper/Helper';
 import degenFacetAbi from "../../helper/DegenFacetAbi.json";
 import { parseUnits } from 'ethers';
 import { waitForTransactionReceipt } from 'wagmi/actions';
 import { config } from '../../wagmiClient';
 
 const CreateToken = () => {
-  const { isConnected, chain, address } = useAccount();
-  const { connectAsync } = useConnect();
+  const { chain, address } = useAccount();
+
+  const routerAddresses = routers[chain?.id] || [];
+
   const { writeContractAsync, isPending, isSuccess } = useWriteContract();
 
   const [tokenName, setTokenName] = useState('');
   const [tickerSymbol, setTickerSymbol] = useState('');
   const [description, setDescription] = useState('');
-  const [raisedToken, setRaisedToken] = useState('BNB');
+  const [router, setRouter] = useState('Select Router');
   const [website, setWebsite] = useState('');
   const [twitter, setTwitter] = useState('');
   const [telegram, setTelegram] = useState('');
@@ -24,11 +25,7 @@ const CreateToken = () => {
 
   const [showExtraOptions, setShowExtraOptions] = useState(false);
 
-  const [totalSupply, setTotalSupply] = useState(1000000000);
-  const [raisedAmount, setRaisedAmount] = useState(24);
-  const [salesRatio, setSalesRatio] = useState(80);
-  const [reservedRatio, setReservedRatio] = useState(0);
-  const [liquidityPoolRatio, setLiquidityPoolRatio] = useState(20);
+  const [totalSupply, setTotalSupply] = useState(1000000000); // Default total supply
   const [startTime, setStartTime] = useState('');
   const [maxPerUser, setMaxPerUser] = useState(0);
   const [hash, setHash] = useState(null);
@@ -45,56 +42,16 @@ const CreateToken = () => {
     setSelectedTag(selectedTag === tag ? null : tag);
   };
 
-  const handleRatioChange = (type, value) => {
-    const total = salesRatio + reservedRatio + liquidityPoolRatio;
-    const newValue = parseFloat(value);
-
-    if (total - (type === 'sales' ? salesRatio : type === 'reserved' ? reservedRatio : liquidityPoolRatio) + newValue <= 100) {
-      if (type === 'sales') {
-        setSalesRatio(newValue);
-      } else if (type === 'reserved') {
-        setReservedRatio(newValue);
-      } else if (type === 'liquidity') {
-        setLiquidityPoolRatio(newValue);
-      }
-    } else {
-      alert(t('The sum of Sales, Reserved, and Liquidity Pool ratios must not exceed 100'));
-    }
-  };
-
-  const calculateBuySellAmount = (type, value) => {
-    const amount = parseFloat(value);
-
-    // Validation for Buy Tax
-    if (type === 'buy') {
-      if (amount > 100) {
-        alert(t('Buy Tax should be below 100.'));
-        return;
-      }
-      setBuyAmount(amount);
-    }
-
-    // Validation for Sell Tax
-    if (type === 'sell') {
-      if (amount > 5) {
-        alert(t('Sell Tax should be below 5.'));
-        return;
-      }
-      setSellAmount(amount);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent form from refreshing the page
     try {
       if (!address) {
-        await connectAsync();
+        alert("Please Connect Wallet")
       }
-
       const params = {
-        name: tokenName,
-        symbol: tickerSymbol,
         poolDetails: JSON.stringify({
+          name: tokenName,
+          symbol: tickerSymbol,
           description: description,
           Website: website,
           Twitter: twitter,
@@ -102,17 +59,17 @@ const CreateToken = () => {
           Tag: selectedTag
         }),
         configIndex: 20,
-        router: "0xD99D1c33F9fC3444f8101754aBC46c52416550D1",
-        startTime: new Date(startTime).getTime() / 1000,
-        buyFeeRate: buyAmount,
-        sellFeeRate: sellAmount,
+        router: routerAddresses[router],
+        startTime: showExtraOptions ? new Date(startTime).getTime() / 1000 : new Date().getTime(),
+        buyFeeRate: showExtraOptions ? buyAmount : 0,
+        sellFeeRate: showExtraOptions ? sellAmount : 0,
         maxBuyAmount: maxPerUser,
         delayBuyTime: 0,
         merkleRoot: "0x0000000000000000000000000000000000000000000000000000000000000000",
-        initialBuyAmount: parseUnits((totalSupply).toString(), 0).toString()
+        initialBuyAmount: parseUnits(totalSupply.toString(), 0).toString() // Using total supply here
       };
-      console.log({ params })
 
+      console.log({params})
       const data = await writeContractAsync({
         abi: degenFacetAbi,
         address: daimond,
@@ -127,7 +84,8 @@ const CreateToken = () => {
       })
       setHash(receipt.transactionHash);
 
-    } catch (exception) {
+    } catch (error) {
+      console.log(error)
       const message = error.shortMessage;
       if (message) {
         if (message.includes('reason:')) {
@@ -199,20 +157,23 @@ const CreateToken = () => {
 
               {/* Raised Token Selection */}
               <div className="w-full flex flex-col gap-4">
-                <label htmlFor="raisedToken" className="text-lg font-bold text-purple-900">
-                  {t('raisedToken')}<span className="text-red-500">*</span>
+                <label htmlFor="router" className="text-lg font-bold text-purple-900">
+                  {t('router')}<span className="text-red-500">*</span>
                 </label>
                 <select
-                  id="raisedToken"
-                  name="raisedToken"
+                  id="router"
+                  name="router"
                   className="rounded p-4 border-2 border-purple-400 bg-purple-100 text-purple-900 font-bold"
-                  value={raisedToken}
-                  onChange={(e) => setRaisedToken(e.target.value)}
+                  value={router}
+                  onChange={(e) => setRouter(e.target.value)}  
                   required
                 >
-                  <option value="BNB">BNB</option>
-                  <option value="CAKE">CAKE</option>
-                  <option value="USDT">USDT</option>
+                  <option>Select Router</option>
+                  {Object.entries(routerAddresses).map(([name, address]) => (
+                    <option key={name} value={name}>
+                      {name}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -263,110 +224,118 @@ const CreateToken = () => {
                     type="button"
                     key={tag}
                     onClick={() => handleTagClick(tag)}
-                    className={`px-4 py-2 rounded-lg border-2 ${selectedTag === tag
-                      ? 'bg-purple-400 text-white border-purple-400'
-                      : 'bg-purple-100 text-purple-900 border-purple-400'
-                      }`}
+                    className={`px-4 py-2 rounded-lg border-2 font-bold text-purple-900 ${selectedTag === tag ? 'bg-purple-500' : 'bg-purple-100'}`}
                   >
-                    {t(tag.toLowerCase())}
+                    {tag}
                   </button>
                 ))}
               </div>
 
               {/* Extra Options Toggle */}
-              <div className="w-full flex items-center gap-4 mt-6">
-                <label htmlFor="extraOptions" className="text-lg font-bold text-purple-900">{t('extraOptions')}</label>
-                <label className="switch">
-                  <input
-                    type="checkbox"
-                    id="extraOptions"
-                    checked={showExtraOptions}
-                    onChange={() => setShowExtraOptions(!showExtraOptions)}
-                  />
-                  <span className="slider"></span>
-                </label>
+              <div className="w-full flex justify-center mt-4">
+                <button
+                  type="button"
+                  onClick={() => setShowExtraOptions(!showExtraOptions)}
+                  className="text-gold"
+                >
+                  {showExtraOptions ? 'Hide Extra Options' : 'Show Extra Options'}
+                </button>
               </div>
 
-              {/* Extra Options Fields */}
+              {/* Extra Options Fields (conditionally rendered) */}
               {showExtraOptions && (
-                <div className="extraoptions gap-4 mt-4">
-                  <div className='col-md-6'>
-                    <label htmlFor="InitialSupply" className="text-lg font-bold text-purple-900">
-                      {t('totalSupply')} <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="number"
-                      id="InitialSupply"
-                      value={totalSupply}
-                      onChange={(e) => setTotalSupply(parseInt(e.target.value))}
-                      className="rounded p-4 border-2 border-purple-400 bg-purple-100 text-purple-900 font-bold"
-                    />
-                  </div>
-                  <div className='col-md-6'>
-                    <label htmlFor="raisedAmount" className="text-lg font-bold text-purple-900">
-                      {t('raisedAmount')} <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="number"
-                      id="raisedAmount"
-                      value={raisedAmount}
-                      onChange={(e) => setRaisedAmount(parseInt(e.target.value))}
-                      className="rounded p-4 border-2 border-purple-400 bg-purple-100 text-purple-900 font-bold"
-                    />
-                  </div>
-
-                  <div className="col-md-6">
-                    <label htmlFor="buyTax" className="text-lg font-bold text-purple-900">
-                      {t('buyTax')} <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="number"
-                      value={buyAmount}
-                      onChange={(e) => calculateBuySellAmount('buy', e.target.value)}
-                    />
-                  </div>
-
-                  <div className="col-md-6">
-                    <label htmlFor="sellTax" className="text-lg font-bold text-purple-900">
-                      {t('sellTax')} <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="number"
-                      value={sellAmount}
-                      onChange={(e) => calculateBuySellAmount('sell', e.target.value)}
-                    />
-                  </div>
-
-                  <div className='col-md-6'>
+                <>
+                  <div className="w-full flex flex-col gap-4">
                     <label htmlFor="startTime" className="text-lg font-bold text-purple-900">
-                      {t('startTime')}
+                      Start Time <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="datetime-local"
                       id="startTime"
+                      name="startTime"
+                      className="rounded p-4 border-2 border-purple-400 bg-purple-100 text-purple-900 font-bold"
                       value={startTime}
                       onChange={(e) => setStartTime(e.target.value)}
-                      className="rounded p-4 border-2 border-purple-400 bg-purple-100 text-purple-900 font-bold"
                     />
                   </div>
-                </div>
+
+                  <div className="w-full flex flex-col gap-4">
+                    <label htmlFor="buyAmount" className="text-lg font-bold text-purple-900">
+                      Buy Fee Rate (Optional)
+                    </label>
+                    <input
+                      type="number"
+                      id="buyAmount"
+                      name="buyAmount"
+                      className="rounded p-4 border-2 border-purple-400 bg-purple-100 text-purple-900 font-bold"
+                      value={buyAmount}
+                      onChange={(e) => setBuyAmount(e.target.value)}
+                      placeholder="Buy Fee Rate"
+                    />
+                  </div>
+
+                  <div className="w-full flex flex-col gap-4">
+                    <label htmlFor="sellAmount" className="text-lg font-bold text-purple-900">
+                      Sell Fee Rate (Optional)
+                    </label>
+                    <input
+                      type="number"
+                      id="sellAmount"
+                      name="sellAmount"
+                      className="rounded p-4 border-2 border-purple-400 bg-purple-100 text-purple-900 font-bold"
+                      value={sellAmount}
+                      onChange={(e) => setSellAmount(e.target.value)}
+                      placeholder="Sell Fee Rate"
+                    />
+                  </div>
+
+                  <div className="w-full flex flex-col gap-4">
+                    <label htmlFor="maxPerUser" className="text-lg font-bold text-purple-900">
+                      Max Buy Amount per User (Optional)
+                    </label>
+                    <input
+                      type="number"
+                      id="maxPerUser"
+                      name="maxPerUser"
+                      className="rounded p-4 border-2 border-purple-400 bg-purple-100 text-purple-900 font-bold"
+                      value={maxPerUser}
+                      onChange={(e) => setMaxPerUser(e.target.value)}
+                      placeholder="Max Buy Amount"
+                    />
+                  </div>
+                </>
               )}
 
-              <div className="flex flex-col gap-4 mt-6">
-                <button
-                  type="submit" 
-                  disabled = {hash}
-                  className="w-full px-6 py-3 bg-purple-500 text-white rounded-lg mt-6"
-                >
-                  {t('createToken')}
-                </button>
+              {/* Initial Supply Input Section */}
+              <div className="w-full flex flex-col gap-4">
+                <label htmlFor="totalSupply" className="text-lg font-bold text-purple-900">
+                  Initial Supply <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="number"
+                  id="totalSupply"
+                  name="totalSupply"
+                  className="rounded p-4 border-2 border-purple-400 bg-purple-100 text-purple-900 font-bold"
+                  value={totalSupply}
+                  onChange={(e) => setTotalSupply(e.target.value)}
+                  placeholder="Total Supply"
+                  required
+                />
               </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="submit-button mt-4 w-full bg-purple-600 text-white font-bold py-3 rounded-lg"
+              >
+                {isPending ? 'Creating Token...' : 'Create Token'}
+              </button>
             </div>
           </div>
         </form>
       </div>
     </main>
   );
-};
+}
 
 export default CreateToken;

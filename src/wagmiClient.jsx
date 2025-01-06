@@ -1,6 +1,6 @@
 import { getDefaultConfig } from '@rainbow-me/rainbowkit';
 import { http } from 'wagmi';
-import { arbitrum, avalanche, base, blast, metis, mainnet, polygon, optimism, bscTestnet, sepolia, bsc } from 'wagmi/chains';
+import {bscTestnet, bsc} from 'wagmi/chains';
 
 export const config = getDefaultConfig({
   appName: 'Deploy Token',

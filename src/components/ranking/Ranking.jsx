@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ProgressRanking from './progess-ranking/ProgessRanking'; // Import the ProgressRanking component
 import GainersRanking from './gainers-ranking/GainersRanking';
-import NonListed from '../card/NonListed/NonListed';
+import CardList from '../CardList/CardList';
 import { useTranslation } from 'react-i18next';
 import MarketCap from './marketCap-ranking/MarketCap';
 import TradingVolume from './trading-volume/TradingVolume';
@@ -89,7 +89,7 @@ const Ranking = () => {
       </div>
 
       {/* NonListed section */}
-      <NonListed />
+      <CardList />
     </main>
   );
 };
