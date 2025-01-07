@@ -16,7 +16,7 @@ const App = () => {
       <Routes>
         {/* Route for the Ranking page */}
         <Route path="/" element={<Ranking />} />
-        <Route path="/card-page" element={<CardPage />} />
+        <Route path="/token/:chain/:token" element={<CardPage />} />
         <Route path="/create-token" element={<CreateToken />} />
       </Routes>
       <Footer/>

@@ -25,14 +25,11 @@ const NonListed = () => {
   };
 
   // Navigate to the CardPage with item data passed through state
-  const handleCardClick = (item) => {
-    navigate('/card-page', { state: { item } });
-  };
 
   useEffect(() => {
     const fetchPoolCount = async () => {
       try {
-        console.log("Fetching pool count...");
+        // console.log("Fetching pool count...");
         const result = await readContract(config, {
           address: daimond,
           abi,
@@ -40,10 +37,10 @@ const NonListed = () => {
           chainId: 97
         });
 
-        console.log("Pool count fetched:", result);
+        // console.log("Pool count fetched:", result);
         setTotalTokens(result.toString()); // Save the result in state
       } catch (error) {
-        console.error("Error fetching pool count:", error);
+        // console.error("Error fetching pool count:", error);
         setError(error.message); // Set the error state
       }
     };

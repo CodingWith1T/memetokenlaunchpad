@@ -25,7 +25,7 @@ const Navbar = () => {
               to="/"
               className="text-sm text-gray-900 hover:text-gold font-semibold font-bold text-gold"
             >
-              {t('board')} {/* Use translation key */}
+              {t('board')} 
             </NavLink>
             <NavLink
               to="/create-token"
@@ -40,17 +40,17 @@ const Navbar = () => {
         {/* Right side: ConnectButton and Language Selector */}
         <div className="flex items-center gap-4">
           {/* Language Select */}
-          <select
+          {/* <select
             onChange={(e) => handleLanguageChange(e.target.value)}
             className="px-4 py-2 rounded-md text-sm"
             defaultValue={i18n.language}
           >
             <option value="en">English</option>
             <option value="zh">中文</option>
-          </select>
+          </select> */}
 
           <ConnectButton
-            label={t('connectWallet')} // Use translation key for button
+            label={t('connect Wallet')} // Use translation key for button
             accountStatus="address"
             chainStatus="name"
             className="text-sm px-4 py-2 rounded-full focus:ring-2 focus:ring-offset-2"

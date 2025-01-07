@@ -16,6 +16,7 @@ const CreateToken = () => {
 
   const [tokenName, setTokenName] = useState('');
   const [tickerSymbol, setTickerSymbol] = useState('');
+  const [imageURl, setImageURl] = useState('');
   const [description, setDescription] = useState('');
   const [router, setRouter] = useState('Select Router');
   const [website, setWebsite] = useState('');
@@ -25,8 +26,8 @@ const CreateToken = () => {
 
   const [showExtraOptions, setShowExtraOptions] = useState(false);
 
-  const [totalSupply, setTotalSupply] = useState(1000000000); // Default total supply
-  const [startTime, setStartTime] = useState('');
+  const [initialBuyAmount, setInitialBuyAmount] = useState(0);
+  const [startTime, setStartTime] = useState();
   const [maxPerUser, setMaxPerUser] = useState(0);
   const [hash, setHash] = useState(null);
 
@@ -49,9 +50,12 @@ const CreateToken = () => {
         alert("Please Connect Wallet")
       }
       const params = {
+        name: tokenName,
+        symbol: tickerSymbol,
         poolDetails: JSON.stringify({
           name: tokenName,
           symbol: tickerSymbol,
+          image: imageURl,
           description: description,
           Website: website,
           Twitter: twitter,
@@ -60,22 +64,24 @@ const CreateToken = () => {
         }),
         configIndex: 20,
         router: routerAddresses[router],
-        startTime: showExtraOptions ? new Date(startTime).getTime() / 1000 : new Date().getTime(),
+        startTime: showExtraOptions ? BigInt(Math.floor(new Date(startTime).getTime() / 1000)) : BigInt(Math.floor(new Date().getTime() / 1000)),
+
         buyFeeRate: showExtraOptions ? buyAmount : 0,
         sellFeeRate: showExtraOptions ? sellAmount : 0,
-        maxBuyAmount: maxPerUser,
+        maxBuyAmount: 0,
         delayBuyTime: 0,
         merkleRoot: "0x0000000000000000000000000000000000000000000000000000000000000000",
-        initialBuyAmount: parseUnits(totalSupply.toString(), 0).toString() // Using total supply here
+        initialBuyAmount: 0 // Using total supply here
       };
 
-      console.log({params})
+      console.log({ params })
+
       const data = await writeContractAsync({
         abi: degenFacetAbi,
         address: daimond,
         chainID: parseInt(chain.id, 10),
         functionName: 'createPool',
-        value: totalSupply, // Add value if needed
+        value: initialBuyAmount, // Add value if needed
         args: [params], // Passing the struct as an object
       });
 
@@ -138,6 +144,22 @@ const CreateToken = () => {
                 />
               </div>
 
+              <div className="w-full flex flex-col gap-4">
+                <label htmlFor="Image Url" className="text-lg font-bold text-purple-900">
+                  {t('Image Url')} <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="url"
+                  id="imgUrl"
+                  name="imgUrl"
+                  className="rounded p-4 border-2 border-purple-400 bg-purple-100 text-purple-900 font-bold"
+                  value={imageURl}
+                  onChange={(e) => setImageURl(e.target.value)}
+                  placeholder={t('Enter JPG, PNG, GIF Image URL')}
+                  required
+                />
+              </div>
+
               {/* Description Input Section */}
               <div className="w-full flex flex-col gap-4">
                 <label htmlFor="description" className="text-lg font-bold text-purple-900">
@@ -165,7 +187,7 @@ const CreateToken = () => {
                   name="router"
                   className="rounded p-4 border-2 border-purple-400 bg-purple-100 text-purple-900 font-bold"
                   value={router}
-                  onChange={(e) => setRouter(e.target.value)}  
+                  onChange={(e) => setRouter(e.target.value)}
                   required
                 >
                   <option>Select Router</option>
@@ -306,18 +328,18 @@ const CreateToken = () => {
                 </>
               )}
 
-              {/* Initial Supply Input Section */}
+              {/* Initial Buy Amount Input Section */}
               <div className="w-full flex flex-col gap-4">
-                <label htmlFor="totalSupply" className="text-lg font-bold text-purple-900">
-                  Initial Supply <span className="text-red-500">*</span>
+                <label htmlFor="Initial Buy Amount" className="text-lg font-bold text-purple-900">
+                Initial Buy Amount <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="number"
-                  id="totalSupply"
-                  name="totalSupply"
+                  id="initialBuyAmount"
+                  name="initialBuyAmount"
                   className="rounded p-4 border-2 border-purple-400 bg-purple-100 text-purple-900 font-bold"
-                  value={totalSupply}
-                  onChange={(e) => setTotalSupply(e.target.value)}
+                  value={initialBuyAmount}
+                  onChange={(e) => setInitialBuyAmount(e.target.value)}
                   placeholder="Total Supply"
                   required
                 />
