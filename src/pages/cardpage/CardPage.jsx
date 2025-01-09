@@ -81,10 +81,10 @@ const CardPage = () => {
   const [amount, setAmount] = useState(0);
   const [timeLeft, setTimeLeft] = useState(0); // For countdown timer
   const [isSaleAvailable, setIsSaleAvailable] = useState(false);
+  const [approve, setApprove] = useState(0);
 
   // Handle Buy Button Logic
   const handleBuy = async () => {
-
 
     // Ensure 'token' and 'amount' are valid
     if (!token || !amount) {
@@ -125,10 +125,48 @@ const CardPage = () => {
     }
   };
 
+  const handleApprove = async () => {
+    // Ensure 'token' and 'amount' are valid
+    if (!token || !amount) {
+      console.error('Invalid token or amount');
+      return;
+    }
+
+    try {
+
+      const amoutOut = await readContract(config, {
+        abi: DegenFacetabi,
+        address: daimond,
+        functionName: 'getAmountOut',
+        chainId: 97,
+        args: [
+          token,
+          amount * 10 ** 18,
+          true,
+        ],
+      });
+
+      const approve = await writeContract(config, {
+        address: token,
+        abi: TokenABi,
+        functionName: 'approve',
+        chainId: 97,
+        args: [
+          daimond,
+          amount * 10 ** 18,
+        ],
+      });
+
+      setApprove(amount)
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   // Handle Sell Button Logic
   const handleSell = async () => {
 
-    // Ensure 'token' and 'amount' are valid
     if (!token || !amount) {
       console.error('Invalid token or amount');
       return;
@@ -142,33 +180,22 @@ const CardPage = () => {
         chainId: 97,
         args: [
           token,
-          amount * 10 ** 18,
+          approve * 10 ** 18,
           true,
         ],
       });
 
       console.log([
         daimond,
-        amount * 10 ** 18,
+        approve * 10 ** 18,
       ])
 
       console.log([
         token,
         "0x0000000000000000000000000000000000000000",
-        amount * 10 ** 18,
+        approve * 10 ** 18,
         amoutOut[0],
       ])
-
-      // const approve = await writeContract(config, {
-      //   address: token,
-      //   abi: TokenABi,
-      //   functionName: 'approve',
-      //   chainId: 97,
-      //   args: [
-      //     daimond,
-      //     amount * 10 ** 18,
-      //   ],
-      // });
 
       const sell = await writeContract(config, {
         address: daimond,
@@ -178,10 +205,15 @@ const CardPage = () => {
         args: [
           token,
           "0x0000000000000000000000000000000000000000",
-          amount * 10 ** 18,
-          amoutOut[1]*0.99,
+          approve * 10 ** 18, 
+          BigInt(Math.floor(Number(approve) * 0.9)),   
         ],
+
+        
+
       });
+
+      setApprove(0)
 
     } catch (error) {
       console.error('Error calling contract:', error);
@@ -287,16 +319,16 @@ const CardPage = () => {
               </Link>
             </li> */}
             <li>
-            <strong> Token Address: 
+              <strong> Token Address:
 
-            <Link
-                to={`https://testnet.bscscan.com/token/${data?.token}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ml-3 text-gray-500 hover:underline hover:text-gold"
-              >{data?.token ? `${data.token.slice(0, 10)}...${data.token.slice(-9)}` : ''}
-              </Link>
-              </strong> 
+                <Link
+                  to={`https://testnet.bscscan.com/token/${data?.token}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-3 text-gray-500 hover:underline hover:text-gold"
+                >{data?.token ? `${data.token.slice(0, 10)}...${data.token.slice(-9)}` : ''}
+                </Link>
+              </strong>
 
             </li>
             <li><strong>Start Time:</strong> {data?.startTime ? new Date(Number(data.startTime) * 1000).toLocaleString() : 'N/A'}</li>
@@ -326,9 +358,14 @@ const CardPage = () => {
                   <button className="w-full bg-gold text-white py-3 rounded-lg hover:bg-gold transition duration-300" onClick={() => handleBuy()}>
                     Buy Token
                   </button>
-                  <button className="w-full bg-gray-600 text-white py-3 rounded-lg hover:bg-red-700 transition duration-300" onClick={() => handleSell()}>
-                    Sell Token
-                  </button>
+                  {approve == 0 &&
+                    <button className="w-full bg-gray-500 text-white py-3 rounded-lg  transition duration-300" onClick={() => handleApprove()}>
+                      Approve
+                    </button>}
+                  {approve > 0 &&
+                    <button className="w-full bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition duration-300" onClick={() => handleSell()}>
+                      Sell {approve}
+                    </button>}
                 </div>
               </>
             ) : (

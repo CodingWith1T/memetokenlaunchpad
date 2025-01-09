@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { useAccount, useWriteContract } from 'wagmi';
 import { daimond, routers } from '../../helper/Helper';
 import degenFacetAbi from "../../helper/DegenFacetAbi.json";
-import { parseUnits } from 'ethers';
 import { waitForTransactionReceipt } from 'wagmi/actions';
 import { config } from '../../wagmiClient';
 

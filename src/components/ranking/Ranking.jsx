@@ -6,6 +6,7 @@ import CardList from '../CardList/CardList';
 import { useTranslation } from 'react-i18next';
 import MarketCap from './marketCap-ranking/MarketCap';
 import TradingVolume from './trading-volume/TradingVolume';
+import Marquee from '../marquee/Marquee';
 
 const Ranking = () => {
   // State to track which table is active
@@ -17,6 +18,8 @@ const Ranking = () => {
   };
 
   return (
+    <>
+    <Marquee />
     <main className="pl-5 pr-5 top-0 overflow-hidden">
       <div className="flex flex-col pb-4 pt-[75px] xl:pt-[50px]">
         {/* Background Gradient */}
@@ -91,6 +94,7 @@ const Ranking = () => {
       {/* NonListed section */}
       <CardList />
     </main>
+    </>
   );
 };
 

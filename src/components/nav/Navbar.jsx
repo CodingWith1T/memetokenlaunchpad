@@ -34,6 +34,13 @@ const Navbar = () => {
             >
               {t('createToken')} {/* Use translation key */}
             </NavLink>
+            <NavLink
+              to="/admin-panel"
+              className="text-sm text-gray-900 hover:text-gold font-semibold font-bold text-gold"
+              
+            >
+              {t('Admin')} {/* Use translation key */}
+            </NavLink>
           </div>
         </div>
 

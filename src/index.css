@@ -181,3 +181,7 @@ input:checked + .slider:before {
 	.extraoptions .col-md-4{ width:100%;}
 }
 
+ul {
+  list-style-type: disc;
+  padding-left: 20px; /* Adjust this value for proper indentation */
+}
