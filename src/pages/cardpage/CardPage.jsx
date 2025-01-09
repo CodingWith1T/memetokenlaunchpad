@@ -10,6 +10,7 @@ import { useReadContract } from 'wagmi';
 import logo from "../../assets/logo/logo.png";
 import { readContract, writeContract } from 'wagmi/actions';
 import { config } from '../../wagmiClient';
+import TradeEventList from '../../components/Statistics/TradeEventList';
 
 // Registering necessary chart components
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
@@ -409,14 +410,12 @@ const CardPage = () => {
 
       {/* Token Chart Section */}
       <div className="bg-white p-6 mt-8 rounded-lg shadow-lg">
-        <h2 className="text-xl font-semibold text-gray-800">Token Price Chart</h2>
-        <div className="mt-4" style={{ height: '400px' }}>
-          <Line data={priceData} options={chartOptions} />
-        </div>
+        <h2 className="text-xl font-semibold text-gray-800">Token Price Chart : Recent</h2>
+        <TradeEventList/>
       </div>
 
       {/* Additional Info or Activity Section */}
-      <div className="bg-white p-6 mt-8 rounded-lg shadow-lg">
+      {/* <div className="bg-white p-6 mt-8 rounded-lg shadow-lg">
         <h2 className="text-xl font-semibold text-gray-800">Recent Activity</h2>
         <div className="mt-4">
           <div className="flex justify-between items-center py-3 border-b">
@@ -432,7 +431,7 @@ const CardPage = () => {
             <div className="text-gray-600">Dec 19, 2024</div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

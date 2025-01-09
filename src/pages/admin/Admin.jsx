@@ -166,28 +166,28 @@ const Admin = () => {
     };
 
     return (
-        <div className="flex flex-col lg:flex-row h-screen">
+        <div className="flex flex-col lg:flex-row">
             {/* Sidebar */}
-            <div className="w-full lg:w-64 bg-gold text-white p-6 lg:block hidden">
-                <h2 className="text-2xl font-semibold text-center mb-8">Admin Panel</h2>
-                <ul className="space-y-4 list-none">
+            <div className="w-full lg:w-64 text-white p-6 lg:block AdminPanel">
+                <h2 className="text-2xl font-semibold mb-4">Admin Panel</h2>
+                <ul className="list-none">
                     <li>
-                        <Link to="/dashboard" className="hover:bg-gray-700 block px-4 py-2 rounded">
+                        <Link to="/dashboard" className="hover:bg-gray-700 block py-2 rounded">
                             Dashboard
                         </Link>
                     </li>
                     <li>
-                        <Link to="/users" className="hover:bg-gray-700 block px-4 py-2 rounded">
+                        <Link to="/users" className="hover:bg-gray-700 block  py-2 rounded">
                             Users
                         </Link>
                     </li>
                     <li>
-                        <Link to="/settings" className="hover:bg-gray-700 block px-4 py-2 rounded">
+                        <Link to="/settings" className="hover:bg-gray-700 block  py-2 rounded">
                             Settings
                         </Link>
                     </li>
                     <li>
-                        <Link to="/reports" className="hover:bg-gray-700 block px-4 py-2 rounded">
+                        <Link to="/reports" className="hover:bg-gray-700 block py-2 rounded">
                             Reports
                         </Link>
                     </li>
@@ -195,27 +195,27 @@ const Admin = () => {
             </div>
 
             {/* Main content */}
-            <div className="flex-1 p-6 bg-gray-100">
+            <div className="flex-1 p-6 bg-gray-200 rightbox">
                 {/* Header */}
-                <header className="bg-gold text-white p-6 rounded-lg mb-6">
-                    <h1 className="text-3xl font-semibold">Welcome to the Admin Panel</h1>
-                    <p className="mt-2">Manage your website and users from here.</p>
-                </header>
+                <div className="welcome text-white p-6 rounded-lg mb-6">
+                    <h1 className="dtitle text-3xl font-semibold">Welcome to the <span>Admin Panel</span></h1>
+                    <p className="subtext">Manage your website and users from here.</p>
+                </div>
 
                 {/* Dashboard Content */}
-                <div className="bg-white p-6 rounded-lg shadow-lg min-h-50">
-                    <h2 className="text-2xl font-semibold mb-4">Dashboard</h2>
+                <div className="Dashboard bg-white p-6 rounded-lg shadow-lg min-h-50">
+                    <h2 className="text-3xl font-semibold mb-2">Dashboard</h2>
                     <p>Here you can find key statistics and actions to manage the platform.</p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
-                        <div className="bg-gray-200 p-4 rounded-lg shadow-md hover:shadow-[0_8px_12px_rgba(255,215,0,0.7)] transition-shadow duration-300">
-                            <h3 className="text-lg font-semibold mb-2">Total Token Meme : <span>{totalToken - 1}</span></h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 mt-6">
+                        <div className="bg-gray-200 p-4 rounded-lg shadow-md transition-shadow duration-300">
+                            <h3 className="text-lg font-semibold">Total Token Meme : <span>{totalToken - 1}</span></h3>
                         </div>
-                        <div className="bg-gray-200 p-4 rounded-lg shadow-md hover:shadow-[0_8px_12px_rgba(255,215,0,0.7)] transition-shadow duration-300">
-                            <h3 className="text-lg font-semibold mb-2">Plateform Status : &nbsp;
+                        <div className="bg-gray-200 p-4 rounded-lg">
+                            <h3 className="text-lg font-semibold">Plateform Status : &nbsp;
                                 { 
                                     // Convert 'data' to boolean based on its string value
                                     !data ? (
-                                        <span><button className='rounded-md transition-colors bg-green-500 text-white' onClick={Running}>Running</button></span>
+                                        <span><button className='Running rounded-md transition-colors text-white' onClick={Running}>Running</button></span>
                                     ) : (
                                         <span><button className='rounded-md transition-colors bg-red-500 text-white' onClick={Running}>Paused</button></span>
                                     )
@@ -225,7 +225,7 @@ const Admin = () => {
                     {/* Grid of Cards */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
                         {/* Card 1 */}
-                        <div className="bg-gray-200 p-4 rounded-lg shadow-md hover:shadow-[0_8px_12px_rgba(255,215,0,0.7)] transition-shadow duration-300">
+                        <div className="bsbox bg-gray-200 p-4 rounded-lg shadow-md">
                             <h3 className="text-lg font-semibold mb-2">Add Router</h3>
                             <p className="text-sm text-gray-600 mb-4">Enter router details to add a new router.</p>
 
@@ -239,14 +239,14 @@ const Admin = () => {
                             />
                             <button
                                 onClick={handleAddRouter}
-                                className={`w-full p-2 rounded-md transition-colors ${routerName ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-gray-400 text-gray-600 cursor-not-allowed'}`}
+                                className={`w-full p-2 rounded-md transition-colors ${routerName ? 'bg-blue-600 gbutton text-white hover:bg-blue-700' : 'bg-gray-400 text-gray-600 cursor-not-allowed'}`}
                                 disabled={!routerName}
                             >
                                 Add Router
                             </button>
                         </div>
                         {/* Card 2 */}
-                        <div className="bg-gray-200 p-4 rounded-lg shadow-md hover:shadow-[0_8px_12px_rgba(255,215,0,0.7)] transition-shadow duration-300">
+                        <div className="bsbox bg-gray-200 p-4 rounded-lg shadow-md">
                             <h3 className="text-lg font-semibold mb-2">Remove Router</h3>
                             <p className="text-sm text-gray-600 mb-4">Enter router details to remove an existing router.</p>
 
@@ -260,14 +260,14 @@ const Admin = () => {
                             />
                             <button
                                 onClick={handleRemoveRouter}
-                                className={`w-full p-2 rounded-md transition-colors ${routerId ? 'bg-red-600 text-white hover:bg-red-700' : 'bg-gray-400 text-gray-600 cursor-not-allowed'}`}
+                                className={`w-full p-2 rounded-md transition-colors ${routerId ? 'bg-red-600 gbutton text-white hover:bg-red-700' : 'bg-gray-400 text-gray-600 cursor-not-allowed'}`}
                                 disabled={!routerId}
                             >
                                 Remove Router
                             </button>
                         </div>
                         {/* Card 3 */}
-                        <div className="bg-gray-200 p-4 rounded-lg shadow-md hover:shadow-[0_8px_12px_rgba(255,215,0,0.7)] transition-shadow duration-300">
+                        <div className="bsbox bg-gray-200 p-4 rounded-lg shadow-md">
                             <h3 className="text-lg font-semibold mb-2">Total Router</h3>
                             <ul className="text-sm text-black">
                                 {routes.length > 0 ? (
@@ -280,7 +280,7 @@ const Admin = () => {
                             </ul>
                         </div>
                         {/* Card 4 */}
-                        <div className="bg-gray-200 p-4 rounded-lg shadow-md hover:shadow-[0_8px_12px_rgba(255,215,0,0.7)] transition-shadow duration-300">
+                        <div className="bsbox bg-gray-200 p-4 rounded-lg shadow-md">
                             <h3 className="text-lg font-semibold mb-2">Token Info</h3>
                             <input
                                 type="text"
@@ -291,7 +291,7 @@ const Admin = () => {
                             />
                             <button
                                 onClick={openModal} // Open the modal
-                                className={`w-full p-2 rounded-md transition-colors ${tokenAddress ? 'bg-gold text-white hover:bg-gold' : 'bg-gray-400 text-gray-600 cursor-not-allowed'}`}
+                                className={`w-full p-2 rounded-md transition-colors ${tokenAddress ? 'bg-gold gbutton text-white hover:bg-gold' : 'bg-gray-400 text-gray-600 cursor-not-allowed'}`}
                                 disabled={!tokenAddress}
                             >
                                 Search
@@ -336,6 +336,7 @@ const Admin = () => {
                     </div>
                 )}
             </div>
+            <div className='Clearfix'></div>
         </div>
     );
 };

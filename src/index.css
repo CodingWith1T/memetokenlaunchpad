@@ -9,7 +9,7 @@ header .active{ color:#3e69cc;}
 .bg-purple-600{background-color:#3a3a3a;}
 .text-purple-200{color: rgb(255 255 255);}
 main{background:#e8e8e8; padding:0px 70px !important;}
-.buttonbox{box-shadow:1px 2px 5px rgb(191 191 191 / 50%); background: #fff; border: none;}
+.buttonbox{box-shadow:1px 2px 5px rgb(191 191 191 / 50%); background: #fff; border: none; border-radius: 10px;}
 .lastbtn{padding: 10px 30px;}
 .hover\:bg-purple-300:hover {background-color:#4c4c4c !important; color: #fff !important;}
 .text-\[\#7A6EAA\] {color:#2a2a2a;}
@@ -18,9 +18,9 @@ main{background:#e8e8e8; padding:0px 70px !important;}
 .bg-purple-500{background-color:#c1a444;    box-shadow: 1px 2px 1px #8f782e;}
 .hover\:text-purple-500:hover{color:#c1a444 !important;}
 
+
 .cardbox .bg-gray-300 {background: radial-gradient(circle, #c3c3c3 0%, rgb(131 131 131) 71%);}
 .cardbox .text-gray-600{color:#2a2a2a;}
-.lastcontent{}
 .cardbox .text-purple-600{color:#c1a444!important;}
 .tname{ float:left;font-weight:700;}
 .tshort{ float:right;margin-top: 5px; margin-bottom: 0px;    color:#2a2a2a;}
@@ -126,7 +126,10 @@ input:checked + .slider:before {
   border-radius:5px;
   float: left;
   margin-right:10px;
+  
 }
+.card-body img{border: 2px solid #000;}
+.chainlink img{ border:none !important;}
 .card-body {
   justify-content: space-between;
   width: 100%;
@@ -158,10 +161,25 @@ input:checked + .slider:before {
 }
 
 .symble{color: #f1be16; font-size: 14px;}
-.card-text{margin-top:8px;}
+.card-text{margin-top:8px;height: 52px; overflow: hidden;}
 .cards hr{display: inline-block; width: 100%; border-top:1px dashed #898989;}
 .chainlink{ float: right; font-size: 13px;    margin-top:-1px;    margin-right: -8px;}
 .chainimg { width: 31px;  height: 18px;  margin-top: 1px;  margin-right: 3px !important;}
+
+.AdminPanel{ background: #141414;padding-top: 32px;}
+.welcome{background: #141414;}
+.AdminPanel ul{padding-left: 0px;}
+.AdminPanel ul li{ border-bottom: 1px dashed #4c4c4c;}
+.AdminPanel ul li:hover a{background: #c1a444 !important; padding-left: 10px;}
+.gbutton{background: #c1a444 !important;}
+.Running{ background: #c1a444 !important; padding:5px 15px;}
+.subtext{ margin-top: 3px;;}
+.Dashboard{ margin-bottom: 50px;    padding-bottom: 45px;}
+.Dashboard .bg-gray-200{background-color: rgb(221 221 221); box-shadow: none !important;}
+
+.bsbox .bg-gray-400 { --tw-bg-opacity: 1; background-color: rgb(126 126 126); color: #fff !important;}
+.buttonbox button{ border-radius:8px;}
+
 
 
 
