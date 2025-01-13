@@ -172,23 +172,8 @@ const Admin = () => {
                 <h2 className="text-2xl font-semibold mb-4">Admin Panel</h2>
                 <ul className="list-none">
                     <li>
-                        <Link to="/dashboard" className="hover:bg-gray-700 block py-2 rounded">
+                        <Link to="/admin-panel" className="hover:bg-gray-700 block py-2 rounded">
                             Dashboard
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/users" className="hover:bg-gray-700 block  py-2 rounded">
-                            Users
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/settings" className="hover:bg-gray-700 block  py-2 rounded">
-                            Settings
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/reports" className="hover:bg-gray-700 block py-2 rounded">
-                            Reports
                         </Link>
                     </li>
                 </ul>
@@ -212,7 +197,7 @@ const Admin = () => {
                         </div>
                         <div className="bg-gray-200 p-4 rounded-lg">
                             <h3 className="text-lg font-semibold">Plateform Status : &nbsp;
-                                { 
+                                {
                                     // Convert 'data' to boolean based on its string value
                                     !data ? (
                                         <span><button className='Running rounded-md transition-colors text-white' onClick={Running}>Running</button></span>

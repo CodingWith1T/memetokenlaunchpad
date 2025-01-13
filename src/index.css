@@ -180,6 +180,24 @@ input:checked + .slider:before {
 .bsbox .bg-gray-400 { --tw-bg-opacity: 1; background-color: rgb(126 126 126); color: #fff !important;}
 .buttonbox button{ border-radius:8px;}
 
+.PriceChart{margin-top: 15px;}
+.PriceChart thead{background: #ddd;font-size: 16px;}
+.PriceChart table tr td a{color: rgb(0 71 163) !important;}
+.title{ font-size: 28px;margin-bottom: 20px;}
+.pricechart tr td a{color: #004793;}
+.pricetabel{ margin-bottom:50px;}
+.pricechart thead{ background:#e7e7e7;}
+
+.buysell .bg-gold{border-radius:5px; background: #fffceb; box-shadow: none; color: #a9850e; border: 2px solid #c1a444;}
+.sell{color:#000;}
+.buy{color:#000;}
+.buybox{ margin-bottom:50px;}
+.boxc{ border:1px solid #ddd;}
+.lasstbutton {margin-top: 30px; background: #a9850e !important; color: #fff !important; border: none !important;}
+.receivedvalu{ float:right;}
+
+
+
 
 
 

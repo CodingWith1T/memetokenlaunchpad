@@ -59,31 +59,14 @@ const NonListed = () => {
 
   return (
     <div>
-      <div className="cardbox grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4">
+      <div className="cardbox grid grid-cols-1 mb-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4">
         {
           Array.from({ length: totalTokens }, (_, index) => (
             <Card key={index} id={index} />
           ))
         }
       </div>
-      {/* Pagination Section */}
-      <div className="pagination flex justify-center items-center py-4">
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-          className="px-4 py-2 mx-1 bg-gray-300 rounded-md hover:bg-gray-400"
-        >
-          Previous
-        </button>
-        <span className="px-4 py-2 mx-1">{currentPage} / {totalPages}</span>
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-          className="px-4 py-2 mx-1 bg-gray-300 rounded-md hover:bg-gray-400"
-        >
-          Next
-        </button>
-      </div>
+
     </div>
   );
 };

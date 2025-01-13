@@ -22,6 +22,8 @@ const Card = ({ id, handleCardClick }) => {
     chainId: 97
   });
 
+  console.log({data})
+
 
   // Display loading, error, or contract data
   if (isLoading) {

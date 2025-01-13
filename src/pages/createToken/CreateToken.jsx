@@ -64,7 +64,6 @@ const CreateToken = () => {
         configIndex: 20,
         router: routerAddresses[router],
         startTime: showExtraOptions ? BigInt(Math.floor(new Date(startTime).getTime() / 1000)) : BigInt(Math.floor(new Date().getTime() / 1000)),
-
         buyFeeRate: showExtraOptions ? buyAmount : 0,
         sellFeeRate: showExtraOptions ? sellAmount : 0,
         maxBuyAmount: 0,
@@ -282,7 +281,8 @@ const CreateToken = () => {
 
                   <div className="w-full flex flex-col gap-4">
                     <label htmlFor="buyAmount" className="text-lg font-bold text-purple-900">
-                      Buy Fee Rate (Optional)
+
+                      Buy Tax % ({chain.nativeCurrency.symbol})  Ex:2
                     </label>
                     <input
                       type="number"
@@ -297,7 +297,7 @@ const CreateToken = () => {
 
                   <div className="w-full flex flex-col gap-4">
                     <label htmlFor="sellAmount" className="text-lg font-bold text-purple-900">
-                      Sell Fee Rate (Optional)
+                      Sell Tax % ({chain.nativeCurrency.symbol}) Ex:2
                     </label>
                     <input
                       type="number"
@@ -312,7 +312,7 @@ const CreateToken = () => {
 
                   <div className="w-full flex flex-col gap-4">
                     <label htmlFor="maxPerUser" className="text-lg font-bold text-purple-900">
-                      Max Buy Amount per User (Optional)
+                      Max Buy Amount per User ({chain.nativeCurrency.symbol})
                     </label>
                     <input
                       type="number"
@@ -330,7 +330,7 @@ const CreateToken = () => {
               {/* Initial Buy Amount Input Section */}
               <div className="w-full flex flex-col gap-4">
                 <label htmlFor="Initial Buy Amount" className="text-lg font-bold text-purple-900">
-                Initial Buy Amount <span className="text-red-500">*</span>
+                  Initial Buy Amount ({chain.nativeCurrency.symbol}) Ex:2 <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="number"

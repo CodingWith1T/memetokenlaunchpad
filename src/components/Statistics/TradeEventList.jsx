@@ -33,8 +33,6 @@ export function useTradeEvents(contractAddress) {
       toBlock: blockNumber, // Fetch logs up to the latest block
     });
 
-
-
     return logs.map((log) => ({
       token: log.args.token,
       user: log.args.user,
@@ -56,64 +54,90 @@ import React, { useEffect, useState } from 'react';
 import { config } from '../../wagmiClient';
 import { Link } from 'react-router-dom';
 
-function TradeEventList({ contractAddress }) {
+function TradeEventList({ contractAddress, tx}) {
   const { address } = useAccount();
-  const { fetchEvents } = useTradeEvents(contractAddress);
+  const { fetchEvents } = useTradeEvents();
   const [tradeEvents, setTradeEvents] = useState([]);
   const [allYour, setAllYour] = useState(false)
 
   useEffect(() => {
+    console.log("hello")
     const getEvents = async () => {
-      const events = await fetchEvents();
+      const events = await fetchEvents(contractAddress);
+      console.log({events})
       setTradeEvents(events);
     };
     getEvents();
-  }, [fetchEvents]);
+  }, [contractAddress, tx]);
 
   return (
-    <div>
-      <div className="btn">
-        <button onClick={() => setAllYour(false)}>
+    <div className='buysell pricetabel'>
+      {/* Buttons for All/Your Transactions */}
+      <div className="btngroup flex mb-6">
+        <button
+          className={`buy px-6 py-3 text-white text-md font-semibold rounded-lg transition duration-300 w-full ${!allYour ? '' : 'bg-gold'}`}
+          onClick={() => setAllYour(true)}>
           <h2>All Transactions</h2>
         </button>
-        <button onClick={() => setAllYour(true)}>
-          <h2>Your Transactions</h2>
+        <button
+          className={`sell px-6 py-3 text-white text-md font-semibold rounded-lg  transition duration-300 w-full ${allYour ? '' : 'bg-gold'}`}
+          onClick={() => setAllYour(false)}>
+          <h2>Your Transcations</h2>
         </button>
       </div>
 
-      {!allYour ? (
-        <div>
-          <ul>
-            {tradeEvents.map((event, index) => (
-              <li key={index}>
-                <strong>Token:</strong> {event.token} <br />
-                <strong>Is Buy:</strong> {event.isBuy ? 'Buy' : 'Sell'} <br />
-                <strong>Age:</strong> {Math.floor((new Date() - event.timestamp )/(1000 * 60 * 60 * 24))} Days<br />
-                <Link to={`/transaction/${event.transactionHash}`}>
-                  <strong>Transaction Hash:</strong> {event.transactionHash}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <div>
-          <ul>
-            {tradeEvents
-              .filter(event => event.user === address)  // Filter events by the user's address
-              .map((event, index) => (
-                <li key={index}>
-                  <strong>Token:</strong> {event.token} <br />
-                  <strong>Is Buy:</strong> {event.isBuy ? 'Buy' : 'Sell'} <br />
-                  <strong>Age:</strong> {Math.floor((new Date() - event.timestamp )/(1000 * 60 * 60 * 24))} Days <br />
-                  <Link to={`/transaction/${event.transactionHash}`}>
-                    <strong>Transaction Hash:</strong> {event.transactionHash}
-                  </Link>
-                </li>
-              ))}
-          </ul>
-        </div>
-      )}
+      {/* Table to display Trade Events */}
+      <div className="overflow-x-auto bg-white rounded-lg shadow-lg border border-gray-200">
+        <table className="pricechart min-w-full text-sm text-left">
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="py-3 px-6 text-gray-700 font-semibold">Owner</th>
+              <th className="py-3 px-6 text-gray-700 font-semibold">Type</th>
+              <th className="py-3 px-6 text-gray-700 font-semibold">Age (Days)</th>
+              <th className="py-3 px-6 text-gray-700 font-semibold">Transaction Hash</th>
+            </tr>
+          </thead>
+          <tbody className="max-h-[300px] overflow-y-auto">
+            {!allYour
+              ? tradeEvents.map((event, index) => (
+                <tr key={index} className="border-t hover:bg-gray-50">
+                  <td className="py-3 px-6 text-gray-800">{event.user}</td>
+                  <td className="py-3 px-6">{event.isBuy ? 'Buy' : 'Sell'}</td>
+                  <td className="py-3 px-6">
+                    {Math.floor((new Date() - event.timestamp) / (1000 * 60 * 60 * 24))}
+                  </td>
+                  <td className="py-3 px-6">
+                    <Link
+                      to={`/transaction/${event.transactionHash}`}
+                      className="hover:underline"
+                    >
+                      {event.transactionHash}
+                    </Link>
+                  </td>
+                </tr>
+              ))
+              : tradeEvents
+                .filter((event) => event.user === address) // Filter events by the user's address
+                .map((event, index) => (
+                  <tr key={index} className="border-t hover:bg-gray-50">
+                    <td className="py-3 px-6 text-gray-800">{event.user}</td>
+                    <td className="py-3 px-6">{event.isBuy ? 'Buy' : 'Sell'}</td>
+                    <td className="py-3 px-6">
+                      {Math.floor((new Date() - event.timestamp) / (1000 * 60 * 60 * 24))}
+                    </td>
+                    <td className="py-3 px-6">
+                      <Link
+                        to={`/transaction/${event.transactionHash}`}
+                        className="text-indigo-600 hover:text-indigo-700 hover:underline"
+                      >
+                        {event.transactionHash}
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
