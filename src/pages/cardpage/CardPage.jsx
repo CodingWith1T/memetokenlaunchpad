@@ -10,7 +10,8 @@ import logo from "../../assets/logo/logo.png";
 import TradeEventList from '../../components/Statistics/TradeEventList';
 import { config } from '../../wagmiClient';
 import { formatUnits } from 'ethers';
-
+import { Line } from 'react-chartjs-2';
+import { Chart, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale } from 'chart.js';
 const CardPage = () => {
   const { token } = useParams();
 
@@ -183,8 +184,67 @@ const CardPage = () => {
   if (!data) {
     return <div className="flex justify-center items-center h-screen">Data not available</div>;
   }
+  console.log({ data })
 
   const poolDetailsParsed = data?.poolDetails ? JSON.parse(data.poolDetails) : {};
+  const baseReserve = Number(data.virtualBaseReserve) / (10 ** 18);
+  const quoteReserve = Number(data.virtualQuoteReserve) / (10 ** 18);
+  const maxSupply = Number(data.maxListingBaseAmount) / (10 ** 18);
+
+  const prices = [];
+  const supplies = [];
+
+  // Generate price points based on bonding curve
+  for (let supply = 1; supply <= maxSupply; supply += maxSupply / 1000) {
+    const adjustedBaseReserve = baseReserve + supply;
+    const price = quoteReserve / adjustedBaseReserve;
+    prices.push(price * (10 ** 9));
+    supplies.push(supply);
+  }
+  console.log({ prices, supplies })
+  Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale);
+  const chartData = {
+    labels: supplies,
+    datasets: [
+      {
+        label: 'Price vs. Supply',
+        data: prices,
+        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderWidth: 1,
+        tension: 0.4,
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+      },
+      title: {
+        display: true,
+        text: 'Bonding Curve',
+      },
+    },
+    scales: {
+      x: {
+        type: 'linear',
+        title: {
+          display: true,
+          text: `Supply in ${chain?.nativeCurrency?.symbol ?? 'BNB'}`,
+        },
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Price in Gwei',
+        },
+      },
+    },
+  };
+
 
   return (
     <div className="container px-4 px-lg-5 mx-auto">
@@ -258,9 +318,20 @@ const CardPage = () => {
                     min="0"
                   />
                 </div>
+
                 <div className="text-black">
-                  Received : <span className='receivedvalu'>{formatUnits(amountOut[0], 18)} </span><br />
-                  Min Received : <span className='receivedvalu'>{formatUnits(amountOut[1], 18)}</span>
+                  {isBuy ? (
+                    <p>Buy Tax: <span className='receivedvalu'>{parseInt(data?.buyFeeRate)}%</span></p>
+                  ) : (
+                    <p>Sell Tax: <span className='receivedvalu'>{parseInt(data?.sellFeeRate)}%</span></p>
+                  )}
+                  <p> Received : <span className='receivedvalu'>{formatUnits(amountOut[0], 18)} </span></p>
+                  <p> Min Received : <span className='receivedvalu'>
+                    {isBuy ?
+                      formatUnits(amountOut[1], 18) * (1 - parseInt(data?.buyFeeRate) / 100) :
+                      formatUnits(amountOut[1], 18) * (1 - parseInt(data?.sellFeeRate) / 100)
+                    }
+                  </span></p>
                 </div>
                 <div className="flex justify-between space-x-4">
                   {isBuy ? (
@@ -326,8 +397,13 @@ const CardPage = () => {
         </div>
 
       </div>
+      <div className="buybox grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8 mt-8">
+        <TradeEventList contractAddress={token} tx={txDone} />
+        <div style={{ width: '100%', height: '400px' }}>
+          <Line data={chartData} options={options} />
+        </div>
+      </div>
 
-      <TradeEventList contractAddress={token} tx={txDone} />
     </div>
   );
 };

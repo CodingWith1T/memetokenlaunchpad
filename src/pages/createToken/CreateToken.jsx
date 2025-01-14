@@ -5,6 +5,7 @@ import { daimond, routers } from '../../helper/Helper';
 import degenFacetAbi from "../../helper/DegenFacetAbi.json";
 import { waitForTransactionReceipt } from 'wagmi/actions';
 import { config } from '../../wagmiClient';
+import { useNavigate } from 'react-router-dom';
 
 const CreateToken = () => {
   const { chain, address } = useAccount();
@@ -72,8 +73,6 @@ const CreateToken = () => {
         initialBuyAmount: 0 // Using total supply here
       };
 
-      console.log({ params })
-
       const data = await writeContractAsync({
         abi: degenFacetAbi,
         address: daimond,
@@ -83,10 +82,7 @@ const CreateToken = () => {
         args: [params], // Passing the struct as an object
       });
 
-      const receipt = await waitForTransactionReceipt(config, {
-        hash: data,
-      })
-      setHash(receipt.transactionHash);
+      navigate("/");
 
     } catch (error) {
       console.log(error)

@@ -55,13 +55,13 @@ import { config } from '../../wagmiClient';
 import { Link } from 'react-router-dom';
 
 function TradeEventList({ contractAddress, tx}) {
-  const { address } = useAccount();
+  const { chain, address } = useAccount();
   const { fetchEvents } = useTradeEvents();
   const [tradeEvents, setTradeEvents] = useState([]);
   const [allYour, setAllYour] = useState(false)
 
+  const blockExplorerUrl = chain?.blockExplorers?.default?.url;
   useEffect(() => {
-    console.log("hello")
     const getEvents = async () => {
       const events = await fetchEvents(contractAddress);
       console.log({events})
@@ -108,8 +108,8 @@ function TradeEventList({ contractAddress, tx}) {
                   </td>
                   <td className="py-3 px-6">
                     <Link
-                      to={`/transaction/${event.transactionHash}`}
-                      className="hover:underline"
+                      to={`${blockExplorerUrl}/tx/${event.transactionHash}`}
+                      className="hover:underline" target='_blank'
                     >
                       {event.transactionHash}
                     </Link>
@@ -127,7 +127,7 @@ function TradeEventList({ contractAddress, tx}) {
                     </td>
                     <td className="py-3 px-6">
                       <Link
-                        to={`/transaction/${event.transactionHash}`}
+                        to={`${blockExplorerUrl}/tx/${event.transactionHash}`}
                         className="text-indigo-600 hover:text-indigo-700 hover:underline"
                       >
                         {event.transactionHash}

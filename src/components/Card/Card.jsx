@@ -2,11 +2,12 @@ import React from 'react';
 import { useAccount, useReadContract } from 'wagmi';
 import abi from "../../helper/ManagerFaucetAbi.json";
 import { daimond } from '../../helper/Helper';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const Card = ({ id, handleCardClick }) => {
+const Card = ({ id, handleCardClick, activeTable }) => {
+
   const navigate = useNavigate(); // Hook to navigate to different routes
-  const { isConnected, chain, address } = useAccount();
+  const { address } = useAccount();
 
   // Ensure we have the ID available before making the contract call
   if (!id) {
@@ -21,9 +22,11 @@ const Card = ({ id, handleCardClick }) => {
     args: [id.toString()], // Passing `id` as argument to the contract function
     chainId: 97
   });
+  console.log({ data })
 
-  console.log({data})
-
+  if (activeTable == "owner" && data.owner != address) {
+    return
+  }
 
   // Display loading, error, or contract data
   if (isLoading) {
@@ -33,7 +36,7 @@ const Card = ({ id, handleCardClick }) => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-
+  
   // Destructuring the fetched data from the contract
   const { id: poolId, owner, token, router, poolDetails } = data || {};
 
@@ -71,6 +74,7 @@ const Card = ({ id, handleCardClick }) => {
           <span className="MCap">MCap: $36.9K</span>
         </p>
       </div>
+      
     </div>
   );
 };
