@@ -193,7 +193,7 @@ const Admin = () => {
                     <p>Here you can find key statistics and actions to manage the platform.</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 mt-6">
                         <div className="bg-gray-200 p-4 rounded-lg shadow-md transition-shadow duration-300">
-                            <h3 className="text-lg font-semibold">Total Token Meme : <span>{totalToken - 1}</span></h3>
+                            <h3 className="text-lg font-semibold">Total Token Meme : <span>{totalToken}</span></h3>
                         </div>
                         <div className="bg-gray-200 p-4 rounded-lg">
                             <h3 className="text-lg font-semibold">Plateform Status : &nbsp;

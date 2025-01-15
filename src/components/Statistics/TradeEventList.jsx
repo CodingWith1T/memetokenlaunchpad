@@ -64,7 +64,6 @@ function TradeEventList({ contractAddress, tx}) {
   useEffect(() => {
     const getEvents = async () => {
       const events = await fetchEvents(contractAddress);
-      console.log({events})
       setTradeEvents(events);
     };
     getEvents();

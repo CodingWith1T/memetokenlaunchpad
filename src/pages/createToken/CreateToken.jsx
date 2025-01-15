@@ -278,7 +278,7 @@ const CreateToken = () => {
                   <div className="w-full flex flex-col gap-4">
                     <label htmlFor="buyAmount" className="text-lg font-bold text-purple-900">
 
-                      Buy Tax % ({chain.nativeCurrency.symbol})  Ex:2
+                      Buy Tax % ({chain?.nativeCurrency.symbol})  Ex:2
                     </label>
                     <input
                       type="number"

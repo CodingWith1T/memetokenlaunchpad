@@ -55,7 +55,7 @@ const CardPage = () => {
         const seconds = Math.floor(difference % 60);
         setTimeLeft(`${days}d ${hours}h ${minutes}m ${seconds}s`);
       }
-    }, 1000);
+    }, 1000); 
 
     return () => clearInterval(interval);
   }, [startTime]);
@@ -79,6 +79,7 @@ const CardPage = () => {
           isBuy,
         ],
       });
+      console.log({result})
       setAmountOut(result);
     } catch (error) {
       console.error('Error fetching amountOut:', error);
@@ -102,7 +103,8 @@ const CardPage = () => {
           amountOut[0],
           [],
         ],
-        value: BigInt(amount * 10 ** 18),
+        // value: BigInt(amount * 10 ** 18),
+        value: BigInt(amount * 10 ** 18) + amountOut[2],
       });
       const receipt = await waitForTransactionReceipt(config, {
         hash: data,
@@ -139,6 +141,12 @@ const CardPage = () => {
   const handleSell = async () => {
     if (!token || !approve) return;
 
+    console.log([
+      token,
+      "0x0000000000000000000000000000000000000000",
+      BigInt(approve * 10 ** 18),
+      amountOut[0],
+    ])
     try {
       const data = await writeContract(config, {
         address: daimond,
@@ -149,9 +157,10 @@ const CardPage = () => {
           token,
           "0x0000000000000000000000000000000000000000",
           BigInt(approve * 10 ** 18),
-          amountOut[0],
+          amountOut[0]-amountOut[4],
         ],
       });
+      
       const receipt = await waitForTransactionReceipt(config, {
         hash: data,
       })
@@ -184,7 +193,6 @@ const CardPage = () => {
   if (!data) {
     return <div className="flex justify-center items-center h-screen">Data not available</div>;
   }
-  console.log({ data })
 
   const poolDetailsParsed = data?.poolDetails ? JSON.parse(data.poolDetails) : {};
   const baseReserve = Number(data.virtualBaseReserve) / (10 ** 18);
@@ -201,7 +209,7 @@ const CardPage = () => {
     prices.push(price * (10 ** 9));
     supplies.push(supply);
   }
-  console.log({ prices, supplies })
+
   Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale);
   const chartData = {
     labels: supplies,

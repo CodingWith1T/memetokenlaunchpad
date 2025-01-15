@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAccount, useReadContract } from 'wagmi';
 import abi from "../../helper/ManagerFaucetAbi.json";
 import { daimond } from '../../helper/Helper';
 import { useNavigate } from 'react-router-dom';
 
-const Card = ({ id, handleCardClick, activeTable }) => {
-
+const Card = ({ id }) => {
   const navigate = useNavigate(); // Hook to navigate to different routes
-  const { address } = useAccount();
+ 
 
   // Ensure we have the ID available before making the contract call
   if (!id) {
@@ -22,13 +21,8 @@ const Card = ({ id, handleCardClick, activeTable }) => {
     args: [id.toString()], // Passing `id` as argument to the contract function
     chainId: 97
   });
-  console.log({ data })
 
-  if (activeTable == "owner" && data.owner != address) {
-    return
-  }
-
-  // Display loading, error, or contract data
+  // Guard clause: Return early if loading or error
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -36,12 +30,21 @@ const Card = ({ id, handleCardClick, activeTable }) => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-  
+
+  // Ensure data is available before destructuring
+  if (!data) {
+    return <div>No data available</div>;
+  }
+
   // Destructuring the fetched data from the contract
-  const { id: poolId, owner, token, router, poolDetails } = data || {};
+  const { id: poolId,poolDetails,virtualQuoteReserve,virtualBaseReserve } = data;
 
   // Parse the poolDetails JSON string
   const poolDetailsParsed = poolDetails ? JSON.parse(poolDetails) : {};
+  const pricePerToken = Number(virtualQuoteReserve || BigInt(0)) / Number(virtualBaseReserve || BigInt(0));  // Token price estimation
+  const marketCap = pricePerToken * Number(1000000000);
+
+
 
   return (
     <div
@@ -53,28 +56,29 @@ const Card = ({ id, handleCardClick, activeTable }) => {
       <div className="cards dark">
         <div className="card-body">
           <img
-            src={JSON.parse(data.poolDetails).image || 'https://codingyaar.com/wp-content/uploads/chair-image.jpg'}
+            src={poolDetailsParsed.image || 'https://codingyaar.com/wp-content/uploads/chair-image.jpg'}
             className="card-img-top"
-            alt="..."
+            alt="Token Logo"
           />
           <div className="text-section">
-            <h5 className="card-title">{JSON.parse(data.poolDetails).name}</h5>
+            <h5 className="card-title">{poolDetailsParsed.name}</h5>
             <p className="symble">
-              ({JSON.parse(data.poolDetails).symbol})
+              ({poolDetailsParsed.symbol})
               <span className="chainlink">
-                <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" className="chainimg" alt="..." /> BNB
+                <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" className="chainimg" alt="BNB" /> BNB
               </span>
             </p>
-            <p className="card-text">{JSON.parse(data.poolDetails).description}</p>
+            <p className="card-text">{poolDetailsParsed.description}</p>
           </div>
         </div>
         <hr />
-        <p>
-          <span className="per"><a href="#">0.00%</a></span>
-          <span className="MCap">MCap: $36.9K</span>
+        <p className='p-5'>
+          <span className="per"></span>
+          <span className="MCap">
+            MCap: {marketCap ? `$${marketCap.toFixed(2)}` : 'Calculating...'}
+          </span>
         </p>
       </div>
-      
     </div>
   );
 };

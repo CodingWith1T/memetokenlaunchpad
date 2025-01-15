@@ -11,7 +11,6 @@ const NonListed = ( {activeTable } ) => {
   const [error, setError] = useState(null); // Error state
   const [totalTokens, setTotalTokens] = useState(null); // Total tokens count state
   const navigate = useNavigate(); // React Router hook for navigation
-  console.log(totalTokens)
 
   useEffect(() => {
     const fetchPoolCount = async () => {
@@ -42,9 +41,9 @@ const NonListed = ( {activeTable } ) => {
       <div className="cardbox grid grid-cols-1 mb-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4">
         {
           Array.from({ length: totalTokens }, (_, index) => (
-            <Card key={index} id={index} activeTable={activeTable}/>
+            <Card key={index} id={index}/>
           ))
-        }
+        } 
       </div>
 
     </div>
