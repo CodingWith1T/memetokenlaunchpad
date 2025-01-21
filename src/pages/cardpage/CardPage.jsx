@@ -37,9 +37,6 @@ const CardPage = () => {
   });
   console.log({ data })
   const { chain, address } = useAccount();
-
-  const [amountOut, setAmountOut] = useState([0n, 0n, 0n, 0n, 0n]);
-  const [isBuy, setIsBuy] = useState(true);
   const [txDone, setTxDone] = useState(0);
   const [tokenBalance, setTokenBalace] = useState(0);
 
@@ -148,12 +145,6 @@ const CardPage = () => {
     },
   };
 
-  let routerText = '';
-  if (data[0].result.router === '0xD99D1c33F9fC3444f8101754aBC46c52416550D1') {
-    routerText = 'Pancake Swap';
-  } else if (data[0].result.router === '0xda8e9632c013c9d6a5fbabac9e2ecdf69706a306') {
-    routerText = 'How Swap';
-  }
 
   return (
     <div className="container px-4 px-lg-5 mx-auto">
@@ -166,7 +157,7 @@ const CardPage = () => {
       {/* Token Info */}
       <div className="buybox grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
         {/* Token Information Card */}
-        <TokenInfo details={poolDetailsParsed} router={routerText} data={data[0].result} reserve={data[1].result}/>
+        <TokenInfo details={poolDetailsParsed} data={data[0].result} reserve={data[1].result}/>
 
         {/* Contract Information Card */}
         <div className="boxc bg-white p-6 rounded-lg">
@@ -226,7 +217,7 @@ const CardPage = () => {
 
         {/* Buy/Sell Section or Countdown */}
         <div className="boxc bg-white p-6 rounded-lg">
-          <BuySell data={data[0].result} token={token} tokenBalance={tokenBalance} reserve={data[1].result}/>
+          <BuySell data={data[0].result} token={token} setTxDone={setTxDone} tokenBalance={tokenBalance} reserve={data[1].result}/>
         </div>
 
       </div>

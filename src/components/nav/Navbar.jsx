@@ -3,9 +3,11 @@ import { NavLink } from 'react-router-dom';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 import logo from "../../assets/logo/logo.png";
+import { useAccount } from 'wagmi';
 
 const Navbar = () => {
   const { t, i18n } = useTranslation(); // Use translation hook
+  const { address } = useAccount()
 
   // Change language function
   const handleLanguageChange = (lang) => {
@@ -25,29 +27,29 @@ const Navbar = () => {
               to="/"
               className="text-sm text-gray-900 hover:text-gold font-semibold font-bold text-gold"
             >
-              {t('board')} 
+              {t('board')}
             </NavLink>
             <NavLink
               to="/create-token"
               className="text-sm text-gray-900 hover:text-gold font-semibold font-bold text-gold"
-              
+
             >
               {t('createToken')} {/* Use translation key */}
             </NavLink>
-            <NavLink
+            {address == "0xAe18A9deDA9163bBd53984668952875FfB9abBbD" && < NavLink
               to="/admin-panel"
-              className="text-sm text-gray-900 hover:text-gold font-semibold font-bold text-gold"
+            className="text-sm text-gray-900 hover:text-gold font-semibold font-bold text-gold"
               
             >
-              {t('Admin')} {/* Use translation key */}
-            </NavLink>
-          </div>
+            {t('Admin')} {/* Use translation key */}
+          </NavLink>}
         </div>
+      </div>
 
-        {/* Right side: ConnectButton and Language Selector */}
-        <div className="flex items-center gap-4">
-          {/* Language Select */}
-          {/* <select
+      {/* Right side: ConnectButton and Language Selector */}
+      <div className="flex items-center gap-4">
+        {/* Language Select */}
+        {/* <select
             onChange={(e) => handleLanguageChange(e.target.value)}
             className="px-4 py-2 rounded-md text-sm"
             defaultValue={i18n.language}
@@ -56,29 +58,29 @@ const Navbar = () => {
             <option value="zh">中文</option>
           </select> */}
 
-          <ConnectButton
-            label={t('connect Wallet')} // Use translation key for button
-            accountStatus="address"
-            chainStatus="name"
-            className="text-sm px-4 py-2 rounded-full focus:ring-2 focus:ring-offset-2"
-          >
-            {({ isConnected, isConnecting }) => {
-              let bgColor = isConnected ? 'bg-green-500' : 'bg-blue-500';
-              let hoverColor = isConnected ? 'hover:bg-green-600' : 'hover:bg-blue-600';
-              let statusText = isConnected ? t('walletConnected') : t('connectWallet'); // Translate status text
+        <ConnectButton
+          label={t('connect Wallet')} // Use translation key for button
+          accountStatus="address"
+          chainStatus="name"
+          className="text-sm px-4 py-2 rounded-full focus:ring-2 focus:ring-offset-2"
+        >
+          {({ isConnected, isConnecting }) => {
+            let bgColor = isConnected ? 'bg-green-500' : 'bg-blue-500';
+            let hoverColor = isConnected ? 'hover:bg-green-600' : 'hover:bg-blue-600';
+            let statusText = isConnected ? t('walletConnected') : t('connectWallet'); // Translate status text
 
-              return (
-                <button
-                  className={`${bgColor} ${hoverColor} text-white rounded-full px-4 py-2 focus:ring-2 focus:ring-blue-500`}
-                >
-                  {isConnecting ? 'Connecting...' : statusText}
-                </button>
-              );
-            }}
-          </ConnectButton>
-        </div>
+            return (
+              <button
+                className={`${bgColor} ${hoverColor} text-white rounded-full px-4 py-2 focus:ring-2 focus:ring-blue-500`}
+              >
+                {isConnecting ? 'Connecting...' : statusText}
+              </button>
+            );
+          }}
+        </ConnectButton>
       </div>
-    </header>
+    </div>
+    </header >
   );
 };
 
