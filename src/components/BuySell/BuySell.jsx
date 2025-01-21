@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { formatUnits } from 'ethers';
-import { useAccount, useReadContract } from 'wagmi';
+import { useAccount } from 'wagmi';
 import { readContract, waitForTransactionReceipt, writeContract } from 'wagmi/actions';
 import { config } from '../../wagmiClient';
 import { daimond } from '../../helper/Helper';
 import DegenFacetabi from "../../helper/DegenFacetAbi.json";
 import TokenABi from "../../helper/TokenAbi.json"
 
-const BuySell = ({ data, token, balanceOf }) => {
-
+const BuySell = ({ data, token, tokenBalance, reserve }) => {
     const { chain } = useAccount();
 
     const [amount, setAmount] = useState(0);
@@ -145,13 +144,6 @@ const BuySell = ({ data, token, balanceOf }) => {
     };
 
     const poolDetailsParsed = data?.poolDetails ? JSON.parse(data.poolDetails) : {};
-    const baseReserve = Number(data.virtualBaseReserve) / (10 ** 18);
-    const quoteReserve = Number(data.virtualQuoteReserve) / (10 ** 18);
-    const maxSupply = Number(data.maxListingBaseAmount) / (10 ** 18);
-
-    const prices = [];
-    const supplies = [];
-
     // Function to format the received amount with 3 decimal places
     const formatAmount = (amount) => {
         return parseFloat(formatUnits(amount, 18)).toFixed(3);
@@ -161,7 +153,10 @@ const BuySell = ({ data, token, balanceOf }) => {
         <div className="mt-4 buysell">
             {isSaleAvailable ? (
                 <>
+                <br/>
                     <div className="btngroup flex mb-6">
+                        
+
                         <button
                             className={`buy px-6 py-3 text-white text-md font-semibold rounded-lg transition duration-300 w-full ${!isBuy ? '' : 'bg-gold'}`}
                             onClick={() => setIsBuy(true)}>
@@ -201,7 +196,9 @@ const BuySell = ({ data, token, balanceOf }) => {
                                 formatAmount(amountOut[1]) * (1 - parseInt(data?.sellFeeRate) / 100)
                             }
                         </span></p>
-                        <p>Balance of : <span className='receivedvalu'>{formatAmount(balanceOf)}</span></p>
+                        <p>Balance of : <span className='receivedvalu'>{formatAmount(tokenBalance)}</span></p>
+                       
+                        <p className='cl'>Needs {(parseFloat((data.maxListingQuoteAmount+data.listingFee)-(data.virtualQuoteReserve - reserve.initialVirtualQuoteReserve))/10**18).toFixed(4)} BNB to fill the bonding curve</p>
                     </div>
                     <div className="flex justify-between space-x-4">
                         {isBuy ? (
@@ -211,6 +208,8 @@ const BuySell = ({ data, token, balanceOf }) => {
                             >
                                 Buy Token
                             </button>
+
+                            
                         ) : (
                             <>
                                 {approve === 0 && (
