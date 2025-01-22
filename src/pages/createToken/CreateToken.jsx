@@ -4,13 +4,15 @@ import { useAccount, useWriteContract } from 'wagmi';
 import { daimond, routers } from '../../helper/Helper';
 import degenFacetAbi from "../../helper/DegenFacetAbi.json";
 import { waitForTransactionReceipt } from 'wagmi/actions';
-import { useNavigate } from 'react-router-dom';
+import { config } from '../../wagmiClient';
 
 const CreateToken = () => {
   const { chain, address } = useAccount();
+
   const routerAddresses = routers[chain?.id] || [];
+
   const { writeContractAsync, isPending, isSuccess } = useWriteContract();
-  
+
   const [tokenName, setTokenName] = useState('');
   const [tickerSymbol, setTickerSymbol] = useState('');
   const [imageURl, setImageURl] = useState('');
@@ -33,8 +35,8 @@ const CreateToken = () => {
   const [sellAmount, setSellAmount] = useState(0);
 
   const tags = ['Meme', 'AI', 'DeFi', 'Games', 'Infra', 'De-Sci', 'Social', 'Depin', 'Charity', 'Others'];
+
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   const handleTagClick = (tag) => {
     setSelectedTag(selectedTag === tag ? null : tag);
@@ -44,10 +46,8 @@ const CreateToken = () => {
     e.preventDefault(); // Prevent form from refreshing the page
     try {
       if (!address) {
-        alert("Please Connect Wallet");
-        return;
+        alert("Please Connect Wallet")
       }
-      
       const params = {
         name: tokenName,
         symbol: tickerSymbol,
@@ -59,7 +59,7 @@ const CreateToken = () => {
           Website: website,
           Twitter: twitter,
           Telegram: telegram,
-          Tag: selectedTag,
+          Tag: selectedTag
         }),
         configIndex: 20,
         router: routerAddresses[router],
@@ -69,10 +69,11 @@ const CreateToken = () => {
         maxBuyAmount: 0,
         delayBuyTime: 0,
         merkleRoot: "0x0000000000000000000000000000000000000000000000000000000000000000",
-        initialBuyAmount: 0, // Using total supply here
+        initialBuyAmount: 0 // Using total supply here
       };
 
-      // Call the contract and wait for the transaction
+      console.log({ params })
+
       const data = await writeContractAsync({
         abi: degenFacetAbi,
         address: daimond,
@@ -82,17 +83,13 @@ const CreateToken = () => {
         args: [params], // Passing the struct as an object
       });
 
-      // Wait for the transaction to be mined
-      await waitForTransactionReceipt({
-        hash: data.hash,
-        confirmations: 1, // Wait for at least 1 confirmation
-      });
-
-      // Once the transaction is mined, navigate to the home page
-      navigate("/");
+      const receipt = await waitForTransactionReceipt(config, {
+        hash: data,
+      })
+      setHash(receipt.transactionHash);
 
     } catch (error) {
-      console.log(error);
+      console.log(error)
       const message = error.shortMessage;
       if (message) {
         if (message.includes('reason:')) {
@@ -284,8 +281,7 @@ const CreateToken = () => {
 
                   <div className="w-full flex flex-col gap-4">
                     <label htmlFor="buyAmount" className="text-lg font-bold text-purple-900">
-
-                      Buy Tax % ({chain?.nativeCurrency?.symbol})  Ex:2
+                      Buy Fee Rate (Optional)
                     </label>
                     <input
                       type="number"
@@ -300,7 +296,7 @@ const CreateToken = () => {
 
                   <div className="w-full flex flex-col gap-4">
                     <label htmlFor="sellAmount" className="text-lg font-bold text-purple-900">
-                      Sell Tax % ({chain?.nativeCurrency.symbol}) Ex:2
+                      Sell Fee Rate (Optional)
                     </label>
                     <input
                       type="number"
@@ -315,7 +311,7 @@ const CreateToken = () => {
 
                   <div className="w-full flex flex-col gap-4">
                     <label htmlFor="maxPerUser" className="text-lg font-bold text-purple-900">
-                      Max Buy Amount per User ({chain?.nativeCurrency.symbol})
+                      Max Buy Amount per User (Optional)
                     </label>
                     <input
                       type="number"
@@ -333,7 +329,7 @@ const CreateToken = () => {
               {/* Initial Buy Amount Input Section */}
               <div className="w-full flex flex-col gap-4">
                 <label htmlFor="Initial Buy Amount" className="text-lg font-bold text-purple-900">
-                  Initial Buy Amount ({chain?.nativeCurrency.symbol}) Ex:2 <span className="text-red-500">*</span>
+                Initial Buy Amount <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="number"

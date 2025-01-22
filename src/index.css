@@ -2,21 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
-header{ box-shadow:none !important; border-bottom: 1px solid #c5c5c5;}
+body{ background:#4e4e4e;}
+
+header{ box-shadow:none !important;}
 header button{background:#c1a444!important; border-radius: 7px !important; padding: 5px 15px 8px !important;}
 header .text-sm{ font-size:18px;}
 header .active{ color:#3e69cc;}
-.bg-purple-600{background-color:#3a3a3a;}
+.bg-purple-600{background-color:#2a2a2a;}
 .text-purple-200{color: rgb(255 255 255);}
-main{background:#e8e8e8; padding:0px 70px !important;}
-.buttonbox{box-shadow:1px 2px 5px rgb(191 191 191 / 50%); background: #fff; border: none; border-radius: 10px;}
+main{background:#4e4e4e; padding:0px 70px !important;}
+.buttonbox{background:#666; border: none; border-radius: 10px;}
+.lastbtn{ color:#fff !important;}
 .lastbtn{padding: 10px 30px;}
 .hover\:bg-purple-300:hover {background-color:#4c4c4c !important; color: #fff !important;}
 .text-\[\#7A6EAA\] {color:#2a2a2a;}
-.text-purple-700 {color:#2a2a2a; font-weight: 600;}
-.text-purple-500{color:#2a2a2a; font-weight: 600;}
+.text-purple-700 {color:#fff; font-weight: 600;}
+.text-purple-500{color:#fff; font-weight: 600;}
 .bg-purple-500{background-color:#c1a444;    box-shadow: 1px 2px 1px #8f782e;}
 .hover\:text-purple-500:hover{color:#c1a444 !important;}
+.bg-gray-50 {background-color:rgb(54 54 54);}
+.bg-white{background-color:rgb(42 42 42);}
+.hover\:bg-gray-200:hover {background-color: rgb(56 56 56) !important;}
+.hover\:bg-purple-300:hover{background-color: #262626 !important;}
+footer{background:#1a1a1a;}
+.footer p{ color:#fff !important;}
+table tr{ border-bottom:1px solid #525252;}
+.logo{padding: 5px;}
+.slidermain{ background: radial-gradient(circle, #424242 17%, rgba(32, 32, 32, 1) 100%); padding:80px 0px; height:500px;}
+.slidermain .createrightbtn{ margin-top:20px;}
+.slidermain h1 {
+    color: #fff;
+    font-size: 45px;
+    font-weight: 700;
+    line-height: 48px;
+	    margin-top: -20px;
+		text-shadow: 3px 14px 0px #2a2a2a;
+}
+.slidermain h2 {
+    color:#f3c52e !important;
+    font-size:45px;
+    font-weight:300;
+    line-height: 48px;
+	margin-top:15px;
+	margin-bottom:20px;
+	text-shadow: 3px 14px 0px #2a2a2a;
+}
+.slidermain p{ width:55%; color:#fff; font-size:18px;}
+.container{width: 1210px !important; margin: 0 auto;}
+.slcontent{ width:100%; float:left;}
+.sliderimg{float: right; width: 400px; margin-top: -50px;}
+
 
 
 .cardbox .bg-gray-300 {background: radial-gradient(circle, #c3c3c3 0%, rgb(131 131 131) 71%);}
@@ -25,15 +60,16 @@ main{background:#e8e8e8; padding:0px 70px !important;}
 .tname{ float:left;font-weight:700;}
 .tshort{ float:right;margin-top: 5px; margin-bottom: 0px;    color:#2a2a2a;}
 .tokenbox{ width:100%; display: inline-block;}
-.cardbox .shadow-md{box-shadow: 2px 3px 4px #dddddd !important;}
+.cardbox .shadow-md{}
 .pagination{ margin-top:20px; margin-bottom: 40px;}
-.pagination .bg-gray-300{background-color:#cbcbcb !important;}
+.pagination .bg-gray-300{background-color: #101010 !important; color: #fff;}
+.pagination .p-4{ color:#fff;}
 .cardbox .p-4{padding: 15px 10px;}
 header button{ color:#fff !important;}
 header button div{ color:#fff !important;}
 header button svg{ color:#fff !important;}
 
-.forminbox{ background:#fff;     padding: 30px !important;    box-shadow:1px 3px 8px #dddddd; border-radius:20px;}
+.forminbox{ background:#fff;     padding: 30px !important;    box-shadow:1px 3px 8px #343434; border-radius:20px;}
 .tokenform{padding-top:70px !important;padding-bottom: 70px !important;}
 .forminbox input{border-color:#c5c5c5;background-color: #fff;    padding: 10px;}
 .forminbox textarea{border-color: #c5c5c5;background-color: #fff;}
@@ -42,12 +78,14 @@ header button svg{ color:#fff !important;}
 .tags-selection button{border-color:#b7b7b7;background-color:#efefef;}
 .forminbox  .border-2 {border-width: 1px;}
 .tags-selection .text-white{background:#c1a444!important; border-color: #c1a444;}
-.formmain{background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgb(225 225 225) 100%);}
+.formmain{}
 .connectbutton button{background:#c1a444!important;  border-radius: 7px !important; padding: 7px 35px 11px !important; box-shadow: 1px 4px 3px #dfdfdf !important;}
 .createrightbtn a{background:#c1a444 !important;  border-radius: 7px !important; padding:8px 34px 10px !important;}
-.marquee-link{color:#2a2a2a !important;}
-header .text-gray-900{color:rgb(76 76 76) !important;}
-header{padding: 0px 64px !important;}
+.marquee-link{color:#fff !important;}
+header .text-gray-900{color:#fff !important;}
+header{padding: 0px 64px !important; background:#333 !important;}
+.forminbox .gap-4 {gap: 5px;}
+.rightbox{background: #404040;}
 /* Toggle Switch */
 .switch {
   position: relative;
@@ -103,12 +141,13 @@ input:checked + .slider:before {
 .lastdiv{width:50% !important;margin-right:0px !important;}
 
 .cards {
-  flex-direction: row;
-  
-  background: #333;
-  border: 0;
-  box-shadow: 0 7px 7px rgba(0, 0, 0, 0.18);
-  padding: 14px;
+    flex-direction: row;
+    background: #242424;
+    border: 0;
+    box-shadow: 0 7px 7px rgba(0, 0, 0, 0.18);
+    padding: 14px;
+    border:1px solid #626262;
+    border-radius: 10px;
 }
 .cards:hover{background: #141414;}
 .cards.dark {
@@ -117,7 +156,7 @@ input:checked + .slider:before {
 .cards.card.bg-light-subtle .card-title {
   color: dimgrey;
 }
-.marquee-container{background-color: #f3f3f3 !important;border-bottom: 1px solid #cdcdcd;}
+.marquee-container{background-color:#525252 !important;border-bottom:1px solid #3a3a3a;}
 
 .card-title{font-size: 20px; font-weight: 600;    text-shadow: 0px 5px 0px #000;}
 
@@ -174,8 +213,12 @@ input:checked + .slider:before {
 .gbutton{background: #c1a444 !important;}
 .Running{ background: #c1a444 !important; padding:5px 15px;}
 .subtext{ margin-top: 3px;;}
-.Dashboard{ margin-bottom: 50px;    padding-bottom: 45px;}
-.Dashboard .bg-gray-200{background-color: rgb(221 221 221); box-shadow: none !important;}
+.Dashboard{ margin-bottom: 50px;    padding-bottom: 45px;    background: #141414;}
+.Dashboard h2{ color:#fff;}
+.Dashboard p{ color:#fff;}
+.Dashboard .bg-gray-200{background-color:rgb(58 58 58); box-shadow: none !important;}
+.Dashboard .bg-gray-200 h3{ color:#fff;}
+.Dashboard .bg-gray-200 ul li{ color:#fff;}
 
 .bsbox .bg-gray-400 { --tw-bg-opacity: 1; background-color: rgb(126 126 126); color: #fff !important;}
 .buttonbox button{ border-radius:8px;}
@@ -187,42 +230,17 @@ input:checked + .slider:before {
 .pricechart tr td a{color: #004793;}
 .pricetabel{ margin-bottom:50px;}
 .pricechart thead{ background:#e7e7e7;}
+.main{background: #464646;}
+.boxc h2{ color:#fff !important;}
+.boxc ul li{ color:#fff;}
+.boxc ul li a{ color:#fff; font-weight:300;}
+.buysell p{color:#fff !important;}
+.buysell  .text-black{ margin-bottom:20px;}
+.buysell .text-gray-600{ color:#fff !important;}
+.bg-gray-600{    background-color: rgb(34 34 34);}
+canvas{background: #282828; border-radius: 10px;}
 
-.buysell .bg-gold{border-radius:5px; background: #fffceb; box-shadow: none; color: #a9850e; border: 2px solid #c1a444;}
-.sell{color:#000;}
-.buy{color:#000;}
-.buybox{ margin-bottom:50px;}
-.boxc{ border:1px solid #ddd;}
-.lasstbutton {margin-top: 30px; background: #a9850e !important; color: #fff !important; border: none !important;}
-.receivedvalu{ float:right;}
 
-
-.progress-bar {
-    float: left;
-    width: 0;
-    height: 100%;
-    font-size: 9px;
-    line-height: 15px;
-    color: #fff;
-    text-align: center;
-     background-color:#c1a444;
-    -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
-    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
-    -webkit-transition: width .6s ease;
-    -o-transition: width .6s ease;
-    transition: width .6s ease;
-}
-.progress {
-    height: 12px;
-    margin-bottom: 20px;
-    overflow: hidden;
-    background-color: #5e5e5e;
-	width: 100%;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
-}
-.cl{ color:#c1a444!important;}
 
 
 
@@ -235,6 +253,7 @@ input:checked + .slider:before {
   .extraoptions .col-md-4{ width:100%;}
   .liquiditydiv{width:100% !important;}
   .lastdiv{width:100% !important;}
+  .container{ width:100% !important;}
 }
 @media only screen and (max-width: 540px) {
 	header .text-sm {font-size: 12px;}

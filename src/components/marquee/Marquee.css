@@ -1,0 +1,46 @@
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: #f5f5f5; /* Optional: Background color for the marquee */
+  padding: 10px 0;
+    border-bottom: 1px solid #c8cbe1;
+}
+
+.marquee-content {
+  display: inline-block;
+  animation: scroll-left 10s linear infinite;
+}
+
+.marquee-link {
+  font-size: 16px;
+  text-decoration: none;
+  color: #3e69cc;
+  font-weight: 500;
+  margin-right: 10px;
+  transition: color 0.50s ease-in-out;
+}
+
+.marquee-link:hover {
+  color: #9b61b4; /* Light purple when hovered */
+}
+
+.spacer {
+  color: #6b3fa0; /* Same purple color for the separator */
+  margin-right: 10px;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+@keyframes scroll-left {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}

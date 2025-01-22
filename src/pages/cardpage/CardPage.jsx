@@ -148,7 +148,7 @@ const CardPage = () => {
 
   return (
     <div className="container px-4 px-lg-5 mx-auto">
-      <div className="flex justify-center items-center py-5 border-b">
+      <div className="flex justify-center items-center py-5">
         <div className="flex items-center">
           <img className="w-20 h-50 rounded" src={poolDetailsParsed?.image} alt="Token image" />
         </div>

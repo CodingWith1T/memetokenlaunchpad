@@ -3,11 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 import logo from "../../assets/logo/logo.png";
-import { useAccount } from 'wagmi';
 
 const Navbar = () => {
   const { t, i18n } = useTranslation(); // Use translation hook
-  const { address } = useAccount()
 
   // Change language function
   const handleLanguageChange = (lang) => {
@@ -20,36 +18,36 @@ const Navbar = () => {
         {/* Left side: Logo and Links (Board, Create Token) */}
         <div className="flex items-center gap-5">
           <NavLink to="https://howswap.com/" className="w-8 sm:w-[80px]">
-            <img src={logo} alt="logo" className="w-13 h-13 object-contain" />
+            <img src={logo} alt="logo" className="logo w-13 h-13 object-contain" />
           </NavLink>
           <div className="flex space-x-6">
             <NavLink
               to="/"
               className="text-sm text-gray-900 hover:text-gold font-semibold font-bold text-gold"
             >
-              {t('board')}
+              {t('board')} 
             </NavLink>
             <NavLink
               to="/create-token"
               className="text-sm text-gray-900 hover:text-gold font-semibold font-bold text-gold"
-
+              
             >
               {t('createToken')} {/* Use translation key */}
             </NavLink>
-            {address == "0xAe18A9deDA9163bBd53984668952875FfB9abBbD" && < NavLink
+            <NavLink
               to="/admin-panel"
-            className="text-sm text-gray-900 hover:text-gold font-semibold font-bold text-gold"
+              className="text-sm text-gray-900 hover:text-gold font-semibold font-bold text-gold"
               
             >
-            {t('Admin')} {/* Use translation key */}
-          </NavLink>}
+              {t('Admin')} {/* Use translation key */}
+            </NavLink>
+          </div>
         </div>
-      </div>
 
-      {/* Right side: ConnectButton and Language Selector */}
-      <div className="flex items-center gap-4">
-        {/* Language Select */}
-        {/* <select
+        {/* Right side: ConnectButton and Language Selector */}
+        <div className="flex items-center gap-4">
+          {/* Language Select */}
+          {/* <select
             onChange={(e) => handleLanguageChange(e.target.value)}
             className="px-4 py-2 rounded-md text-sm"
             defaultValue={i18n.language}
@@ -58,29 +56,29 @@ const Navbar = () => {
             <option value="zh">中文</option>
           </select> */}
 
-        <ConnectButton
-          label={t('connect Wallet')} // Use translation key for button
-          accountStatus="address"
-          chainStatus="name"
-          className="text-sm px-4 py-2 rounded-full focus:ring-2 focus:ring-offset-2"
-        >
-          {({ isConnected, isConnecting }) => {
-            let bgColor = isConnected ? 'bg-green-500' : 'bg-blue-500';
-            let hoverColor = isConnected ? 'hover:bg-green-600' : 'hover:bg-blue-600';
-            let statusText = isConnected ? t('walletConnected') : t('connectWallet'); // Translate status text
+          <ConnectButton
+            label={t('connect Wallet')} // Use translation key for button
+            accountStatus="address"
+            chainStatus="name"
+            className="text-sm px-4 py-2 rounded-full focus:ring-2 focus:ring-offset-2"
+          >
+            {({ isConnected, isConnecting }) => {
+              let bgColor = isConnected ? 'bg-green-500' : 'bg-blue-500';
+              let hoverColor = isConnected ? 'hover:bg-green-600' : 'hover:bg-blue-600';
+              let statusText = isConnected ? t('walletConnected') : t('connectWallet'); // Translate status text
 
-            return (
-              <button
-                className={`${bgColor} ${hoverColor} text-white rounded-full px-4 py-2 focus:ring-2 focus:ring-blue-500`}
-              >
-                {isConnecting ? 'Connecting...' : statusText}
-              </button>
-            );
-          }}
-        </ConnectButton>
+              return (
+                <button
+                  className={`${bgColor} ${hoverColor} text-white rounded-full px-4 py-2 focus:ring-2 focus:ring-blue-500`}
+                >
+                  {isConnecting ? 'Connecting...' : statusText}
+                </button>
+              );
+            }}
+          </ConnectButton>
+        </div>
       </div>
-    </div>
-    </header >
+    </header>
   );
 };
 

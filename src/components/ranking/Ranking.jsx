@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import ProgressRanking from './progess-ranking/ProgessRanking'; // Import the ProgressRanking component
+import GainersRanking from './gainers-ranking/GainersRanking';
 import CardList from '../CardList/CardList';
+import { useTranslation } from 'react-i18next';
+import MarketCap from './marketCap-ranking/MarketCap';
+import TradingVolume from './trading-volume/TradingVolume';
+import Marquee from '../marquee/Marquee';
 
 const Ranking = () => {
   // State to track which table is active
-  const [activeTable, setActiveTable] = useState('all'); // 'progress' is the default
+  const [activeTable, setActiveTable] = useState('progress'); // 'progress' is the default
   const { t, i18n } = useTranslation();
   // Function to handle the button clicks
   const handleButtonClick = (table) => {
@@ -14,7 +19,28 @@ const Ranking = () => {
 
   return (
     <>
+    <Marquee />
+
+    <section className='slidermain'>
+      <div className='container'>
+          <div className='col-md-12 slcontent'>
+          <img src='./images/sliderimg.png' alt="logo" className="sliderimg w-13 h-13 object-contain" />
+              <h1>Discover the power of <br></br>Howpump</h1>
+              <h2>like never before</h2>
+              <p>At Howpump we connect marketing and market making with results that transform projects into success stories. We design precise soluctions that generate natural attraction for investors, ensuring solid and sustainable growth for our clients.</p>
+
+              <p>width:50%;Trust the experience that makes the difference. Howpump, where your vision becomes reality.</p>
+             <div className='createrightbtn'>
+              <a class="inline-block font-bold px-6 py-3 text-white bg-gradient-to-r rounded-full text-center shadow-lg transition-all duration-200 ease-in-out text-xs sm:text-sm lg:text-base" href="/create-token" data-discover="true">Create Token</a>
+              </div>
+             
+          </div>
+         
+      </div>
+    </section>
+
     <main className="pl-5 pr-5 top-0 overflow-hidden">
+     
       <div className="flex flex-col pb-4 pt-[75px] xl:pt-[50px]">
         {/* Background Gradient */}
         <div className="absolute top-0 left-0 z-0 w-90 h-[60vw] sm:h-[43vw] md:h-[33vw] "></div>
@@ -30,19 +56,37 @@ const Ranking = () => {
               {/* Button 1: Progress Ranking */}
               <button
                 type="button"
-                className={`flex-1 flex items-center justify-center h-10 px-4 text-center font-medium rounded-full overflow-hidden whitespace-nowrap text-ellipsis text-xs sm:text-sm lg:text-base ${activeTable === 'all' ? 'bg-gold text-white' : 'text-[#7A6EAA] dark:text-purple-500 hover:bg-gray-400'}`}
-                onClick={() => handleButtonClick('all')}
+                className="lastbtn flex-1 flex items-center justify-center h-10 px-4 text-center font-medium text-[#7A6EAA] dark:text-purple-500 rounded-full hover:bg-purple-300 overflow-hidden whitespace-nowrap text-ellipsis text-xs sm:text-sm lg:text-base"
+                onClick={() => handleButtonClick('progress')}
               >
-                {t('All')}
+                {t('progressRanking')}
               </button>
 
               {/* Button 2: 24 Hours Gainers Ranking */}
               <button
                 type="button"
-                className={`flex-1 flex items-center justify-center h-10 px-9 text-center font-medium rounded-full overflow-hidden whitespace-nowrap text-ellipsis text-xs sm:text-sm lg:text-base ${activeTable === 'owner' ? 'bg-gold text-white' : 'text-[#7A6EAA] dark:text-purple-500 hover:bg-gray-400'}`}
-                onClick={() => handleButtonClick('owner')}
+                className="lastbtn flex-1 flex items-center justify-center h-10 px-4 text-center font-medium text-[#7A6EAA] dark:text-purple-500 rounded-full hover:bg-purple-300 overflow-hidden whitespace-nowrap text-ellipsis text-xs sm:text-sm lg:text-base"
+                onClick={() => handleButtonClick('gainers')}
               >
-                {t('Your Contribution')}
+                {t('gainersRanking')}
+              </button>
+
+              {/* Button 3: MarketCap Ranking */}
+              <button
+                type="button"
+                className="lastbtn flex-1 flex items-center justify-center h-10 px-4 text-center font-medium text-[#7A6EAA] dark:text-purple-500 rounded-full hover:bg-purple-300 overflow-hidden whitespace-nowrap text-ellipsis text-xs sm:text-sm lg:text-base"
+                onClick={() => handleButtonClick('marketcap')}
+              >
+                {t('marketCapRanking')}
+              </button>
+
+              {/* Button 4: 24 Hours Trading Volume */}
+              <button
+                type="button"
+                className="lastbtn flex-1 flex items-center justify-center h-10 px-4 text-center font-medium text-[#7A6EAA] dark:text-purple-500 rounded-full hover:bg-purple-300 overflow-hidden whitespace-nowrap text-ellipsis text-xs sm:text-sm lg:text-base"
+                onClick={() => handleButtonClick('volume')}
+              >
+                {t('tradingVolume')}
               </button>
             </div>
 
@@ -59,10 +103,16 @@ const Ranking = () => {
 
           {/* Conditionally Render Tables Based on Active Table */}
           <div className="mt-0">
-            <CardList activeTable={activeTable}/>
+            {activeTable === 'progress' && <ProgressRanking />}
+            {activeTable === 'gainers' && <GainersRanking />}
+            {activeTable === 'marketcap' && <MarketCap />}
+            {activeTable === 'volume' && <TradingVolume />}
           </div>
         </div>
-      </div> 
+      </div>
+
+      {/* NonListed section */}
+      <CardList />
     </main>
     </>
   );
