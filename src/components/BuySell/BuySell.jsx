@@ -199,8 +199,6 @@ const BuySell = ({ data, token, setTxDone, tokenBalance, reserve }) => {
                         </span></p>
                         {isBuy ? <p>Your Balance: <span className='receivedvalu'>{balance ?? 0} {chain ? chain.nativeCurrency.symbol : 'currency'}</span></p> :
                             <p>Your Holdings: <span className='receivedvalu'>{formatAmount(tokenBalance)} {poolDetailsParsed.symbol}</span></p>}
-
-                        <p className='cl'>Needs {(parseFloat((data.maxListingQuoteAmount + data.listingFee) - (data.virtualQuoteReserve - reserve.initialVirtualQuoteReserve)) / 10 ** 18).toFixed(4)} BNB to fill the bonding curve</p>
                     </div>
                     <div className="flex justify-between space-x-4">
                         {isBuy ? (
@@ -233,6 +231,7 @@ const BuySell = ({ data, token, setTxDone, tokenBalance, reserve }) => {
                             </>
                         )}
                     </div>
+                    <p className='cl'>Needs {(parseFloat((data.maxListingQuoteAmount + data.listingFee) - (data.virtualQuoteReserve - reserve.initialVirtualQuoteReserve)) / 10 ** 18).toFixed(4)} BNB to fill the bonding curve</p>
                 </>
             ) : (
                 <div className="flex flex-col items-center justify-center bg-gold from-blue-500 to-purple-600 p-6 rounded-lg shadow-lg w-full max-w-xs mx-auto">

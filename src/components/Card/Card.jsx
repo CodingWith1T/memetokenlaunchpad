@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useAccount, useReadContract } from 'wagmi';
 import abi from "../../helper/ManagerFaucetAbi.json";
 import { daimond } from '../../helper/Helper';
 import { useNavigate } from 'react-router-dom';
 
-const Card = ({ id }) => {
+const Card = ({ id, activeTable }) => {
   const navigate = useNavigate(); // Hook to navigate to different routes
- 
+  const { address } = useAccount();
 
   // Ensure we have the ID available before making the contract call
   if (!id) {
@@ -21,6 +21,11 @@ const Card = ({ id }) => {
     args: [id.toString()], // Passing `id` as argument to the contract function
     chainId: 97
   });
+
+
+  if (activeTable == "owner" && data.owner != address) {
+    return 
+  }
 
   // Guard clause: Return early if loading or error
   if (isLoading) {
@@ -62,12 +67,16 @@ const Card = ({ id }) => {
           />
           <div className="text-section">
             <h5 className="card-title">{poolDetailsParsed.name}</h5>
-            <p className="symble">
-              ({poolDetailsParsed.symbol})
-              <span className="chainlink">
-                <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" className="chainimg" alt="BNB" /> BNB
-              </span>
-            </p>
+            <span>Progress</span>
+            <span class="hardcap">Hard Cap</span>
+            <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style={{width: '25%'}}>25%
+            </div>
+            </div>
+            <span className='price'>4.913k  <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" className="chainimg" alt="BNB" /></span> 
+        
+            <span className='hardcap'><img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" className="hardcapchainimg" alt="BNB" /> 10.000k</span>
+        
             <p className="card-text">{poolDetailsParsed.description}</p>
           </div>
         </div>

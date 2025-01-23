@@ -17,7 +17,6 @@ const TokenInfo = ({ details, data, reserve }) => {
                 <ul className="mt-4 space-y-3 text-gray-600">
                 <li><strong>Name:</strong> <span>{details.name}</span></li>
                 <li><strong>Symbol:</strong><span>{details.symbol}</span></li>
-                <li><strong>Description:</strong> &nbsp; {details.description}</li>
                 <li><strong>Tag:</strong><span>{details.Tag}</span></li>
                 <li><strong>Router:</strong><span>{getRouter(data.router)}</span></li>
                 <li><strong>Start Time :</strong><span>2/7/2025, 11:31:00 AM</span></li>

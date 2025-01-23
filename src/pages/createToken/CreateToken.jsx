@@ -16,6 +16,7 @@ const CreateToken = () => {
   const [tokenName, setTokenName] = useState('');
   const [tickerSymbol, setTickerSymbol] = useState('');
   const [imageURl, setImageURl] = useState('');
+  const [videoURl, setVideoURl] = useState('');
   const [description, setDescription] = useState('');
   const [router, setRouter] = useState('Select Router');
   const [website, setWebsite] = useState('');
@@ -55,6 +56,7 @@ const CreateToken = () => {
           name: tokenName,
           symbol: tickerSymbol,
           image: imageURl,
+          video: videoURl,
           description: description,
           Website: website,
           Twitter: twitter,
@@ -155,6 +157,21 @@ const CreateToken = () => {
                   onChange={(e) => setImageURl(e.target.value)}
                   placeholder={t('Enter JPG, PNG, GIF Image URL')}
                   required
+                />
+              </div>
+
+              <div className="w-full flex flex-col gap-4">
+                <label htmlFor="Image Url" className="text-lg font-bold text-purple-900">
+                  {t('Video Url')}
+                </label>
+                <input
+                  type="url"
+                  id="videoUrl"
+                  name="videoUrl"
+                  className="rounded p-4 border-2 border-purple-400 bg-purple-100 text-purple-900 font-bold"
+                  value={videoURl}
+                  onChange={(e) => setVideoURl(e.target.value)}
+                  placeholder={t('Video URL')}
                 />
               </div>
 
@@ -323,25 +340,23 @@ const CreateToken = () => {
                       placeholder="Max Buy Amount"
                     />
                   </div>
+                  <div className="w-full flex flex-col gap-4">
+                    <label htmlFor="Initial Buy Amount" className="text-lg font-bold text-purple-900">
+                      Initial Buy Amount <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="number"
+                      id="initialBuyAmount"
+                      name="initialBuyAmount"
+                      className="rounded p-4 border-2 border-purple-400 bg-purple-100 text-purple-900 font-bold"
+                      value={initialBuyAmount}
+                      onChange={(e) => setInitialBuyAmount(e.target.value)}
+                      placeholder="Total Supply"
+                      required
+                    />
+                  </div>
                 </>
               )}
-
-              {/* Initial Buy Amount Input Section */}
-              <div className="w-full flex flex-col gap-4">
-                <label htmlFor="Initial Buy Amount" className="text-lg font-bold text-purple-900">
-                Initial Buy Amount <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="number"
-                  id="initialBuyAmount"
-                  name="initialBuyAmount"
-                  className="rounded p-4 border-2 border-purple-400 bg-purple-100 text-purple-900 font-bold"
-                  value={initialBuyAmount}
-                  onChange={(e) => setInitialBuyAmount(e.target.value)}
-                  placeholder="Total Supply"
-                  required
-                />
-              </div>
 
               {/* Submit Button */}
               <button

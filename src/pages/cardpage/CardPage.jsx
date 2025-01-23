@@ -14,6 +14,7 @@ import { Chart, LineController, LineElement, PointElement, LinearScale, Title, C
 import BuySell from '../../components/BuySell/BuySell';
 import { useEffect } from 'react';
 import TokenInfo from '../../components/TokenInfo/TokenInfo';
+import Video from '../../components/Video/Video';
 const CardPage = () => {
   const { token } = useParams();
 
@@ -145,82 +146,74 @@ const CardPage = () => {
     },
   };
 
+  console.log({ poolDetailsParsed })
 
   return (
 
-<div className="slidersection">
-<div className="container">
-  <div className='row'>
+    <div className="slidersection">
+      <div className="container">
+        <div className='row'>
 
-    <div className='col-md-3'>
-      {/* Token Info */}
-      <div className='boxc'>
-          <span class="socialicon">
-          <a href='#'><i class="fa fa-globe"></i></a>
-          <a href='#'><i class="fa fa-twitter"></i></a>
-          <a href='#'><i class="fa fa-telegram"></i></a>
-          <a href='#'><i class="fa fa-github"></i></a>
-          </span>
-          <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet.</p>
-          <hr className='separetar'></hr>
-          <div className="tokeninfo">
-          <h3 className="text-xl font-semibold text-gray-800">Token Info</h3>
-          <TokenInfo details={poolDetailsParsed} data={data[0].result} reserve={data[1].result}/>
+          <div className='col-md-3'>
+            {/* Token Info */}
+            <div className='boxc'>
+              <span class="socialicon">
+                <a href={poolDetailsParsed.Website} target='_blank'><i class="fa fa-globe"></i></a>
+                <a href={poolDetailsParsed.Twitter} target='_blank'><i class="fa fa-twitter"></i></a>
+                <a href={poolDetailsParsed.Telegram} target='_blank'><i class="fa fa-telegram"></i></a>
+              </span>
+              <p>{poolDetailsParsed.description}</p>
+              <hr className='separetar'></hr>
+              <div className="tokeninfo">
+                <h3 className="text-xl font-semibold text-gray-800">Token Info</h3>
+                <TokenInfo details={poolDetailsParsed} data={data[0].result} reserve={data[1].result} />
+              </div>
+              <hr className='separetar'></hr>
+              <div className='tokenomic'>
+                <h3 className="text-xl font-semibold text-gray-800">Tokenomic</h3>
+                <img className="h-50 rounded" src="/images/chart.png" alt="Token image" />
+
+              </div>
+            </div>
           </div>
-          <hr className='separetar'></hr>
-        <div className='tokenomic'>
-        <h3 className="text-xl font-semibold text-gray-800">Tokenomic</h3>
-        <img className="h-50 rounded" src="/images/chart.png" alt="Token image" />
 
+          <div className='col-md-6'>
+
+            <div className='boxc tpllogo'>
+              <div className='row detaillogo'>
+                <div className='col-md-3'>
+                  <img className="w-20 h-50 rounded" src={poolDetailsParsed?.image} alt="Token image" />
+                </div>
+                <div className='col-md-9 lgs'>
+                  <h1 className='tokenname'>Bullforce Token</h1>
+                </div>
+              </div>
+            </div>
+            {poolDetailsParsed?.video && (
+              <Video link={poolDetailsParsed?.video }/>
+            )}
+            <div className='boxc AllTransactions'>
+              <TradeEventList contractAddress={token} tx={txDone} />
+            </div>
+          </div>
+
+          <div className='col-md-3'>
+            <div className='boxc'>
+
+              <p>Bonding Curve Progress (0.32%)</p>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style={{ width: '25%' }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+              </div>
+              <p>When the market cap hits $79.4K, All liquidity from the bonding curve will be deposited into Pancake Swap and burned. The progression accelerates as the price rises</p>
+
+              <BuySell data={data[0].result} token={token} setTxDone={setTxDone} tokenBalance={tokenBalance} reserve={data[1].result} />
+            </div>
+            <div className='chartbox' style={{ width: '100%' }}>
+              <Line data={chartData} options={options} />
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-
-<div className='col-md-6'>
-
-  <div className='boxc tpllogo'>
-  <div className='row detaillogo'>
-    <div className='col-md-3'>
-    <img className="w-20 h-50 rounded" src={poolDetailsParsed?.image} alt="Token image" />
-    </div>
-    <div className='col-md-9 lgs'>
-      <h1 className='tokenname'>Bullforce Token</h1>
-      </div>
-  </div>
-  </div>
-  <div className='boxc'>
-  <iframe width="100%" height="400" src="https://www.youtube.com/embed/SCQ2CrCbFfk" title="BITCOIN: THIS IS THE CALM BEFORE THE STORM..." frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-  </div>
-  <div className='boxc AllTransactions'>
-        <TradeEventList contractAddress={token} tx={txDone} />
-        </div>
-</div>
-
-<div className='col-md-3'>
-  <div className='boxc'>
-
-  <p>Bonding Curve Progress (0.32%)</p>
-  <div class="progress">
-  <div class="progress-bar" role="progressbar" style={{ width: '25%' }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-  </div>
-  <p>When the market cap hits $79.4K, All liquidity from the bonding curve will be deposited into Raydium AMM V4 and burned. The progression accelerates as the price rises</p>
-    
-  <BuySell data={data[0].result} token={token} setTxDone={setTxDone} tokenBalance={tokenBalance} reserve={data[1].result}/>
-  </div>
-  <div className='chartbox' style={{ width: '100%'}}>
-  <Line data={chartData} options={options} />
-  </div>
-</div>
-
-
-
-
-
-
-    
-
-    </div>
-    </div>
     </div>
   );
 };
