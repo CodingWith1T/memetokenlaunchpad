@@ -19,23 +19,25 @@ const Ranking = () => {
 
   return (
     <>
-    <Marquee />
+
 
     <section className='slidermain'>
       <div className='container'>
-          <div className='col-md-12 slcontent'>
-          <img src='./images/sliderimg.png' alt="logo" className="sliderimg w-13 h-13 object-contain" />
+      <div className='row'>
+          <div className='col-md-7 slcontent'>
+          
               <h1>Discover the power of <br></br>Howpump</h1>
               <h2>like never before</h2>
               <p>At Howpump we connect marketing and market making with results that transform projects into success stories. We design precise soluctions that generate natural attraction for investors, ensuring solid and sustainable growth for our clients.</p>
 
-              <p>width:50%;Trust the experience that makes the difference. Howpump, where your vision becomes reality.</p>
-             <div className='createrightbtn'>
-              <a class="inline-block font-bold px-6 py-3 text-white bg-gradient-to-r rounded-full text-center shadow-lg transition-all duration-200 ease-in-out text-xs sm:text-sm lg:text-base" href="/create-token" data-discover="true">Create Token</a>
-              </div>
+              <p>Trust the experience that makes the difference. Howpump, where your vision becomes reality.</p>
+             
              
           </div>
-         
+          <div className='col-md-5 slcontent'>
+          <img src='./images/sliderimg.png' alt="logo" className="sliderimg w-13 h-13 object-contain" />
+          </div>
+          </div>
       </div>
     </section>
 
@@ -56,8 +58,8 @@ const Ranking = () => {
               {/* Button 1: Progress Ranking */}
               <button
                 type="button"
-                className="lastbtn flex-1 flex items-center justify-center h-10 px-4 text-center font-medium text-[#7A6EAA] dark:text-purple-500 rounded-full hover:bg-purple-300 overflow-hidden whitespace-nowrap text-ellipsis text-xs sm:text-sm lg:text-base"
-                onClick={() => handleButtonClick('progress')}
+                className={`flex-1 flex items-center justify-center h-10 px-4 text-center font-medium rounded-full overflow-hidden whitespace-nowrap text-ellipsis text-xs sm:text-sm lg:text-base ${activeTable === 'all' ? 'bg-white text-black' : 'text-[#fff] dark:text-purple-500 hover:bg-gray-400'}`}
+                onClick={() => handleButtonClick('all')}
               >
                 {t('progressRanking')}
               </button>
@@ -65,28 +67,10 @@ const Ranking = () => {
               {/* Button 2: 24 Hours Gainers Ranking */}
               <button
                 type="button"
-                className="lastbtn flex-1 flex items-center justify-center h-10 px-4 text-center font-medium text-[#7A6EAA] dark:text-purple-500 rounded-full hover:bg-purple-300 overflow-hidden whitespace-nowrap text-ellipsis text-xs sm:text-sm lg:text-base"
-                onClick={() => handleButtonClick('gainers')}
+                className={`items-center justify-center h-10 px-9 text-center font-medium rounded-full overflow-hidden whitespace-nowrap  lg:text-base ${activeTable === 'owner' ? 'bg-white' : 'text-[#fff] dark:text-purple-500 hover:bg-gray-400'}`}
+                onClick={() => handleButtonClick('owner')}
               >
-                {t('gainersRanking')}
-              </button>
-
-              {/* Button 3: MarketCap Ranking */}
-              <button
-                type="button"
-                className="lastbtn flex-1 flex items-center justify-center h-10 px-4 text-center font-medium text-[#7A6EAA] dark:text-purple-500 rounded-full hover:bg-purple-300 overflow-hidden whitespace-nowrap text-ellipsis text-xs sm:text-sm lg:text-base"
-                onClick={() => handleButtonClick('marketcap')}
-              >
-                {t('marketCapRanking')}
-              </button>
-
-              {/* Button 4: 24 Hours Trading Volume */}
-              <button
-                type="button"
-                className="lastbtn flex-1 flex items-center justify-center h-10 px-4 text-center font-medium text-[#7A6EAA] dark:text-purple-500 rounded-full hover:bg-purple-300 overflow-hidden whitespace-nowrap text-ellipsis text-xs sm:text-sm lg:text-base"
-                onClick={() => handleButtonClick('volume')}
-              >
-                {t('tradingVolume')}
+                {t('Your Contributions')}
               </button>
             </div>
 

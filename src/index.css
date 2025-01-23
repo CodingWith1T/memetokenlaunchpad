@@ -6,11 +6,13 @@ body{ background:#4e4e4e;}
 
 header{ box-shadow:none !important;}
 header button{background:#c1a444!important; border-radius: 7px !important; padding: 5px 15px 8px !important;}
-header .text-sm{ font-size:18px;}
+header .text-sm{ font-size:18px;font-weight: 400 !important; margin-left:20px !important;    padding: 0px 10px !important;}
+.slcontent p{ margin-bottom:15px;}
+header button{font-size:18px !important; text-transform:capitalize; font-weight:600 !important;}
 header .active{ color:#3e69cc;}
 .bg-purple-600{background-color:#2a2a2a;}
 .text-purple-200{color: rgb(255 255 255);}
-main{background:#4e4e4e; padding:0px 70px !important;}
+main{padding:0px 70px !important;}
 .buttonbox{background:#666; border: none; border-radius: 10px;}
 .lastbtn{ color:#fff !important;}
 .lastbtn{padding: 10px 30px;}
@@ -24,33 +26,37 @@ main{background:#4e4e4e; padding:0px 70px !important;}
 .bg-white{background-color:rgb(42 42 42);}
 .hover\:bg-gray-200:hover {background-color: rgb(56 56 56) !important;}
 .hover\:bg-purple-300:hover{background-color: #262626 !important;}
-footer{background:#1a1a1a;}
+footer{background:#000; padding:18px 0px; font-size:16px;}
 .footer p{ color:#fff !important;}
 table tr{ border-bottom:1px solid #525252;}
 .logo{padding: 5px;}
-.slidermain{ background: radial-gradient(circle, #424242 17%, rgba(32, 32, 32, 1) 100%); padding:80px 0px; height:500px;}
+.slidermain{    background: linear-gradient(45deg, rgba(32, 32, 32, 1) 0%, rgba(92, 92, 92, 1) 100%); padding:100px 0px; height:500px;}
 .slidermain .createrightbtn{ margin-top:20px;}
 .slidermain h1 {
     color: #fff;
     font-size: 45px;
     font-weight: 700;
     line-height: 48px;
-	    margin-top: -20px;
+	    margin-top: -10px;
 		text-shadow: 3px 14px 0px #2a2a2a;
+		    font-family: system-ui;
 }
 .slidermain h2 {
     color:#f3c52e !important;
     font-size:45px;
     font-weight:300;
     line-height: 48px;
-	margin-top:15px;
+	margin-top:8px;
 	margin-bottom:20px;
 	text-shadow: 3px 14px 0px #2a2a2a;
 }
-.slidermain p{ width:55%; color:#fff; font-size:18px;}
-.container{width: 1210px !important; margin: 0 auto;}
-.slcontent{ width:100%; float:left;}
-.sliderimg{float: right; width: 400px; margin-top: -50px;}
+.slidermain p{color:#fff; font-size:17px;}
+.container{margin: 0 auto;}
+.sliderimg{float: right; width: 400px; margin-top: -80px;}
+canvas{ height: 145px; width: 290px;}
+.pricechart tr th, .pricechart tr td {
+    font-size: 14px;
+}
 
 
 
@@ -62,6 +68,7 @@ table tr{ border-bottom:1px solid #525252;}
 .tokenbox{ width:100%; display: inline-block;}
 .cardbox .shadow-md{}
 .pagination{ margin-top:20px; margin-bottom: 40px;}
+.pagination .px-4{ color:#fff;}
 .pagination .bg-gray-300{background-color: #101010 !important; color: #fff;}
 .pagination .p-4{ color:#fff;}
 .cardbox .p-4{padding: 15px 10px;}
@@ -69,21 +76,35 @@ header button{ color:#fff !important;}
 header button div{ color:#fff !important;}
 header button svg{ color:#fff !important;}
 
-.forminbox{ background:#fff;     padding: 30px !important;    box-shadow:1px 3px 8px #343434; border-radius:20px;}
+.forminbox{ background:#1a1a1a;  padding: 30px !important;    box-shadow:1px 3px 8px #343434; border-radius:20px;}
 .tokenform{padding-top:70px !important;padding-bottom: 70px !important;}
 .forminbox input{border-color:#c5c5c5;background-color: #fff;    padding: 10px;}
 .forminbox textarea{border-color: #c5c5c5;background-color: #fff;}
 .forminbox select{border-color: #c5c5c5;background-color: #fff;    padding: 10px;}
-.forminbox .text-purple-900{color:#333;}
+.forminbox .text-purple-900{color:#fff;font-weight: 400; margin-bottom:8px;}
 .tags-selection button{border-color:#b7b7b7;background-color:#efefef;}
 .forminbox  .border-2 {border-width: 1px;}
+.forminbox .text-purple-900 {
+    color: #fff;
+    font-weight: 400;
+    background: #424242;
+    border: none;
+}
+.tags-selection button:hover{background:#c1a444!important;}
+.submit-button{background-color: #c1a444;}
 .tags-selection .text-white{background:#c1a444!important; border-color: #c1a444;}
 .formmain{}
 .connectbutton button{background:#c1a444!important;  border-radius: 7px !important; padding: 7px 35px 11px !important; box-shadow: 1px 4px 3px #dfdfdf !important;}
-.createrightbtn a{background:#c1a444 !important;  border-radius: 7px !important; padding:8px 34px 10px !important;}
+.createrightbtn a {
+    background: #c1a444 !important;
+    border-radius: 7px !important;
+    padding: 16px 22px 14px !important;
+    font-size:17px;
+    font-weight: 500;
+}
 .marquee-link{color:#fff !important;}
 header .text-gray-900{color:#fff !important;}
-header{padding: 0px 64px !important; background:#333 !important;}
+header{padding: 0px 45px !important; background:#333 !important;    border-bottom: 1px solid #4e4e4e;}
 .forminbox .gap-4 {gap: 5px;}
 .rightbox{background: #404040;}
 /* Toggle Switch */
@@ -142,13 +163,14 @@ input:checked + .slider:before {
 
 .cards {
     flex-direction: row;
-    background: #242424;
+    background: #161616;
     border: 0;
     box-shadow: 0 7px 7px rgba(0, 0, 0, 0.18);
     padding: 14px;
-    border:1px solid #626262;
+    border: 1px solid #3e3e3e;
     border-radius: 10px;
 }
+.buttonbox .bg-white {background-color: rgb(255 255 255);}
 .cards:hover{background: #141414;}
 .cards.dark {
   color: #fff;
@@ -158,7 +180,23 @@ input:checked + .slider:before {
 }
 .marquee-container{background-color:#525252 !important;border-bottom:1px solid #3a3a3a;}
 
-.card-title{font-size: 20px; font-weight: 600;    text-shadow: 0px 5px 0px #000;}
+.card-title {
+    font-size: 18px;
+    font-weight: 500;
+    text-shadow: 0px 5px 0px #000;
+    margin-bottom: 2px;
+}
+.forminbox .text-lg {
+    font-size: 16px;
+    line-height: 0px;
+}
+.forminbox input, .forminbox textarea, .forminbox select {
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #3e3e3e !important;
+    background: #2c2c2c !important;
+    margin-top: 2px;
+}
 
 .cards img {
   max-width:30%;
@@ -191,7 +229,7 @@ input:checked + .slider:before {
   background-color: #898989;
   border-color: #898989;
 }
-.MCap{ float: right;}
+.MCap{ float: right;    margin-top: 7px;}
 .per a{ color:#ebbf2e;}
 @media screen and (max-width: 475px) {
   .cards {
@@ -200,9 +238,9 @@ input:checked + .slider:before {
 }
 
 .symble{color: #f1be16; font-size: 14px;}
-.card-text{margin-top:8px;height: 52px; overflow: hidden;}
-.cards hr{display: inline-block; width: 100%; border-top:1px dashed #898989;}
-.chainlink{ float: right; font-size: 13px;    margin-top:-1px;    margin-right: -8px;}
+.card-text{margin-top:8px;height:61px; overflow: hidden;    word-spacing: 0.5px;color: #e9e9e9;}
+.cards hr{display: inline-block; width: 100%; border-top:1px dashed #4a4a4a;}
+.chainlink{ float: right; font-size: 13px;    margin-top:-1px;    margin-right: -8px; color:#fff;}
 .chainimg { width: 31px;  height: 18px;  margin-top: 1px;  margin-right: 3px !important;}
 
 .AdminPanel{ background: #141414;padding-top: 32px;}
@@ -215,13 +253,38 @@ input:checked + .slider:before {
 .subtext{ margin-top: 3px;;}
 .Dashboard{ margin-bottom: 50px;    padding-bottom: 45px;    background: #141414;}
 .Dashboard h2{ color:#fff;}
-.Dashboard p{ color:#fff;}
+.Dashboard p{ color:#fff;font-size:14px;}
 .Dashboard .bg-gray-200{background-color:rgb(58 58 58); box-shadow: none !important;}
-.Dashboard .bg-gray-200 h3{ color:#fff;}
-.Dashboard .bg-gray-200 ul li{ color:#fff;}
+.Dashboard .bg-gray-200 h3{ color:#fff; font-size:16px; font-weight:600;}
+.Dashboard .bg-gray-200 ul li{ color:#fff; font-size:14px;    line-height: 24px;}
+.rightbox input {
+    background: #282828;
+    padding: 10px 15px;
+    border: 1px solid #565656;
+}
+.bsbox button {
+    background: #fff !important;
+	    color: #000 !important;
+}
 
-.bsbox .bg-gray-400 { --tw-bg-opacity: 1; background-color: rgb(126 126 126); color: #fff !important;}
-.buttonbox button{ border-radius:8px;}
+.bsbox .bg-gray-400 { --tw-bg-opacity: 1; background-color: rgb(126 126 126); color: #000 !important;}
+.buttonbox button {
+    border-radius: 8px;
+    height: 40px;
+    padding: 8px 25px;
+}
+.buttonbox {
+    box-shadow: none;
+    background: #404040;
+    border: none;
+    border-radius: 10px;
+    height: 40px;
+}
+button {
+    font-size: 17px !important;
+    text-transform: capitalize;
+    font-weight: 500 !important;
+}
 
 .PriceChart{margin-top: 15px;}
 .PriceChart thead{background: #ddd;font-size: 16px;}
@@ -230,7 +293,7 @@ input:checked + .slider:before {
 .pricechart tr td a{color: #004793;}
 .pricetabel{ margin-bottom:50px;}
 .pricechart thead{ background:#e7e7e7;}
-.main{background: #464646;}
+.main{background:#282828;}
 .boxc h2{ color:#fff !important;}
 .boxc ul li{ color:#fff;}
 .boxc ul li a{ color:#fff; font-weight:300;}
@@ -241,6 +304,108 @@ input:checked + .slider:before {
 canvas{background: #282828; border-radius: 10px;}
 
 
+.slidersection{ padding:50px 0px;}
+
+#particle-canvas {
+  width: 100%;
+  height: 100%;
+  position: absolute !important; 
+  top: 0;
+  left: 0;
+}
+.videosec iframe{ border:1px solid #4c4c4c; border-radius:20px;}
+
+.socialicon i{ background:#3e3e3e; padding:8px 8px; margin-right:5px; border-radius:5px;font-size: 18px;}
+.socialicon i:hover{background:#fff; color:#000;}
+
+
+.particles-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+#particles-js {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Push canvas behind the content */
+}
+
+.mainslider .container {
+  position: relative;
+  z-index: 1; /* Ensure content is above the canvas */
+}
+canvas{background: #ffffff !important; border-radius: 20px !important; }
+.boxc {
+    padding: 15px;
+    border: 1px solid #464646;
+    border-radius: 10px;
+	background: #343434;
+}
+.boxc h3 {
+    color: #fff;
+    font-size: 22px !important;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+.boxc .socialicon i {
+    background: #525252;
+    padding: 6px 7px;
+    margin-right: 5px;
+    border-radius: 5px;
+    font-size: 17px;
+    color: #fff;
+}
+.boxc .socialicon i:hover{background: #ffffff;color: #000 !important;}
+.tokenomic{ margin-top:25px;}
+
+.boxc p{ color:#e9e9e9; margin-top:8px;}
+.tokeninfo{ margin-top:25px;}
+.boxc ul li {
+    /* line-height: 22px; */
+    list-style: none;
+    border-bottom: 1px dashed #505050;
+    padding: 6px 0px;
+    margin-top: 0px !important;
+}
+.boxc ul{ margin-left:-18px;}
+.separetar{margin-top: 22px;  border-top: 1px solid #4c4c4c;}
+.AllTransactions{ margin-top:20px;}
+.detaillogo{ margin-top:20px;}
+.detaillogo img{border:2px solid #afafaf; width: 80px; height:70px; border-radius: 10px;}
+.tokenname{font-size: 22px; color: #fff; margin-top: 10px; font-weight:600;}
+.progress{ margin-bottom:20px; margin-top:5px;}
+.bonding{font-size: 13px !important; color:#40a7ff !important;}
+.tokeninfo ul li span{ float:right;    color: #e9e9e9;}
+.buysell button {font-size: 16px !important;}
+.tpllogo img{float: left; width: 100%; height: 92px;}
+.detaillogo{ width:100%;}
+.lgs{ padding-left:0px;}
+.lgs h1{ margin-top:61px;}
+.tpllogo{background: linear-gradient(180deg, rgba(77, 77, 77, 1) 50%, rgba(32, 32, 32, 1) 50%); margin-bottom:20px;}
+.buysell{padding-top: 18px; border-top: 1px dashed #4e4e4e;}
+body {
+    background: #282828;
+}
+.chartbox {
+    margin-top: 20px;
+}
+.progress {
+    height: 12px;
+    background-color: #5e5e5e;
+    width: 100%;
+	margin-bottom: 20px;
+    margin-top: 5px;
+}
+.progress-bar {
+    background-color: #0079e1;
+    font-size: 9px;
+    line-height: 15px;
+}
 
 
 

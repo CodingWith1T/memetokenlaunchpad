@@ -176,7 +176,7 @@ const Admin = () => {
                             Dashboard
                         </Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link to="/users" className="hover:bg-gray-700 block  py-2 rounded">
                             Users
                         </Link>
@@ -190,7 +190,7 @@ const Admin = () => {
                         <Link to="/reports" className="hover:bg-gray-700 block py-2 rounded">
                             Reports
                         </Link>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
 

@@ -49,7 +49,7 @@ const Card = ({ id }) => {
   return (
     <div
       key={data.id}
-      className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer"
+      className="rounded-lg shadow-md overflow-hidden cursor-pointer"
       onClick={() => navigate(`/token/bsc/${data.token}`)} // Navigate to /card-page with poolId as query param
     >
       {/* Card New Section */}
@@ -72,8 +72,10 @@ const Card = ({ id }) => {
           </div>
         </div>
         <hr />
-        <p className='p-5'>
-          <span className="per"></span>
+        <p className='socialicon'>
+          <span className="per">
+          <span class="socialicon"><i class="fa fa-globe"></i><i class="fa fa-twitter"></i></span>
+          </span>
           <span className="MCap">
             MCap: {marketCap ? `$${marketCap.toFixed(2)}` : 'Calculating...'}
           </span>

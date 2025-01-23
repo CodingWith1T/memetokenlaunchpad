@@ -2,9 +2,16 @@
   overflow: hidden;
   white-space: nowrap;
   background-color: #f5f5f5; /* Optional: Background color for the marquee */
-  padding: 10px 0;
-    border-bottom: 1px solid #c8cbe1;
+  border-bottom: 1px solid #505050 !important;
 }
+.socialicon i {
+    background: #3e3e3e;
+    padding: 8px;
+    margin-right: 5px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
 
 .marquee-content {
   display: inline-block;
