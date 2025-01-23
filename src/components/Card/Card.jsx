@@ -4,7 +4,7 @@ import abi from "../../helper/ManagerFaucetAbi.json";
 import { daimond } from '../../helper/Helper';
 import { useNavigate } from 'react-router-dom';
 
-const Card = ({ id, activeTable }) => {
+const Card = ({ id, reserve, activeTable }) => {
   const navigate = useNavigate(); // Hook to navigate to different routes
   const { address } = useAccount();
 
@@ -68,9 +68,9 @@ const Card = ({ id, activeTable }) => {
           <div className="text-section">
             <h5 className="card-title">{poolDetailsParsed.name}</h5>
             <span>Progress</span>
-            <span class="hardcap">Hard Cap</span>
-            <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style={{width: '25%'}}>25%
+            <span className="hardcap">Hard Cap</span>
+            <div className="progress">
+            <div className="progress-bar" role="progressbar" aria-valuenow={`${parseInt((data.virtualQuoteReserve - reserve.initialVirtualQuoteReserve) / (data.maxListingQuoteAmount + data.listingFee)) ** 100}`} aria-valuemin="0" aria-valuemax="100" style={{ width: `${parseInt((data.virtualQuoteReserve - reserve.initialVirtualQuoteReserve) / (data.maxListingQuoteAmount + data.listingFee)) ** 100}%` }}>{parseInt((data.virtualQuoteReserve - reserve.initialVirtualQuoteReserve) / (data.maxListingQuoteAmount + data.listingFee)) ** 100}%
             </div>
             </div>
             <span className='price'>4.913k  <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" className="chainimg" alt="BNB" /></span> 
@@ -83,7 +83,7 @@ const Card = ({ id, activeTable }) => {
         <hr />
         <p className='socialicon'>
           <span className="per">
-          <span class="socialicon"><i class="fa fa-globe"></i><i class="fa fa-twitter"></i></span>
+          <span className="socialicon"><i className="fa fa-globe"></i><i className="fa fa-twitter"></i></span>
           </span>
           <span className="MCap">
             MCap: {marketCap ? `$${marketCap.toFixed(2)}` : 'Calculating...'}

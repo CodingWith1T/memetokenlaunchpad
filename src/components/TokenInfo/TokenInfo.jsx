@@ -27,8 +27,8 @@ const TokenInfo = ({ details, data, reserve }) => {
                 : (parseFloat(data.virtualQuoteReserve - reserve.initialVirtualQuoteReserve) / 10 ** 18).toFixed(4) + ' ' + (chain?.nativeCurrency?.symbol || 'Currency')
                 }</span>
                 </li>
-                {/* <li><strong>Progress:</strong> <div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow={`${parseInt((data.virtualQuoteReserve - reserve.initialVirtualQuoteReserve) / (data.maxListingQuoteAmount + data.listingFee)) ** 100}`} aria-valuemin="0" aria-valuemax="100" style={{ width: `${parseInt((data.virtualQuoteReserve - reserve.initialVirtualQuoteReserve) / (data.maxListingQuoteAmount + data.listingFee)) ** 100}` }}>{parseInt((data.virtualQuoteReserve - reserve.initialVirtualQuoteReserve) / (data.maxListingQuoteAmount + data.listingFee)) ** 100} %</div>
-                </div></li> */}
+                <li><strong>Progress:</strong> <div className="progress"><div className="progress-bar" role="progressbar" aria-valuenow={`${parseInt((data.virtualQuoteReserve - reserve.initialVirtualQuoteReserve) / (data.maxListingQuoteAmount + data.listingFee)) ** 100}`} aria-valuemin="0" aria-valuemax="100" style={{ width: `${parseInt((data.virtualQuoteReserve - reserve.initialVirtualQuoteReserve) / (data.maxListingQuoteAmount + data.listingFee)) ** 100}` }}>{parseInt((data.virtualQuoteReserve - reserve.initialVirtualQuoteReserve) / (data.maxListingQuoteAmount + data.listingFee)) ** 100} %</div>
+                </div></li>
                 </ul>
 
 

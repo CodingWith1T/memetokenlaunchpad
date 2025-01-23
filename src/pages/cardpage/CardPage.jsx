@@ -157,10 +157,10 @@ const CardPage = () => {
           <div className='col-md-3'>
             {/* Token Info */}
             <div className='boxc'>
-              <span class="socialicon">
-                <a href={poolDetailsParsed.Website} target='_blank'><i class="fa fa-globe"></i></a>
-                <a href={poolDetailsParsed.Twitter} target='_blank'><i class="fa fa-twitter"></i></a>
-                <a href={poolDetailsParsed.Telegram} target='_blank'><i class="fa fa-telegram"></i></a>
+              <span className="socialicon">
+                <a href={poolDetailsParsed.Website} target='_blank'><i className="fa fa-globe"></i></a>
+                <a href={poolDetailsParsed.Twitter} target='_blank'><i className="fa fa-twitter"></i></a>
+                <a href={poolDetailsParsed.Telegram} target='_blank'><i className="fa fa-telegram"></i></a>
               </span>
               <p>{poolDetailsParsed.description}</p>
               <hr className='separetar'></hr>
@@ -200,10 +200,6 @@ const CardPage = () => {
           <div className='col-md-3'>
             <div className='boxc'>
 
-              <p>Bonding Curve Progress (0.32%)</p>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style={{ width: '25%' }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-              </div>
               <p>When the market cap hits $79.4K, All liquidity from the bonding curve will be deposited into Pancake Swap and burned. The progression accelerates as the price rises</p>
 
               <BuySell data={data[0].result} token={token} setTxDone={setTxDone} tokenBalance={tokenBalance} reserve={data[1].result} />
