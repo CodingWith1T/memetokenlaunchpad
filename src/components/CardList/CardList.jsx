@@ -6,18 +6,6 @@ import Card from '../Card/Card';
 import abi from "../../helper/ManagerFaucetAbi.json";
 import { daimond } from '../../helper/Helper';
 
-// Dummy fallback data in case the API fails
-const dummyData = [
-  // Dummy data remains unchanged...
-];
-// Dummy fallback data in case the API fails
-const dummyData = [
-  // Dummy data remains unchanged...
-];
-
-const NonListed = () => {
-  const [data, setData] = useState([]); // Data state
-  const [loading, setLoading] = useState(true); // Loading state
 const NonListed = () => {
   const [data, setData] = useState([]); // Data state
   const [loading, setLoading] = useState(true); // Loading state
@@ -25,15 +13,7 @@ const NonListed = () => {
   const [totalTokens, setTotalTokens] = useState(null); // Total tokens count state
   const [currentPage, setCurrentPage] = useState(1); // Current page state
   const [totalPages, setTotalPages] = useState(1); // Total pages state
-  const [currentPage, setCurrentPage] = useState(1); // Current page state
-  const [totalPages, setTotalPages] = useState(1); // Total pages state
   const navigate = useNavigate(); // React Router hook for navigation
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
-  // Navigate to the CardPage with item data passed through state
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -85,9 +65,7 @@ const NonListed = () => {
         {
           Array.from({ length: totalTokens }, (_, index) => (
             <Card key={index} id={index} />
-            <Card key={index} id={index} />
           ))
-        }
         }
       </div>
       {/* Pagination Section */}
