@@ -22,11 +22,6 @@ const Card = ({ id, reserve, activeTable }) => {
     chainId: 97
   });
 
-
-  if (activeTable == "owner" && data.owner != address) {
-    return 
-  }
-
   // Guard clause: Return early if loading or error
   if (isLoading) {
     return <div>Loading...</div>;
@@ -41,15 +36,21 @@ const Card = ({ id, reserve, activeTable }) => {
     return <div>No data available</div>;
   }
 
-  // Destructuring the fetched data from the contract
-  const { id: poolId,poolDetails,virtualQuoteReserve,virtualBaseReserve } = data;
+  const { id: poolId, poolDetails, virtualQuoteReserve, virtualBaseReserve } = data;
 
-  // Parse the poolDetails JSON string
   const poolDetailsParsed = poolDetails ? JSON.parse(poolDetails) : {};
+  const addressToCompare = address ? address : "0x0000000000000000000000000000000000000000";
+  if (activeTable === "owner" && data.owner !== addressToCompare) {
+    return;
+  }
+  if (activeTable.includes("Tag") && poolDetailsParsed.Tag !== activeTable.split(" ")[1].trim()) {
+    console.log({id,'tagset':activeTable.split(" ")[1].trim(),'actual tag':poolDetailsParsed.tag})
+    return;
+  }
+
+ 
   const pricePerToken = Number(virtualQuoteReserve || BigInt(0)) / Number(virtualBaseReserve || BigInt(0));  // Token price estimation
   const marketCap = pricePerToken * Number(1000000000);
-
-
 
   return (
     <div
@@ -70,20 +71,20 @@ const Card = ({ id, reserve, activeTable }) => {
             <span>Progress</span>
             <span className="hardcap">Hard Cap</span>
             <div className="progress">
-            <div className="progress-bar" role="progressbar" aria-valuenow={`${parseInt((data.virtualQuoteReserve - reserve.initialVirtualQuoteReserve) / (data.maxListingQuoteAmount + data.listingFee)) ** 100}`} aria-valuemin="0" aria-valuemax="100" style={{ width: `${parseInt((data.virtualQuoteReserve - reserve.initialVirtualQuoteReserve) / (data.maxListingQuoteAmount + data.listingFee)) ** 100}%` }}>{parseInt((data.virtualQuoteReserve - reserve.initialVirtualQuoteReserve) / (data.maxListingQuoteAmount + data.listingFee)) ** 100}%
+              <div className="progress-bar" role="progressbar" aria-valuenow={`${parseInt((data.virtualQuoteReserve - reserve.initialVirtualQuoteReserve) / (data.maxListingQuoteAmount + data.listingFee)) ** 100}`} aria-valuemin="0" aria-valuemax="100" style={{ width: `${parseInt((data.virtualQuoteReserve - reserve.initialVirtualQuoteReserve) / (data.maxListingQuoteAmount + data.listingFee)) ** 100}%` }}>{parseInt((data.virtualQuoteReserve - reserve.initialVirtualQuoteReserve) / (data.maxListingQuoteAmount + data.listingFee)) ** 100}%
+              </div>
             </div>
-            </div>
-            <span className='price'>4.913k  <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" className="chainimg" alt="BNB" /></span> 
-        
+            <span className='price'>4.913k  <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" className="chainimg" alt="BNB" /></span>
+
             <span className='hardcap'><img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" className="hardcapchainimg" alt="BNB" /> 10.000k</span>
-        
+
             <p className="card-text">{poolDetailsParsed.description}</p>
           </div>
         </div>
         <hr />
         <p className='socialicon'>
           <span className="per">
-          <span className="socialicon"><i className="fa fa-globe"></i><i className="fa fa-twitter"></i></span>
+            <span className="socialicon"><i className="fa fa-globe"></i><i className="fa fa-twitter"></i></span>
           </span>
           <span className="MCap">
             MCap: {marketCap ? `$${marketCap.toFixed(2)}` : 'Calculating...'}

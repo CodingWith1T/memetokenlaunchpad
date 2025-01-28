@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAccount, useWriteContract } from 'wagmi';
-import { daimond, routers } from '../../helper/Helper';
+import { daimond, routers, tags } from '../../helper/Helper';
 import degenFacetAbi from "../../helper/DegenFacetAbi.json";
 import { waitForTransactionReceipt } from 'wagmi/actions';
 import { config } from '../../wagmiClient';
@@ -34,8 +34,6 @@ const CreateToken = () => {
   // Extra Amounts based on percentages
   const [buyAmount, setBuyAmount] = useState(0);
   const [sellAmount, setSellAmount] = useState(0);
-
-  const tags = ['Meme', 'AI', 'DeFi', 'Games', 'Infra', 'De-Sci', 'Social', 'Depin', 'Charity', 'Others'];
 
   const { t } = useTranslation();
 

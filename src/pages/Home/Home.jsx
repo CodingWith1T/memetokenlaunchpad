@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import CardList from '../../components/CardList/CardList';
 import { useTranslation } from 'react-i18next';
+import { tags } from '../../helper/Helper';
 
 const Home = () => {
   // State to track which table is active
@@ -49,8 +50,6 @@ const Home = () => {
                 >
                   {t('All ')}
                 </button>
-
-
                 <button
                   type="button"
                   className={`items-center justify-center h-10 px-9 text-center font-medium rounded-full overflow-hidden whitespace-nowrap  lg:text-base ${activeTable === 'owner' ? 'bg-white' : 'text-[#fff] dark:text-purple-500 hover:bg-gray-400'}`}
@@ -58,6 +57,16 @@ const Home = () => {
                 >
                   {t('Your Contributions')}
                 </button>
+                {tags.map(tag => (
+                  <button
+                    key={tag}
+                    type="button"
+                    className={`items-center justify-center h-10 px-9 text-center font-medium rounded-full overflow-hidden whitespace-nowrap lg:text-base ${activeTable === `Tag ${tag}` ? 'bg-white' : 'text-[#fff] dark:text-purple-500 hover:bg-gray-400'}`}
+                    onClick={() => handleButtonClick(`Tag ${tag}`)}
+                  >
+                    {t(tag)}
+                  </button>
+                ))}
               </div>
             </div>
           </div>

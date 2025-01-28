@@ -12,7 +12,7 @@ header button{font-size:18px !important; text-transform:capitalize; font-weight:
 header .active{ color:#3e69cc;}
 .bg-purple-600{background-color:#2a2a2a;}
 .text-purple-200{color: rgb(255 255 255);}
-main{padding:0px 70px !important;}
+main{padding:0px 70px 50px !important;}
 .buttonbox{background:#666; border: none; border-radius: 10px;}
 .lastbtn{ color:#fff !important;}
 .lastbtn{padding: 10px 30px;}
@@ -288,12 +288,12 @@ input:checked + .slider:before {
     background: #fff !important;
 	    color: #000 !important;
 }
-
+.hover\:bg-gray-400:hover{background-color: #c1a444 !important;}
 .bsbox .bg-gray-400 { --tw-bg-opacity: 1; background-color: rgb(126 126 126); color: #000 !important;}
 .buttonbox button {
     border-radius: 8px;
     height: 40px;
-    padding: 8px 25px;
+    padding: 8px 10px;
 }
 .buttonbox {
     box-shadow: none;
@@ -433,7 +433,7 @@ body {
 .successbox p {color: #fff; font-size: 18px; margin-bottom: 15px;}
 .successbox button {background: #c1a444 !important;}
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 980px) {
   main {padding: 0px 15px !important;}
   .max-w-xs {max-width: 100%;}
   .pt-\[75px\] {padding-top: 35px;}
@@ -443,6 +443,18 @@ body {
   .liquiditydiv{width:100% !important;}
   .lastdiv{width:100% !important;}
   .container{ width:100% !important;}
+  .slidermain{ height:auto; padding:20px 0px !important;}
+  header .w-8 {width: 57px;}
+  header .text-sm{margin-left: 2px !important;}
+  header .text-sm {font-size:15px !important;}
+  .sliderimg {float: inherit; width: 320px; margin-top: 0;}
+  .tpllogo img{    width: auto; margin-right:10px;}
+  .lgs h1 {margin-top: 51px;}
+  .slidermain h1{    font-size: 35px;    line-height: 40px;}
+  .slidermain h2{    font-size: 35px;    line-height: 40px;}
+  .buttonbox{    height:auto; background:none;}
+  .buttonbox button{border: 1px solid #585858; margin-bottom: 7px;}
+  .boxc{ margin-bottom:20px;}
 }
 @media only screen and (max-width: 540px) {
 	header .text-sm {font-size: 12px;}

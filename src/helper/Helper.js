@@ -1,6 +1,6 @@
 export const daimond = "0xc470214688f89B100363E280532625fabB5dca00";
 
-
+export const tags = ['Meme', 'AI', 'DeFi', 'Games', 'Infra', 'De-Sci', 'Social', 'Depin', 'Charity', 'Others']
 // Routers
 
 const bscRouters = {
