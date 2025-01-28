@@ -268,8 +268,8 @@ input:checked + .slider:before {
 .AdminPanel{ background: #141414;padding-top: 32px;}
 .welcome{background: #141414;}
 .AdminPanel ul{padding-left: 0px;}
-.AdminPanel ul li{ border-bottom: 1px dashed #4c4c4c;}
-.AdminPanel ul li:hover a{background: #c1a444 !important; padding-left: 10px;}
+.AdminPanel ul li{background: #c1a444 !important; padding-left: 10px; text-decoration: none;color: #fff; border-radius:2px;padding-left: 10px;}
+.AdminPanel ul li:hover a{background: #c1a444 !important; text-decoration: none;color: #fff;}
 .gbutton{background: #c1a444 !important;}
 .Running{ background: #c1a444 !important; padding:5px 15px;}
 .subtext{ margin-top: 3px;;}
@@ -428,8 +428,10 @@ body {
     font-size: 9px;
     line-height: 15px;
 }
-
-
+.successbox {background: #323232;  padding: 60px; border: 1px solid #484848; border-radius: 10px;    margin-top: 80px;}
+.successbox h3{ font-size:26px !important;    margin-bottom: 25px;}
+.successbox p {color: #fff; font-size: 18px; margin-bottom: 15px;}
+.successbox button {background: #c1a444 !important;}
 
 @media only screen and (max-width: 768px) {
   main {padding: 0px 15px !important;}
