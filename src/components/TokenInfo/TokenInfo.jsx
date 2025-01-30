@@ -20,6 +20,7 @@ const TokenInfo = ({ details, data, reserve }) => {
                 <li><strong>Tag:</strong><span>{details.Tag}</span></li>
                 <li><strong>Router:</strong><span>{getRouter(data.router)}</span></li>
                 <li><strong>Start Time :</strong><span>2/7/2025, 11:31:00 AM</span></li>
+                <li><strong>Market Cap :</strong><span>${(data.virtualQuoteReserve * 10000000n * 67754n / data.virtualBaseReserve).toString()}</span></li>
                 <li>
                 <strong>Current Reserve:</strong><span>
                 {parseInt(data.virtualQuoteReserve - reserve.initialVirtualQuoteReserve) < 10 ** 15

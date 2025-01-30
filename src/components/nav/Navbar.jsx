@@ -19,7 +19,7 @@ const Navbar = () => {
       <div className="flex justify-between items-center h-[56px] lg:h-[80px] xl:h-[80px]">
         {/* Left side: Logo and Links (Board, Create Token) */}
         <div className="flex items-center gap-5">
-          <NavLink to="https://howswap.com/" className="w-8 sm:w-[80px]">
+          <NavLink to="/" className="w-8 sm:w-[80px]">
             <img src={logo} alt="logo" className="logo w-13 h-13 object-contain" />
           </NavLink>
           <div className="flex space-x-6">

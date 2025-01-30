@@ -36,7 +36,9 @@ const CardPage = () => {
 
     }]
   });
-  console.log({ data })
+  if (!data) {
+    return <div className="flex justify-center items-center h-screen">Data not available</div>;
+  }
   const { chain, address } = useAccount();
   const [txDone, setTxDone] = useState(0);
   const [tokenBalance, setTokenBalace] = useState(0);
@@ -47,7 +49,7 @@ const CardPage = () => {
         abi: TokenAbi,
         address: token,
         functionName: 'balanceOf',
-        chainId: 56,
+        chainID: 56,
         args: [
           address,
         ],
@@ -55,7 +57,6 @@ const CardPage = () => {
       setTokenBalace(result)
     } catch (error) {
       console.error('Error fetching balance:', error);
-      setAmountOut([0n, 0n, 0n, 0n, 0n]);
     }
   };
 
@@ -83,9 +84,7 @@ const CardPage = () => {
     );
   }
 
-  if (!data) {
-    return <div className="flex justify-center items-center h-screen">Data not available</div>;
-  }
+
 
   const poolDetailsParsed = data[0].result.poolDetails ? JSON.parse(data[0].result.poolDetails) : {};
   const baseReserve = Number(data[0].result.virtualBaseReserve) / (10 ** 18);
@@ -146,8 +145,6 @@ const CardPage = () => {
     },
   };
 
-  console.log({ poolDetailsParsed })
-
   return (
 
     <div className="slidersection">
@@ -190,7 +187,7 @@ const CardPage = () => {
               </div>
             </div>
             {poolDetailsParsed?.video && (
-              <Video link={poolDetailsParsed?.video }/>
+              <Video link={poolDetailsParsed?.video} />
             )}
             <div className='boxc AllTransactions'>
               <TradeEventList contractAddress={token} tx={txDone} />
@@ -200,7 +197,7 @@ const CardPage = () => {
           <div className='col-md-3'>
             <div className='boxc'>
 
-              <p>When the market cap hits $79.4K, All liquidity from the bonding curve will be deposited into Pancake Swap and burned. The progression accelerates as the price rises</p>
+              <p>When the market cap hits <span className='text-yellow-100'>${(data[1].result.maxListingQuoteAmount * 10000000n * 67754n / data[1].result.maxListingBaseAmount).toString()}</span>, All liquidity from the bonding curve will be deposited into Pancake Swap and burned. The progression accelerates as the price rises</p>
 
               <BuySell data={data[0].result} token={token} setTxDone={setTxDone} tokenBalance={tokenBalance} reserve={data[1].result} />
             </div>

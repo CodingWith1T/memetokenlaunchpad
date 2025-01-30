@@ -72,8 +72,6 @@ const CreateToken = () => {
         initialBuyAmount: 0 // Using total supply here
       };
 
-      console.log({ params })
-
       const data = await writeContractAsync({
         abi: degenFacetAbi,
         address: daimond[56],
