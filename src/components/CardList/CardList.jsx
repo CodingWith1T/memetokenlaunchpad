@@ -16,16 +16,16 @@ const CardList = ({ activeTable }) => {
         // console.log("Fetching pool count...");
         const result = await readContracts(config, {
           contracts: [{
-            address: daimond,
+            address: daimond[56],
             abi,
             functionName: 'getPoolCount',
-            chainId: 97
+            chainId: 56
           }, {
             abi,
-            address: daimond,
+            address: daimond[56],
             functionName: 'getPoolConfig',
             args: [20],
-            chainId: 97
+            chainId: 56
           }]
         });
         setTotalTokens(result[0].result.toString());

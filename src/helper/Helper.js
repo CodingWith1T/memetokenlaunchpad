@@ -1,4 +1,7 @@
-export const daimond = "0xc470214688f89B100363E280532625fabB5dca00";
+export const daimond  = {
+    56: "0x56E3D58bDED193110C248aB05B8d0a093d9f974E",
+    97: "0xc470214688f89B100363E280532625fabB5dca00",
+} ;
 
 export const tags = ['Meme', 'AI', 'DeFi', 'Games', 'Infra', 'De-Sci', 'Social', 'Depin', 'Charity', 'Others']
 // Routers

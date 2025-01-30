@@ -43,10 +43,10 @@ const Admin = () => {
             }
 
             const addRouter = await writeContract(config, {
-                address: daimond,
+                address: daimond[56],
                 abi: MangerAbi,
                 functionName: 'setWhitelistedRouters',
-                chainId: 97,
+                chainId: 56,
                 args: [
                     [routerName],
                     true,
@@ -70,10 +70,10 @@ const Admin = () => {
             }
 
             const removeRouter = await writeContract(config, {
-                address: daimond,
+                address: daimond[56],
                 abi: MangerAbi,
                 functionName: 'setWhitelistedRouters',
-                chainId: 97,
+                chainId: 56,
                 args: [
                     [routerId],
                     false,
@@ -89,10 +89,10 @@ const Admin = () => {
         try {
             // Start the contract call to setPaused
             const removeRouter = await writeContract(config, {
-                address: daimond,
+                address: daimond[56],
                 abi: MangerAbi,
                 functionName: 'setPaused',
-                chainId: 97,
+                chainId: 56,
                 args: [!data],
             });
 
@@ -123,10 +123,10 @@ const Admin = () => {
 
             // Start the contract call to setMasterConfig
             const removeRouter = await writeContract(config, {
-                address: daimond,
+                address: daimond[56],
                 abi: MangerAbi,
                 functionName: 'setMasterConfig',
-                chainId: 97,
+                chainId: 56,
                 args: [updatedConfigs],
             });
 
@@ -149,20 +149,21 @@ const Admin = () => {
 
     const { data, error, isLoading } = useReadContract({
         abi: MangerAbi,
-        address: daimond,
+        address: daimond[56],
         functionName: 'isPaused',
-        chainId: 97
+        chainId: 56
     });
 
     useEffect(() => {
         const fetchRouters = async () => {
             try {
                 const totalrouters = await readContract(config, {
-                    address: daimond,
+                    address: daimond[56],
                     abi: MangerAbi,
                     functionName: 'getRouters',
-                    chainId: 97,
+                    chainId: 56,
                 });
+                console.log({totalrouters})
                 // Ensure `totalrouters` is an array before updating state
                 if (Array.isArray(totalrouters)) {
                     setrouters(totalrouters);
@@ -176,10 +177,10 @@ const Admin = () => {
             try {
                 // console.log("Fetching pool count...");
                 const result = await readContract(config, {
-                    address: daimond,
+                    address: daimond[56],
                     abi: MangerAbi,
                     functionName: 'getPoolCount',
-                    chainId: 97
+                    chainId: 56
                 });
                 setTotalTokens(result.toString());
             } catch (error) {
@@ -190,10 +191,10 @@ const Admin = () => {
             try {
                 // console.log("Fetching pool count...");
                 const result = await readContract(config, {
-                    address: daimond,
+                    address: daimond[56],
                     abi: MangerAbi,
                     functionName: 'getMasterConfig',
-                    chainId: 97
+                    chainId: 56
                 });
                 setMasterConfig(result);
             } catch (error) {
@@ -211,10 +212,10 @@ const Admin = () => {
         try {
             const data = await readContract(config, {
                 abi: MangerAbi,
-                address: daimond,
+                address: daimond[56],
                 functionName: 'getPoolInfo',
                 args: [tokenAddress],
-                chainId: 97
+                chainId: 56
             });
             setTokenAddress(data)
         } catch (error) {
@@ -277,7 +278,7 @@ const Admin = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 mt-6">
                         <div className="bg-gray-200 p-4 rounded-lg shadow-md transition-shadow duration-300">
                             <h3 className="text-lg font-semibold">
-                                Total Token Meme : <span>{isNaN(totalToken) ? 'Loading...' : totalToken - 1}</span>
+                                Total Token Meme : <span>{isNaN(totalToken) ? 'Loading...' : totalToken}</span>
                             </h3>
                         </div>
                         <div className="bg-gray-200 p-4 rounded-lg">

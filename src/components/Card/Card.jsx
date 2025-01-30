@@ -16,10 +16,10 @@ const Card = ({ id, reserve, activeTable }) => {
   // Use the wagmi hook to read the contract
   const { data, error, isLoading } = useReadContract({
     abi,
-    address: daimond,
+    address: daimond[56],
     functionName: 'getPoolAt',
     args: [id.toString()], // Passing `id` as argument to the contract function
-    chainId: 97
+    chainId: 56
   });
 
   // Guard clause: Return early if loading or error

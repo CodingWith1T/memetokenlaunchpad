@@ -3,9 +3,11 @@ import { NavLink } from 'react-router-dom';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 import logo from "../../assets/logo/logo.png";
+import { useAccount } from 'wagmi';
 
 const Navbar = () => {
   const { t, i18n } = useTranslation(); // Use translation hook
+  const { address } = useAccount()
 
   // Change language function
   const handleLanguageChange = (lang) => {
@@ -25,22 +27,22 @@ const Navbar = () => {
               to="/"
               className="text-sm text-gray-900 hover:text-gold font-semibold font-bold text-gold"
             >
-              {t('board')} 
+              {t('board')}
             </NavLink>
             <NavLink
               to="/create-token"
               className="text-sm text-gray-900 hover:text-gold font-semibold font-bold text-gold"
-              
+
             >
               {t('createToken')} {/* Use translation key */}
             </NavLink>
-            <NavLink
+            {address && address=='0x0b69Dee815973C811c7e720Db7Ae63c2CB54101D' && <NavLink
               to="/admin-panel"
               className="text-sm text-gray-900 hover:text-gold font-semibold font-bold text-gold"
-              
+
             >
               {t('Admin')} {/* Use translation key */}
-            </NavLink>
+            </NavLink>}
           </div>
         </div>
 

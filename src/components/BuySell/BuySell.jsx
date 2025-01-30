@@ -50,9 +50,9 @@ const BuySell = ({ data, token, setTxDone, tokenBalance, reserve }) => {
         try {
             const result = await readContract(config, {
                 abi: DegenFacetabi,
-                address: daimond,
+                address: daimond[56],
                 functionName: 'getAmountOut',
-                chainId: 97,
+                chainId: 56,
                 args: [
                     token,
                     BigInt(inputAmount * 10 ** 18),
@@ -72,10 +72,10 @@ const BuySell = ({ data, token, setTxDone, tokenBalance, reserve }) => {
         try {
             const data = await writeContract(config, {
 
-                address: daimond,
+                address: daimond[56],
                 abi: DegenFacetabi,
                 functionName: 'buy',
-                chainId: 97,
+                chainId: 56,
                 args: [
                     token,
                     "0x0000000000000000000000000000000000000000",
@@ -103,9 +103,9 @@ const BuySell = ({ data, token, setTxDone, tokenBalance, reserve }) => {
                 address: token,
                 abi: TokenABi,
                 functionName: 'approve',
-                chainId: 97,
+                chainId: 56,
                 args: [
-                    daimond,
+                    daimond[56],
                     BigInt(amount * 10 ** 18),
                 ],
             });
@@ -122,10 +122,10 @@ const BuySell = ({ data, token, setTxDone, tokenBalance, reserve }) => {
         if (!token || !approve) return;
         try {
             const data = await writeContract(config, {
-                address: daimond,
+                address: daimond[56],
                 abi: DegenFacetabi,
                 functionName: 'sell',
-                chainId: 97,
+                chainId: 56,
                 args: [
                     token,
                     "0x0000000000000000000000000000000000000000",
