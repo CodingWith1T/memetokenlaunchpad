@@ -29,13 +29,13 @@ const Navbar = () => {
             >
               {t('board')}
             </NavLink>
-            { <NavLink
-              to="/admin-panel"
+            <NavLink
+              to="/create-token"
               className="text-sm text-gray-900 hover:text-gold font-semibold font-bold text-gold"
 
             >
-              {t('Admin')} {/* Use translation key */}
-            </NavLink>}
+              {t('createToken')} {/* Use translation key */}
+            </NavLink>
             {address && address=='0x0b69Dee815973C811c7e720Db7Ae63c2CB54101D' && <NavLink
               to="/admin-panel"
               className="text-sm text-gray-900 hover:text-gold font-semibold font-bold text-gold"
