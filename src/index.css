@@ -272,24 +272,25 @@ input:checked + .slider:before {
 .AdminPanel ul li:hover a{background: #c1a444 !important; text-decoration: none;color: #fff;}
 .gbutton{background: #c1a444 !important;}
 .Running{ background: #c1a444 !important; padding:5px 15px;}
-.subtext{ margin-top: 3px;;}
-.Dashboard{ margin-bottom: 50px;    padding-bottom: 45px;    background: #141414;}
-.Dashboard h2{ color:#fff;}
+.subtext{ margin-top: -3px;}
+.Dashboard{ margin-bottom: 50px;    padding-bottom: 45px;    background: #141414; padding:30px 30px 40px;}
+.Dashboard h2{ color:#fff;    font-size: 26px;}
 .Dashboard p{ color:#fff;font-size:14px;}
-.Dashboard .bg-gray-200{background-color:rgb(58 58 58); box-shadow: none !important;}
-.Dashboard .bg-gray-200 h3{ color:#fff; font-size:16px; font-weight:600;}
+.Dashboard .bg-gray-200{background-color:rgb(40 40 40); box-shadow: none !important;    padding:20px 20px;}
+.Dashboard .bg-gray-200 h3{ color:#fff; font-size:18px; font-weight:400;}
 .Dashboard .bg-gray-200 ul li{ color:#fff; font-size:14px;    line-height: 24px;}
 .rightbox input {
-    background: #282828;
+    background: #363636;
     padding: 10px 15px;
-    border: 1px solid #565656;
+    border: 1px solid #525252;
+    color: #fff;
 }
 .bsbox button {
-    background: #fff !important;
-	    color: #000 !important;
+    background:#c1a444 !important;
+	    color: #fff !important;
 }
 .hover\:bg-gray-400:hover{background-color: #c1a444 !important;}
-.bsbox .bg-gray-400 { --tw-bg-opacity: 1; background-color: rgb(126 126 126); color: #000 !important;}
+.bsbox .bg-gray-400 { --tw-bg-opacity: 1; background-color: rgb(126 126 126); color: #fff !important;}
 .buttonbox button {
     border-radius: 8px;
     height: 40px;
@@ -432,6 +433,10 @@ body {
 .successbox h3{ font-size:26px !important;    margin-bottom: 25px;}
 .successbox p {color: #fff; font-size: 18px; margin-bottom: 15px;}
 .successbox button {background: #c1a444 !important;}
+.adminpanel{ padding:50px 0px 0px;}
+.adminpanel h1{ color:#fff; font-size:35px; padding-bottom:10px;}
+.adminpanel p{ color:#afafaf;}
+.adminpanel .subtext{ margin-bottom:20px; font-size:16px;}
 
 @media only screen and (max-width: 980px) {
   main {padding: 0px 15px !important;}

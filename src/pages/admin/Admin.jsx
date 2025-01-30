@@ -237,40 +237,14 @@ const Admin = () => {
     return (
         <div className="flex flex-col lg:flex-row">
             {/* Sidebar */}
-            <div className="w-full lg:w-64 text-white p-6 lg:block AdminPanel">
-                <h2 className="text-2xl font-semibold mb-4">Admin Panel</h2>
-                <ul className="list-none">
-                    <li>
-                        <Link to="/dashboard" className="hover:bg-gray-700 block py-2 rounded">
-                            Dashboard
-                        </Link>
-                    </li>
-                    {/* <li>
-                        <Link to="/users" className="hover:bg-gray-700 block  py-2 rounded">
-                            Users
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/settings" className="hover:bg-gray-700 block  py-2 rounded">
-                            Settings
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/reports" className="hover:bg-gray-700 block py-2 rounded">
-                            Reports
-                        </Link>
-                    </li> */}
-                </ul>
-            </div>
+            
 
             {/* Main content */}
-            <div className="flex-1 p-6 bg-gray-200 rightbox">
+            <div className="flex-1 p-6 bg-gray-200 rightbox adminpanel">
+                <div className='container'>
                 {/* Header */}
-                <div className="welcome text-white p-6 rounded-lg mb-6">
-                    <h1 className="dtitle text-3xl font-semibold">Welcome to the <span>Admin Panel</span></h1>
-                    <p className="subtext">Manage your website and users from here.</p>
-                </div>
-
+                <h1 className="dtitle text-3xl font-semibold">Welcome to the <span>Admin Panel</span></h1>
+                <p className="subtext">Manage your website and users from here.</p>
                 {/* Dashboard Content */}
                 <div className="Dashboard bg-white p-6 rounded-lg shadow-lg min-h-50">
                     <h2 className="text-3xl font-semibold mb-2">Dashboard</h2>
@@ -464,6 +438,7 @@ const Admin = () => {
                 )}
             </div>
             <div className='Clearfix'></div>
+            </div>
         </div>
     );
 };
